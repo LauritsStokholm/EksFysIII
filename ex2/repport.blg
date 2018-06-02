@@ -1,0 +1,15 @@
+[0] Config.pm:354> INFO - This is Biber 2.7 (beta)
+[0] Config.pm:357> INFO - Logfile is 'repport.blg'
+[27] biber:303> INFO - === Sat Jun  2, 2018, 15:58:26
+[39] Biber.pm:360> INFO - Reading 'repport.bcf'
+[101] Biber.pm:833> INFO - Using all citekeys in bib section 0
+[112] Biber.pm:3671> INFO - Processing section 0
+[124] Biber.pm:3841> INFO - Looking for bibtex format file 'bibliography.bib' for section 0
+[125] bibtex.pm:1424> INFO - Decoding LaTeX character macros into UTF-8
+[128] bibtex.pm:1281> INFO - Found BibTeX data source 'bibliography.bib'
+[153] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[153] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[154] Biber.pm:3500> INFO - Sorting list 'nty/global/' of type 'entry' with scheme 'nty' and locale 'en-US'
+[154] Biber.pm:3506> INFO - No sort tailoring available for locale 'en-US'
+[156] bbl.pm:608> INFO - Writing 'repport.bbl' with encoding 'UTF-8'
+[156] bbl.pm:712> INFO - Output to repport.bbl

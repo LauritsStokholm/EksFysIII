@@ -1,0 +1,13 @@
+1st)
+Go to github.com and make a new repository
+
+2nd)
+Go to the folder of interest and type:
+git init
+
+3rd)
+git clone https://github.com/LauritsStokholm/EksFysIII.git
+
+4th)
+Go to settings (in github) and add collaborator
+

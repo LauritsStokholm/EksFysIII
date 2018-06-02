@@ -1,0 +1,48 @@
+\documentclass[a4paper, twocolumn, 11pt, oneside]{memoir}
+\usepackage{preamble}
+
+% Path for graphics
+\graphicspath{{./Graphics/}}
+
+\title{Compton Scattering}
+\author[1]{Name \thanks{mail}}
+\author[1]{Laurits N. Stokholm \thanks{201605496@post.au.dk}}
+\affil[1]{Department of Physics and Astronomy, Aarhus University}
+\renewcommand{\Affilfont}{\itshape}
+\date{\today}
+
+% BibLateX
+\usepackage[backend=biber, style=authortitle, defernumbers=true,
+            sorting=nty]{biblatex}
+\addbibresource{bibliography.bib}
+\defbibheading{secbib}[\bibname]{%
+    \section{#1}%
+    \markboth{#1}{#1}}
+
+\begin{document}
+% Title og Abstract
+% Ignorerer twocolumn til abstract
+\begin{minipage}{\textwidth}
+    \twocolumn[
+        \maketitle
+        \begin{onecolabstract}
+        \noindent
+            \input{abstract}
+        \end{onecolabstract}]
+\end{minipage}
+
+\saythanks{}
+\input{introduction}
+\input{theory}
+\input{hazards}
+\input{setup}
+\input{data}
+\input{discussion}
+\input{conclusion}
+\printbibliography[heading=subbibliography]{}
+\input{appendix}
+\clearpage
+\includepdf[pages={1-}]{logbook.pdf}
+\nocite{*}
+\end{document}
+

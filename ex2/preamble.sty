@@ -1,0 +1,175 @@
+% This preamble is written by Laurits Stokholm with inspiration from Amalie Stokholm and help from Lars 'daleif' Madsens Introduction to LaTeX
+
+% Typesetting, design and layout
+% Essentials
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+% Typography magic!
+% Fixes badbox problems. Compatible with pdflatex.
+\usepackage[final]{microtype} 
+
+% Languages
+\usepackage[english]{babel}
+% Daleif recommends:
+% Orddeling og ordentligt mellemrum efter forkortelser
+%\renewcommand{\danishhyphenmins}{22} % bedre orddeling
+
+% Sørger for ordentligt mellemrum efter forkortelser (e.g.)
+\frenchspacing  
+
+% Fonts
+\usepackage{lmodern}
+%\usepackage{libertine} % Linux Libertine as text font
+%\usepackage[libertine]{newtxmath} % Nicely scaled math font
+
+% Margins
+\setlxvchars{}
+\setulmargins{*}{*}{1.618}
+\setlrmargins{*}{*}{1}
+% Necessary for memoir to compile the settings correctly
+\checkandfixthelayout[nearest]
+
+% Authors
+\usepackage{authblk}
+
+% Insert pdf into repport
+\usepackage{pdfpages}
+
+% Figures and floats
+\usepackage{graphicx}
+\usepackage{enumerate} % Tillader argumenter i enumerate env.
+\usepackage{url}
+\usepackage{lipsum}
+
+\usepackage[tableposition=top]{caption}
+\newcolumntype{L}{>{$}{l}<{$}}
+\newcolumntype{R}{>{$}{r}<{$}}
+\newcolumntype{C}{>{$}{c}<{$}}
+
+% Sektioner er højest prioriteret
+ \usepackage{chngcntr}
+     \counterwithout{section}{chapter}
+     \counterwithout{figure}{section}
+     \counterwithout{figure}{chapter}
+     \counterwithout{table}{chapter}
+     \counterwithout{equation}{chapter}
+
+
+% Mathematics
+% Mathematical characters
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+% Daleif, \nuparrow, \xrightarrow[under]{over}
+\usepackage{mathtools}
+% If only to show numbers on ref. eq.
+\mathtoolsset{showonlyrefs=true} 
+
+% SI-units
+\usepackage{siunitx}
+\sisetup{output-decimal-marker = {,},
+         separate-uncertainty=true,
+         multi-part-units=single,
+         exponent-product = {\cdot},
+         per-mode = fraction}
+
+% Debuggin
+\usepackage{lipsum}
+\usepackage[margin, draft]{fixme} \fxusetheme{color}
+% Vil gøre det til
+% \fxnote (grøn), \fxerror (gul), \fxwarning (orange), \fxfatal (rød)
+
+% Things with draft
+% \usepackage{ifdraft}
+% \usepackage[firstpage]{draftwatermark}
+
+
+% Code
+%\usepackage{minted}
+%\setminted{style=pastie, breaklines=true}
+%\newenviroment{code}{\captionsetup{type=listing}}{}
+
+% References, ToC and Chapters
+% Smart quotation
+\usepackage{csquotes}
+
+% Testing sections
+% Sections
+\setsecheadstyle{\Large\bfseries\sffamily\raggedright}
+\setsubsecheadstyle{\large\bfseries\sffamily\raggedright}
+
+% Figures & Tables on page with TOC
+\usepackage{tocloft}
+
+% TOC går til subsection (Benytter nu istedet 'chapter' til sections og 'section' til subsections)
+\setcounter{tocdepth}{0}
+
+
+% Bibliography
+%\usepackage[backend=biber,
+%%style=numeric,  % Citation style as [NUMBER]
+%style=authoryear-comp,  % Citation style as (AUTHOR YEAR)
+%sorting=nyt,     % Sort NAME-YEAR-TITLE
+%sortcites=true,
+%dashed=false,
+%maxcitenames=2,
+%maxbibnames=5,
+%uniquelist=false,
+%doi=false,
+%url=false,
+%isbn=false,
+%eprint=false,
+%hyperref=true]{biblatex}
+%\addbibresource{bibliography.bib}
+%
+%% Space in bibliography
+%\setlength\bibitemsep{1.5\itemsep}
+%
+%% Change bib-order
+%\DeclareNameAlias{sortname}{last-first}
+%
+%% Et al. på dansk
+%\DefineBibliographyStrings{danish}{%
+%  andothers = {et\addabbrvspace al\adddot}
+%}
+%
+%% Title of bibliography and entry in toc
+%\defbibheading{memoirbib}[Litteraturliste]{%
+%  \chapter*{#1} \addcontentsline{toc}{chapter}{#1}}
+
+
+% Referencing packages (in this order!)
+\usepackage{varioref} % Brug \vref, til referencer i nærområdet.
+
+% Hyperlinks i TOC, etc.
+\usepackage[colorlinks=true, allcolors=black]{hyperref}
+\usepackage{hypcap} 
+
+% Smarte referancer
+%\usepackage[danish]{cleveref}
+\usepackage{cleveref}
+
+% Macros
+% Matematik
+% Partiel Differential
+\newcommand\diff[3][\partial]%
+{\frac{#1 #2}{#1 #3}}
+%\diff{f}{x}\diff[d]{x}{t}
+
+%Facit-komando
+\newcommand{\facit}[1]{\underline{\underline{#1}}}
+% \facit{a=b}
+
+% Seperation in equation
+\newcommand\eqsep{\ensuremath{\quad , \quad}}
+
+% Vectors (we are doing physics!)
+\renewcommand{\vec}[1]{\ensuremath{\boldsymbol{#1}}\xspace}
+
+% Variable name
+\newcommand{\var}[2]{\ensuremath{#1_{\textup{#2}}}\xspace}
+
+% Code names
+\newcommand\numpy{NumPy\xspace}
+\newcommand\scipy{SciPy\xspace}
