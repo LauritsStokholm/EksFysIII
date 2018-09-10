@@ -1,0 +1,16 @@
+#skrald fra latex
+*.aux
+*.bcf
+*.bbl
+*.blg
+*.log
+*.out
+*.xml
+*.synctex.gz.orig
+*.synctex.gz
+
+#ikke sync pdf
+*.pdf.orig
+*.pdf
+#skrald fra vim
+*.swp

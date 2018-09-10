@@ -61,6 +61,13 @@ def prep4():
     # Accelerated Energy (MeV)
     E = 400 * 10**(-3)
 
+    # Sommerfeld criterian
+    eta_s_Au = 0.16*Z_p * Z_Au * np.sqrt( 1/E)
+    eta_s_C = 0.16*Z_p * Z_C  * np.sqrt( 1/E)
+
+    print(eta_s_Au)
+    print(eta_s_C)
+
     # Conversion factor (radian to degrees)
     alpha_radToDeg = 360/(2*np.pi)
 
@@ -140,10 +147,10 @@ def prep4():
     print(N_scattering_C)
     print("That Au is bigger than C is likely, as Au is heavier")
 
-
-    # Excercise C)
+    # # # Excercise C)
     # Calculate the energy of the scattered proton as a function of scattering
     # angle
+
 
 
     return()
@@ -153,6 +160,7 @@ def RutherfordcrossSection(Z1, Z2, E, theta):
     dsdo = (1.296*((Z1 * Z2)/(E))**(2)) *(1/(np.sin(theta/2))**4)
     return dsdo
 
+# Countrate
 # Returns the countrate by detector (domega) at angle (in crossS) after
 # Rutherford scattering of N_incidents with n_target (density) of thickness dx
 # (#protons #nucleon / s  ) 
@@ -164,7 +172,6 @@ def countrate(N_incident, n_target, dx,  crossS, domega):
     # domega = Solid angle.          (sr)
     dN = N_incident * n_target * dx * domega * crossS
     return dN
-
 
 # Returns the number of Nucleons per meters cubed
 def atomdensity(rho, M, A):
@@ -180,6 +187,7 @@ def atomdensity(rho, M, A):
     # g/cm3 = 10**(-3) kg / (10**(-2))**3 m3 = 10**(3) kg/m3
     N = N * 10**(3)
     return N
+
 
 
 # # # # # # # # # # # # # # # Output # # # # # # # # # # # # # # # # # # # # #

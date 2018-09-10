@@ -49,19 +49,22 @@ data     = [x for x in data_files if 'data' in x]
 data_cal_dir = [os.path.join(data_path, x) for x in data_cal]
 data_dir     = [os.path.join(data_path, x) for x in data]
 
+A = np.ones(5)
+print(A)
+print(np.size(A))
 
 # # # # # # # # # # # # # # # # Calibration # # # # # # # # # # # # # # # # # # 
 # Preparing dataframe structure
-df = pd.DataFrame()
-
-# Itterating over all files
-for i in range(len(data_cal_dir)):
-    print(data_cal_dir[i])
-    # Reading txt
-    column_names = ['Channel', 'Signal']
-    df = pd.read_csv(data_cal_dir[i], skiprows=[0], names=column_names)
-    df.plot()
-    plt.show()
+#df = pd.DataFrame()
+#
+## Itterating over all files
+#for i in range(len(data_cal_dir)):
+#    print(data_cal_dir[i])
+#    # Reading txt
+#    column_names = ['Channel', 'Signal']
+#    df = pd.read_csv(data_cal_dir[i], skiprows=[0], names=column_names)
+#    df.plot()
+#    plt.show()
 
     # Plot Calibration
     
