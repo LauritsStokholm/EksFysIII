@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.3.5)  27 AUG 2018 18:36
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.3.5)  9 SEP 2018 19:12
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1608,21 +1608,21 @@ File: english.lbx 2016/12/05 v3.7 biblatex localization (PK/JW/AB)
 ) (./repport.aux)
 \openout1 = `repport.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Info: Redefining \microtypecontext on input line 22.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Info: Redefining \microtypecontext on input line 23.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
@@ -1749,7 +1749,7 @@ Dictionary: translator-basic-dictionary, Language: English
 ) (/usr/share/texlive/texmf-dist/tex/latex/siunitx/siunitx-abbreviations.cfg
 File: siunitx-abbreviations.cfg 2017/08/02 v2.7j siunitx: Abbreviated units
 )
-Package hyperref Info: Link coloring ON on input line 22.
+Package hyperref Info: Link coloring ON on input line 23.
  (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
  (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
@@ -1760,15 +1760,15 @@ LaTeX Info: Redefining \Ref on input line 515.
 )
 Redoing nameref's sectioning
 Redoing nameref's label
-LaTeX Info: Redefining \nameref on input line 22.
-LaTeX Info: Redefining \ref on input line 22.
-LaTeX Info: Redefining \pageref on input line 22.
-LaTeX Info: Redefining \nameref on input line 22.
+LaTeX Info: Redefining \nameref on input line 23.
+LaTeX Info: Redefining \ref on input line 23.
+LaTeX Info: Redefining \pageref on input line 23.
+LaTeX Info: Redefining \nameref on input line 23.
 (./repport.out) (./repport.out)
 \@outlinefile=\write6
 \openout6 = `repport.out'.
 
-LaTeX Info: Redefining \Ref on input line 22.
+LaTeX Info: Redefining \Ref on input line 23.
 Package biblatex Info: Input encoding 'utf8' detected.
 Package biblatex Info: Automatic encoding selection.
 (biblatex)             Assuming data encoding 'utf8'.
@@ -1777,44 +1777,44 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'repport.bbl' found.
  (./repport.bbl)
-Package biblatex Info: Reference section=0 on input line 22.
-Package biblatex Info: Reference segment=0 on input line 22.
+Package biblatex Info: Reference section=0 on input line 23.
+Package biblatex Info: Reference segment=0 on input line 23.
 \c__siunitx_mathsf_int=\count491
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 22.
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 23.
  (/usr/share/texmf/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 22.
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 23.
  (/usr/share/texmf/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 22.
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 23.
  (/usr/share/texmf/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 22.
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 23.
  (/usr/share/texmf/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 22.
+(Font)              <10.95> on input line 23.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 22.
+(Font)              <8> on input line 23.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 22.
-LaTeX Font Info:    Try loading font information for U+msa on input line 22.
+(Font)              <6> on input line 23.
+LaTeX Font Info:    Try loading font information for U+msa on input line 23.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 22.
+LaTeX Font Info:    Try loading font information for U+msb on input line 23.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
-LaTeX Font Info:    Try loading font information for OT1+lmss on input line 22.
+LaTeX Font Info:    Try loading font information for OT1+lmss on input line 23.
  (/usr/share/texmf/tex/latex/lm/ot1lmss.fd
 File: ot1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
@@ -1823,7 +1823,7 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 \c__siunitx_mathtt_int=\count492
-LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 22.
+LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 23.
  (/usr/share/texmf/tex/latex/lm/ot1lmtt.fd
 File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
@@ -1832,20 +1832,20 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 31.
-LaTeX Font Info:    Try loading font information for OMS+lmr on input line 31.
+(Font)              <12> on input line 32.
+LaTeX Font Info:    Try loading font information for OMS+lmr on input line 32.
  (/usr/share/texmf/tex/latex/lm/omslmr.fd
 File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <8> not available
-(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 31.
+(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 32.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 31.
+(Font)              <9> on input line 32.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 31.
+(Font)              <5> on input line 32.
  (./abstract.tex)
 LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <6> not available
-(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 34.
+(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 35.
  (./introduction.tex
 LaTeX Font Info:    Try loading font information for T1+lmss on input line 1.
  (/usr/share/texmf/tex/latex/lm/t1lmss.fd
@@ -1855,155 +1855,158 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `lmss' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-) (./theory.tex
+) (./setup.tex
+<./graphics/setup1.jpg, id=7, 4047.12pt x 3035.34pt>
+File: ./graphics/setup1.jpg Graphic file (type jpg)
+<use ./graphics/setup1.jpg>
+Package pdftex.def Info: ./graphics/setup1.jpg  used on input line 20. on input line 20.
+Package pdftex.def Info: Requested size: 226.0pt x 169.46841pt on input line 20.
 
-LaTeX Warning: Reference `fig: comptonscattering' on page 1 undefined on input line 5.
+Overfull \hbox (5.0pt too wide) in paragraph at lines 20--22
+ [][] 
+ []
 
-Package hyperref Info: bookmark level for unknown fixme defaults to 0 on input line 16.
-FiXme Note: 'appendix' on input line 16.
-) (./hazards.tex [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
+
+Underfull \vbox (badness 1642) has occurred while \output is active []
+
+ [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
 ]
-LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 5.
+<./graphics/setup2.jpg, id=32, 4047.12pt x 3035.34pt>
+File: ./graphics/setup2.jpg Graphic file (type jpg)
+<use ./graphics/setup2.jpg>
+Package pdftex.def Info: ./graphics/setup2.jpg  used on input line 28. on input line 28.
+Package pdftex.def Info: Requested size: 226.0pt x 169.46841pt on input line 28.
 
-Underfull \hbox (badness 2591) in paragraph at lines 11--13
-[]\T1/lmr/m/n/10.95 (+20) Radioactivity. Low sever-ity, low risk.
+Overfull \hbox (5.0pt too wide) in paragraph at lines 28--29
+ [][] 
  []
 
-) (./setup.tex
-FiXme Note: 'fig: setup' on input line 3.
+<./graphics/setup3.jpg, id=33, 4047.12pt x 3035.34pt>
+File: ./graphics/setup3.jpg Graphic file (type jpg)
+<use ./graphics/setup3.jpg>
+Package pdftex.def Info: ./graphics/setup3.jpg  used on input line 35. on input line 35.
+Package pdftex.def Info: Requested size: 226.0pt x 169.46841pt on input line 35.
 
-Underfull \hbox (badness 10000) in paragraph at lines 13--19
-[]\T1/lmr/bx/n/10.95 NaI[] \T1/lmr/m/n/10.95 (+20) The sec-ond de-tec-tor is the
+Overfull \hbox (5.0pt too wide) in paragraph at lines 35--36
+ [][] 
  []
 
 
-Underfull \hbox (badness 6125) in paragraph at lines 13--19
-\T1/lmr/m/n/10.95 (+20) NaI2^^Uscintillator. Whereas the BGO al-
- []
-
-
-Underfull \hbox (badness 1205) in paragraph at lines 13--19
-\T1/lmr/m/n/10.95 (+20) most emits all en-ergy ab-sorbed, the NaI
- []
+LaTeX Warning: `h' float specifier changed to `ht'.
 
 ) (./data.tex) (./discussion.tex) (./conclusion.tex)
 Package microtype Info: Character `029' is missing
 (microtype)             in font `T1/lmr/m/sc/10.95'.
 (microtype)             Ignoring protrusion settings for this character.
- (./appendix.tex) [2]
-<logbook.pdf, id=47, pagebox=cropbox, 597.50829pt x 845.0471pt>
+ (./appendix.tex) [2 <./graphics/setup1.jpg> <./graphics/setup2.jpg> <./graphics/setup3.jpg>]
+<logbook.pdf, id=48, pagebox=cropbox, 597.50829pt x 845.0471pt>
 File: logbook.pdf Graphic file (type pdf)
 <use logbook.pdf>
-Package pdftex.def Info: logbook.pdf  used on input line 45. on input line 45.
-Package pdftex.def Info: Requested size: 597.50682pt x 845.04504pt on input line 45.
+Package pdftex.def Info: logbook.pdf  used on input line 46. on input line 46.
+Package pdftex.def Info: Requested size: 597.50682pt x 845.04504pt on input line 46.
 File: logbook.pdf Graphic file (type pdf)
 <use logbook.pdf>
-Package pdftex.def Info: logbook.pdf  used on input line 45. on input line 45.
-Package pdftex.def Info: Requested size: 597.50682pt x 845.04504pt on input line 45.
-<logbook.pdf, id=50, page=1, pagebox=cropbox, 597.50829pt x 845.0471pt>
+Package pdftex.def Info: logbook.pdf  used on input line 46. on input line 46.
+Package pdftex.def Info: Requested size: 597.50682pt x 845.04504pt on input line 46.
+<logbook.pdf, id=51, page=1, pagebox=cropbox, 597.50829pt x 845.0471pt>
 File: logbook.pdf Graphic file (type pdf)
 <use logbook.pdf, page 1>
-Package pdftex.def Info: logbook.pdf , page1 used on input line 45. on input line 45.
-Package pdftex.def Info: Requested size: 597.50682pt x 845.04504pt on input line 45.
+Package pdftex.def Info: logbook.pdf , page1 used on input line 46. on input line 46.
+Package pdftex.def Info: Requested size: 597.50682pt x 845.04504pt on input line 46.
 File: logbook.pdf Graphic file (type pdf)
 <use logbook.pdf, page 1>
-Package pdftex.def Info: logbook.pdf , page1 used on input line 45. on input line 45.
-Package pdftex.def Info: Requested size: 597.53416pt x 845.08372pt on input line 45.
+Package pdftex.def Info: logbook.pdf , page1 used on input line 46. on input line 46.
+Package pdftex.def Info: Requested size: 597.53416pt x 845.08372pt on input line 46.
 File: logbook.pdf Graphic file (type pdf)
 <use logbook.pdf, page 1>
-Package pdftex.def Info: logbook.pdf , page1 used on input line 45. on input line 45.
-Package pdftex.def Info: Requested size: 597.53416pt x 845.08372pt on input line 45.
+Package pdftex.def Info: logbook.pdf , page1 used on input line 46. on input line 46.
+Package pdftex.def Info: Requested size: 597.53416pt x 845.08372pt on input line 46.
 File: logbook.pdf Graphic file (type pdf)
 <use logbook.pdf, page 1>
-Package pdftex.def Info: logbook.pdf , page1 used on input line 45. on input line 45.
-Package pdftex.def Info: Requested size: 597.53416pt x 845.08372pt on input line 45.
+Package pdftex.def Info: logbook.pdf , page1 used on input line 46. on input line 46.
+Package pdftex.def Info: Requested size: 597.53416pt x 845.08372pt on input line 46.
 File: logbook.pdf Graphic file (type pdf)
 <use logbook.pdf, page 1>
-Package pdftex.def Info: logbook.pdf , page1 used on input line 45. on input line 45.
-Package pdftex.def Info: Requested size: 597.53416pt x 845.08372pt on input line 45.
+Package pdftex.def Info: logbook.pdf , page1 used on input line 46. on input line 46.
+Package pdftex.def Info: Requested size: 597.53416pt x 845.08372pt on input line 46.
  [3
 
  <./logbook.pdf>]
-<logbook.pdf, id=101, page=2, pagebox=cropbox, 597.50829pt x 845.0471pt>
+<logbook.pdf, id=102, page=2, pagebox=cropbox, 597.50829pt x 845.0471pt>
 File: logbook.pdf Graphic file (type pdf)
 <use logbook.pdf, page 2>
-Package pdftex.def Info: logbook.pdf , page2 used on input line 45. on input line 45.
-Package pdftex.def Info: Requested size: 597.53416pt x 845.08372pt on input line 45.
+Package pdftex.def Info: logbook.pdf , page2 used on input line 46. on input line 46.
+Package pdftex.def Info: Requested size: 597.53416pt x 845.08372pt on input line 46.
 File: logbook.pdf Graphic file (type pdf)
 <use logbook.pdf, page 2>
-Package pdftex.def Info: logbook.pdf , page2 used on input line 45. on input line 45.
-Package pdftex.def Info: Requested size: 597.53416pt x 845.08372pt on input line 45.
+Package pdftex.def Info: logbook.pdf , page2 used on input line 46. on input line 46.
+Package pdftex.def Info: Requested size: 597.53416pt x 845.08372pt on input line 46.
 File: logbook.pdf Graphic file (type pdf)
 <use logbook.pdf, page 2>
-Package pdftex.def Info: logbook.pdf , page2 used on input line 45. on input line 45.
-Package pdftex.def Info: Requested size: 597.53416pt x 845.08372pt on input line 45.
+Package pdftex.def Info: logbook.pdf , page2 used on input line 46. on input line 46.
+Package pdftex.def Info: Requested size: 597.53416pt x 845.08372pt on input line 46.
  [4 <./logbook.pdf>]
-<logbook.pdf, id=124, page=3, pagebox=cropbox, 597.50829pt x 845.0471pt>
+<logbook.pdf, id=125, page=3, pagebox=cropbox, 597.50829pt x 845.0471pt>
 File: logbook.pdf Graphic file (type pdf)
 <use logbook.pdf, page 3>
-Package pdftex.def Info: logbook.pdf , page3 used on input line 45. on input line 45.
-Package pdftex.def Info: Requested size: 597.53416pt x 845.08372pt on input line 45.
+Package pdftex.def Info: logbook.pdf , page3 used on input line 46. on input line 46.
+Package pdftex.def Info: Requested size: 597.53416pt x 845.08372pt on input line 46.
 File: logbook.pdf Graphic file (type pdf)
 <use logbook.pdf, page 3>
-Package pdftex.def Info: logbook.pdf , page3 used on input line 45. on input line 45.
-Package pdftex.def Info: Requested size: 597.53416pt x 845.08372pt on input line 45.
+Package pdftex.def Info: logbook.pdf , page3 used on input line 46. on input line 46.
+Package pdftex.def Info: Requested size: 597.53416pt x 845.08372pt on input line 46.
 File: logbook.pdf Graphic file (type pdf)
 <use logbook.pdf, page 3>
-Package pdftex.def Info: logbook.pdf , page3 used on input line 45. on input line 45.
-Package pdftex.def Info: Requested size: 597.53416pt x 845.08372pt on input line 45.
+Package pdftex.def Info: logbook.pdf , page3 used on input line 46. on input line 46.
+Package pdftex.def Info: Requested size: 597.53416pt x 845.08372pt on input line 46.
  [5 <./logbook.pdf>]
-<logbook.pdf, id=134, page=4, pagebox=cropbox, 597.50829pt x 845.0471pt>
+<logbook.pdf, id=135, page=4, pagebox=cropbox, 597.50829pt x 845.0471pt>
 File: logbook.pdf Graphic file (type pdf)
 <use logbook.pdf, page 4>
-Package pdftex.def Info: logbook.pdf , page4 used on input line 45. on input line 45.
-Package pdftex.def Info: Requested size: 597.53416pt x 845.08372pt on input line 45.
+Package pdftex.def Info: logbook.pdf , page4 used on input line 46. on input line 46.
+Package pdftex.def Info: Requested size: 597.53416pt x 845.08372pt on input line 46.
 File: logbook.pdf Graphic file (type pdf)
 <use logbook.pdf, page 4>
-Package pdftex.def Info: logbook.pdf , page4 used on input line 45. on input line 45.
-Package pdftex.def Info: Requested size: 597.53416pt x 845.08372pt on input line 45.
+Package pdftex.def Info: logbook.pdf , page4 used on input line 46. on input line 46.
+Package pdftex.def Info: Requested size: 597.53416pt x 845.08372pt on input line 46.
 File: logbook.pdf Graphic file (type pdf)
 <use logbook.pdf, page 4>
-Package pdftex.def Info: logbook.pdf , page4 used on input line 45. on input line 45.
-Package pdftex.def Info: Requested size: 597.53416pt x 845.08372pt on input line 45.
+Package pdftex.def Info: logbook.pdf , page4 used on input line 46. on input line 46.
+Package pdftex.def Info: Requested size: 597.53416pt x 845.08372pt on input line 46.
  [6 <./logbook.pdf>]
 
-FiXme Summary: Number of notes: 2,
+FiXme Summary: Number of notes: 0,
 (FiXme)        Number of warnings: 0,
 (FiXme)        Number of errors: 0,
 (FiXme)        Number of fatal errors: 0,
-(FiXme)        Total: 2.
+(FiXme)        Total: 0.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 47.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 47.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 48.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 48.
 (./repport.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 47.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 47.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 48.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 48.
 Package rerunfilecheck Info: File `repport.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-
-
-LaTeX Warning: There were undefined references.
-
 Package logreq Info: Writing requests to 'repport.run.xml'.
 \openout1 = `repport.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 34550 strings out of 492990
- 627995 string characters out of 6135006
- 1222269 words of memory out of 5000000
- 37567 multiletter control sequences out of 15000+600000
- 650188 words of font info for 138 fonts, out of 8000000 for 9000
+ 34547 strings out of 492990
+ 628067 string characters out of 6135006
+ 1221782 words of memory out of 5000000
+ 37580 multiletter control sequences out of 15000+600000
+ 646764 words of font info for 130 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 48i,18n,62p,10396b,1549s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}</usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmcsc10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr17.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr9.pfb></usr/share/texmf/fonts/type1/public/lm/lmri10.pfb></usr/share/texmf/fonts/type1/public/lm/lmri12.pfb></usr/share/texmf/fonts/type1/public/lm/lmss9.pfb></usr/share/texmf/fonts/type1/public/lm/lmssbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy6.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy8.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt10.pfb>
-Output written on repport.pdf (6 pages, 313672 bytes).
+ 48i,18n,80p,10396b,1549s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}</usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmcsc10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr17.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr9.pfb></usr/share/texmf/fonts/type1/public/lm/lmri10.pfb></usr/share/texmf/fonts/type1/public/lm/lmri12.pfb></usr/share/texmf/fonts/type1/public/lm/lmssbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy6.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy8.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt10.pfb>
+Output written on repport.pdf (6 pages, 6600691 bytes).
 PDF statistics:
- 191 PDF objects out of 1000 (max. 8388607)
- 157 compressed objects within 2 object streams
- 23 named destinations out of 1000 (max. 500000)
- 45092 words of extra memory for PDF output out of 51595 (max. 10000000)
+ 185 PDF objects out of 1000 (max. 8388607)
+ 150 compressed objects within 2 object streams
+ 21 named destinations out of 1000 (max. 500000)
+ 43059 words of extra memory for PDF output out of 51595 (max. 10000000)
 
