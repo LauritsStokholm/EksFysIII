@@ -41,41 +41,44 @@ data_path = os.path.join(os.getcwd(), 'data/')
 data_files = os.listdir(data_path)
 
 # Filtering files
-data_cal = [x for x in data_files if 'cal' in x]
-data     = [x for x in data_files if 'data' in x]
-
+data_cal = [x for x in data_files if 'cal' in x and 'csv' in x]
+data     = [x for x in data_files if 'data' in x and 'csv' in x]
 
 # Paths for chosen datafiles
 data_cal_dir = [os.path.join(data_path, x) for x in data_cal]
 data_dir     = [os.path.join(data_path, x) for x in data]
 
-A = np.ones(5)
-print(A)
-print(np.size(A))
-
 # # # # # # # # # # # # # # # # Calibration # # # # # # # # # # # # # # # # # # 
 # Preparing dataframe structure
-#df = pd.DataFrame()
-#
-## Itterating over all files
-#for i in range(len(data_cal_dir)):
-#    print(data_cal_dir[i])
-#    # Reading txt
-#    column_names = ['Channel', 'Signal']
-#    df = pd.read_csv(data_cal_dir[i], skiprows=[0], names=column_names)
-#    df.plot()
-#    plt.show()
+df = pd.DataFrame()
+
+file_names = []
+# Itterating over all files
+for i in range(len(data_cal_dir)):
+    # file name
+    file_names.append(os.path.basename(data_cal_dir[i]))
+
+    # Reading csv
+    column_names = [file_names[i]]
+    df1 = pd.read_csv(data_cal_dir[i], delimiter=',', index_col=0, names=column_names)
 
     # Plot Calibration
-    
+    df = pd.concat([df, df1[column_names[0]]], axis=1)
 
-    # Unit conversion
-#    df1[column_names[0]] = df1[column_names[0]].apply(lambda x: x*10**-9)
-#    df1[column_names[1]] = df1[column_names[1]].apply(lambda x: abs(x))
+# Plotting non zero values
+for name in file_names:
+    df[name].loc[df[name].nonzero()].plot()
+    plt.grid()
+    plt.title("Calibration")
+    plt.xlabel("Channel \#")
+    #plt.legend()
 
-    # Concatenating data
-#    df = pd.concat([df, df1[column_names[1]]], axis=1)
-#
+
+
+plt.show()
+
+
+
 ## Making two dataframes, one with integer indices and the other with lambda
 ## integers. (We need integer index for scipy, but lambda is better for plot)
 #df_intidx = pd.concat([df1[column_names[0]], df], axis=1)
