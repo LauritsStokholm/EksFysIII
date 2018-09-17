@@ -6,6 +6,7 @@ import os
 import pandas as pd
 import numpy as np
 import scipy as sp
+from scipy.stats import norm
 from scipy.optimize import curve_fit
 from scipy import optimize as opt
 from scipy import stats 
@@ -42,178 +43,283 @@ data_files = os.listdir(data_path)
 
 # Filtering files
 data_cal = [x for x in data_files if 'cal' in x and 'csv' in x]
-data     = [x for x in data_files if 'data' in x and 'csv' in x]
+data     = [x for x in data_files if 'AuC' in x and 'csv' in x]
 
 # Paths for chosen datafiles
 data_cal_dir = [os.path.join(data_path, x) for x in data_cal]
 data_dir     = [os.path.join(data_path, x) for x in data]
 
+
 # # # # # # # # # # # # # # # # Calibration # # # # # # # # # # # # # # # # # # 
-# Preparing dataframe structure
-df = pd.DataFrame()
+""" In this calibration we determine alpha and k0, such we can transform
+channel numbers to energy by the E = alpha(k - k0), where k is the channel
+number and k0 is the channelnumber for zero amplitude (extrapolation)"""
 
-file_names = []
-# Itterating over all files
-for i in range(len(data_cal_dir)):
-    # file name
-    file_names.append(os.path.basename(data_cal_dir[i]))
+# Defining functions for fitting later
+# Gaussian
+def gaussian(x, amplitude, mu, std):
+    return amplitude * np.exp(-(x - mu)**2 / (2 * std**2))
 
-    # Reading csv
-    column_names = [file_names[i]]
-    df1 = pd.read_csv(data_cal_dir[i], delimiter=',', index_col=0, names=column_names)
+# Linear
+def linear(a, b, x):
+    return a*x + b
 
-    # Plot Calibration
-    df = pd.concat([df, df1[column_names[0]]], axis=1)
+# Energy
+def ENERGY():
+    Ei = 400 # kev
+    theta_deg = 160 # degrees
+    theta = 160 * (180 / np.pi)
+    mAu = 196.9665690
+    mH = 1.008
 
-# Plotting non zero values
-for name in file_names:
-    df[name].loc[df[name].nonzero()].plot()
-    plt.grid()
-    plt.title("Calibration")
-    plt.xlabel("Channel \#")
-    #plt.legend()
+    E = lambda mb, mt: (((mb*np.cos(theta) + np.sqrt(mt**2 - mb**2 *
+            (np.sin(theta))**2)) / (mb+mt))**2) * Ei
+
+    E1 = E(mH, mAu)
+    E2 = E(2*mH, mAu)
+
+    return E1, E2
 
 
+
+# Data imported into dataframes
+def Dataframe(directory):
+    """ Welcome to the Datafram factory. """
+    # Preparing dataframe structure
+    df = pd.DataFrame()
+    
+    # Itterating over all files
+    file_names = []
+    for i in range(len(directory)):
+        # file name
+        file_names.append(os.path.basename(directory[i]))
+    
+        # Reading csv
+        column_names = [file_names[i]]
+        df1 = pd.read_csv(directory[i], delimiter=',', index_col=0, names=column_names)
+    
+        # Concatenating
+        df = pd.concat([df, df1[column_names[0]]], axis=1)
+
+    # We make Dataframes and return file name
+    return df, file_names
+
+def Gaussian_fit(df, file_names, k0_switch):
+    """ This is a Gaussian fit factory"""
+    # Gaussian mean and std saved for later
+    gaussian_mean = []
+    gaussian_std  = []
+    
+    if k0_switch == True:
+        for name in file_names:
+            # Choosing non zero values
+            df_data = df[name].loc[df[name].nonzero()]
+        
+            # Transforming to array (Might be unnecesarry) [index, count]
+            np_data = np.array([np.array(df_data.index), df_data.values])
+            x = np_data[0] # Indices
+            y = np_data[1] # Count number
+            
+            # Scipy Optimization after Gaussian (guessing start values)
+            mean = sum(x * y) / sum(y)
+            sigma = np.sqrt(sum(y * (x - mean)**2) / sum(y))
+            popt,pcov = curve_fit(gaussian, x, y, p0=[max(y), mean, sigma])
+            
+            gaussian_mean.append(popt[1])
+            gaussian_std.append(popt[2])
+            
+            
+            # Plotting the data + fit
+            plt.title("Calibration")
+            plt.xlabel("Channel \#")
+            plt.ylabel("Count \#")
+            plt.grid()
+            
+                # Fit (smooth x and fitted parameters)
+            gauss_x = np.arange(x[0], x[-1], 0.0001)
+            gauss_y = gaussian(gauss_x, *popt)
+   
+            plt.plot(gauss_x, gauss_y, label='fit')
+            plt.plot(x,y, '.', label='data')
+            plt.legend(loc=1)
+
+        return np.array(gaussian_mean), np.array(gaussian_std)
+    else:
+        df_data = df
+
+        # Transforming to array (Might be unnecesarry) [index, count]
+        np_data = np.array([np.array(df_data.index), df_data.values])
+        x = np_data[0] # Indices
+        y = np_data[1] # Count number
+        
+        # Scipy Optimization after Gaussian (guessing start values)
+        mean = sum(x * y) / sum(y)
+        sigma = np.sqrt(sum(y * (x - mean)**2) / sum(y))
+        popt,pcov = curve_fit(gaussian, x, y, p0=[max(y), mean, sigma])
+        
+        gaussian_mean.append(popt[1])
+        gaussian_std.append(popt[2])
+        
+        
+        # Plotting the data + fit
+        plt.title("Calibration")
+        plt.xlabel("Channel \#")
+        plt.ylabel("Count \#")
+        plt.grid()
+        
+        # Fit (smooth x and fitted parameters)
+        gauss_x = np.arange(x[0], x[-1], 0.0001)
+        gauss_y = gaussian(gauss_x, *popt)
+   
+        plt.plot(gauss_x, gauss_y, label='fit')
+        plt.plot(x,y, '.', label='data')
+        plt.legend(loc=1)
+        return np.array(gaussian_mean), np.array(gaussian_std)
+
+
+def plotting(x, y, x_error, y_error, k0_switch):
+    x_error = np.ones(len(x)) * x_error
+    if k0_switch == True:
+        # Weighing data
+        weights = (1 / y_error)**2
+        
+        # Curve fitting data for linear fit, with weights
+        popt, pcov = curve_fit(linear, x, y, sigma = weights)
+        #popt, pcov = curve_fit(linear, x, y)
+        
+        plt.figure()
+        plt.title("Calibration")
+        plt.xlabel("Amplitude")
+        plt.ylabel("Mean value of Gaussian Fit")
+        plt.errorbar(x, y, xerr=x_error, yerr=y_error, fmt="o", label="Data")
+        plt.plot(x, linear(x, *popt), label='Linear fit')
+        plt.legend()
+        plt.grid()
+
+        # Determining parameters
+        print("Linear fit parameters are a = {:.2f} and b = {:.2f}".format(popt[1],
+            popt[0]))
+        return popt
+    else:
+        popt, pcov = curve_fit(linear, x, y)
+
+        plt.figure()
+        plt.title("Calibration")
+        plt.xlabel("Amplitude")
+        plt.ylabel("Mean value of Gaussian fit")
+        plt.plot(x, y, label="Data")
+        plt.plot(x, linea(x, *popt), label="Linear fit")
+        plt.legend()
+        plt.grid()
+
+        # Determine parameters
+        print("Linear fit parameters are a = {:.2f} and b ={:.2f}".format(popt[1], popt[0]))
+        return popt
+
+
+
+
+# # # # # # # # # # # # # # # Output # # # # # # # # # # # # # # # # # # # # # 
+
+# Determining k0 by changing amplitude (data_cal_dir)
+def k0():
+    # Determine k0 or alpha?
+    k0_switch = True
+
+    # Dataframe (data) + file_names (for itteration)
+    df, file_names = Dataframe(data_cal_dir)
+    
+    # This is manual labour (extracting meassured amplitude from names)
+    file_names.sort()
+    Amps = np.array([1.62, 2.0, 2.5, 3.0, 3.5, 4.0, 5.0, 6.0])
+
+    # Gaussian uncertainties and determining mean value of channel bin
+    gaussian_mean, gaussian_std = Gaussian_fit(df, file_names, k0_switch)
+    
+    # Linear fit (parameters)
+    # Meassured Amplitude is x and the mean channel number is y
+    x = Amps
+    y = gaussian_mean
+    # Amplitude was meassured to lowest digit (0.1)
+    x_error = np.array([0.1])
+    # Mean channel number was meassured with gaussian uncertainty
+    y_error = gaussian_std
+    print(x_error)
+    print(y_error)
+    print(y_error**2)
+
+#    b, a = plotting(Amps, gaussian_mean_k0, gaussian_std_k0, k0_switch)
+    b, a = plotting(x, y, x_error, y_error, k0_switch)
+    k0 = b
+    print("k0 is {:.2f}".format(k0))
+
+    return k0
+
+# Determining alpha by changing matter; H to H2 (data_dir)
+def alpha():
+    # Determine k0 or alpha?
+    k0_switch = False
+    
+    # Determine Energies
+    EH, EH2 = ENERGY()
+
+    # Dataframe (data) + file_names (for itteration)
+    df_alpha, file_names_alpha = Dataframe(data_dir)
+
+    name1 = file_names_alpha[0]
+    name2 = file_names_alpha[1]
+
+    # Manual labour part 2
+    df_alpha2 = df_alpha.loc[100:500]
+
+    # 3 Different peaks (for gaussians)
+    df_alpha3 = df_alpha[name1].loc[100:260]
+    df_alpha4 = df_alpha[name2].loc[260:367]
+    df_alpha5 = df_alpha[name2].loc[367:500]
+
+    plt.figure()
+    df_alpha3.plot()
+    df_alpha4.plot()
+    df_alpha5.plot()
+
+   # Gaussian uncertainties and determining mean value of channel bin
+    gaussian_mean_alpha1, gaussian_std_alpha1 = Gaussian_fit(df_alpha3,
+            name1, k0_switch)
+    gaussian_mean_alpha2, gaussian_std_alpha2 = Gaussian_fit(df_alpha4,
+            name2, k0_switch)
+    gaussian_mean_alpha3, gaussian_std_alpha3 = Gaussian_fit(df_alpha5,
+            [name1], k0_switch)
+#
+#
+#    print(gaussian_mean_alpha1, gaussian_std_alpha1)
+#    print(gaussian_mean_alpha2, gaussian_std_alpha2)
+#    print(gaussian_mean_alpha3, gaussian_std_alpha3)
+#
+#
+#    x = [gaussian_mean_alpha1, gaussian_mean_alpha3]
+#    y = [EH, EH2]
+#    x_error = [gaussian_std_alpha1, gaussian_std_alpha3]
+#
+#    # Linear fit (parameters) (chosen right values
+#    a, b = plotting(x, y, x_error, k0_switch)
+#
+#    alpha = a
+#    
+#    print("alpha is {:.2f}".format(alpha))
+    return
+
+
+#k0()
+alpha()
 
 plt.show()
 
 
 
-## Making two dataframes, one with integer indices and the other with lambda
-## integers. (We need integer index for scipy, but lambda is better for plot)
-#df_intidx = pd.concat([df1[column_names[0]], df], axis=1)
-#df_lamidx = df_intidx.copy()
-#df_lamidx.set_index(df_lamidx[column_names[0]], inplace=True)
-#df_lamidx.drop([column_names[0]], axis=1, inplace=True)
-#
-#
-#
-## # # # # # # # Part A ~ Light bulbs and the solar spectrum # # # # # # # # # #
-#
-## Determining the temperature
-#def Temperature(df):
-#    ''' This function will determine the temperature of the given spectra '''
-#
-#    # Determine peak of wavelength
-#    lambda_peak = df.idxmax()
-#    print(lambda_peak)
-#
-#    # Determine the temperature
-#    constant = 2.898 * 10**-3 # m*K
-#    temperature = constant / lambda_peak
-#    return temperature
-#
-## Sorting relevant files and calculating temperature
-#T = []
-#for column in df_lamidx:
-#    if any(s for s in df_lamidx if column in ('solar1.csv', 'solar2.csv',
-#        'solar3.csv', 'notseethrough.csv', 'seethrough.csv', 'curly.csv')):
-#        T.append(column)
-#        T.append(Temperature(df_lamidx[column]))
-#
-#print('The temperature is given by:')
-#print(T)
-#print(np.average(np.array([T[1], T[-1], T[-3]])))
-#
-#
-## Setting better indices for plot
-#plot_index = pd.Series(df_lamidx.index)
-#df_lamidx.set_index(plot_index.apply(lambda x: x*10**9), inplace=True)
-#
-## Compare results with solar spectra
-#i = 0
-#for item in data_lamps:
-#    # the file name
-#    lamp = os.path.basename(item)
-#
-#    fig = plt.figure()
-#    ax = fig.add_subplot(111)
-#    ax.set_title('Solar spectrum')
-#    df_lamidx['solar1.csv'].plot()
-#    df_lamidx['solar2.csv'].plot()
-#    df_lamidx['solar3.csv'].plot()
-#    df_lamidx[lamp].plot()
-#    ax.grid()
-#    ax.legend()
-#    ax.set_xlabel(r'Wavelength [\si{\nano\meter}]')
-#    ax.set_ylabel(r'Intensity')
-#    plt.savefig("SolarComparison"+str(i))
-#
-#    # Do not run out of memory
-#    #plt.close(fig)
-#    i += 1
-#
-#
-## Determine elements in solar spectrum
-#
-## Finding extrema
-#x = np.array(df_intidx['solar2.csv'], dtype=np.float)
-#order_val = 40
-#list_of_peaks = sp.signal.argrelextrema(x, np.less,
-#        order=order_val)[0].tolist()
-#list_of_peaks = [x for x in list_of_peaks if 295<x and x<1500]
-#
-#
-#x_val = list_of_peaks
-#y_val = df_intidx['solar2.csv'][list_of_peaks]
-#labels = ['Fe', 'Fe/Ca', 'Mg/Fe', 'Na', 'O_2', 'O_2', 'O_2', 'O_2']
-#
-## Making plot with labels at scatterplot
-#plt.figure()
-#plt.title('Fraunhofer lines')
-#plt.scatter(x_val, y_val, marker='o', color='red')
-#
-## For name in labels
-#for label, x, y in zip(labels, x_val, y_val):
-#    plt.annotate(label,
-#		xy=(x, y), xytext=(-20, 20),
-#        textcoords='offset points', ha='right', va='bottom',
-#        bbox=dict(boxstyle='round,pad=0.5', fc='red', alpha=0.5),
-#        arrowprops=dict(arrowstyle = '->', connectionstyle='arc3,rad=0'))
-#df_intidx['solar2.csv'].plot()
-#plt.grid()
-#plt.legend()
-#plt.xlabel(r"Wavelength [\si{\nano\meter}]")
-#plt.ylabel(r"Intensity")
-#
-#print('Interesting wavelengths are')
-#print(df_intidx.wavelength[list_of_peaks] * 10**9)
-#plt.savefig('Fraunhofer')
-#
-#
-## # # # # # # # # # Part B ~ Spectral Lamps and Lasers # # # # # # # # # # # #
-#
-#
-#
-## # # # # # # # # # Part C ~ Absorbance of three cuvette# # # # # # # # # # # #
-##
-#for item in data_absorbance:
-#    cuvette = os.path.basename(item)
-#    print(item)
-#    print(cuvette)
-#    plt.figure()
-#    df_lamidx[cuvette].plot()
-#    plt.grid()
-#    plt.title('Spectrum of cuvette ' + str(cuvette[0]))
-#    plt.legend()
-#    plt.xlabel(r'Wavelength [\si{\nano\meter}]')
-#    plt.ylabel(r'Intensity')
-#    plt.xlim(180, 650)
-#    plt.savefig('abs'+cuvette[0])
-#
-##'plt.show()
-##data_C = []
-##for item in data_absorbance:
-##    data_C.append(os.path.basename(item))
-##print(data_C)
-#
-##for item in data_C:
-##    plt.figure()
-##    df_lamidx[item].plot()
-##    plt.grid()
-##    plt.legend()
-##    plt.xlabel(r'Wavelength [\si{\nano\meter}]')
-##    plt.ylabel(r'Intensity')
-##    plt.xlim(180, 650)
-#
-#
+# # # # # # # # # # # # # # # Data Analysis # # # # # # # # # # # # # # # # # # 
+def E():
+    return alpha * (k - k0)
+
+
+
+
