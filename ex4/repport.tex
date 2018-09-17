@@ -13,8 +13,10 @@
 \date{\today}
 
 % BibLateX
-\usepackage[backend=biber, style=authortitle, defernumbers=true,
-            sorting=nty]{biblatex}
+% style = authortitle
+% nty
+\usepackage[backend=biber, style=apa, defernumbers=true,
+            sorting=nty, round]{biblatex}
 \addbibresource{bibliography.bib}
 \defbibheading{secbib}[\bibname]{%
     \section{#1}%
@@ -40,6 +42,7 @@
 \input{data}
 \input{discussion}
 \input{conclusion}
+\clearpage
 \printbibliography[heading=subbibliography]{}
 \nocite{*}
 \end{document}
