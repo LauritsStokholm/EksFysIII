@@ -78,7 +78,7 @@ def ENERGY():
     E1 = E(mH, mAu)
     E2 = E(2*mH, mAu)
 
-    return E1, E2
+    return np.array([E1, E2])
 
 
 
@@ -143,7 +143,7 @@ def Gaussian_fit(df, file_names, k0_switch):
             plt.plot(x,y, '.', label='data')
             plt.legend(loc=1)
 
-        return np.array(gaussian_mean), np.array(gaussian_std)
+        return np.array([gaussian_mean, gaussian_std])
     else:
         df_data = df
 
@@ -174,7 +174,8 @@ def Gaussian_fit(df, file_names, k0_switch):
         plt.plot(gauss_x, gauss_y, label='fit')
         plt.plot(x,y, '.', label='data')
         plt.legend(loc=1)
-        return np.array(gaussian_mean), np.array(gaussian_std)
+        return np.array([gaussian_mean, gaussian_std])
+
 
 
 def plotting(x, y, x_error, y_error, k0_switch):
@@ -185,7 +186,6 @@ def plotting(x, y, x_error, y_error, k0_switch):
         
         # Curve fitting data for linear fit, with weights
         popt, pcov = curve_fit(linear, x, y, sigma = weights)
-        #popt, pcov = curve_fit(linear, x, y)
         
         plt.figure()
         plt.title("Calibration")
@@ -201,14 +201,14 @@ def plotting(x, y, x_error, y_error, k0_switch):
             popt[0]))
         return popt
     else:
-        popt, pcov = curve_fit(linear, x, y)
+        popt = curve_fit(linear, x, y)[0]
 
         plt.figure()
         plt.title("Calibration")
         plt.xlabel("Amplitude")
         plt.ylabel("Mean value of Gaussian fit")
-        plt.plot(x, y, label="Data")
-        plt.plot(x, linea(x, *popt), label="Linear fit")
+        plt.errorbar(x, y, fmt='o', label="Data")
+        plt.plot(x, linear(x, *popt), label="Linear fit")
         plt.legend()
         plt.grid()
 
@@ -234,7 +234,9 @@ def k0():
     Amps = np.array([1.62, 2.0, 2.5, 3.0, 3.5, 4.0, 5.0, 6.0])
 
     # Gaussian uncertainties and determining mean value of channel bin
-    gaussian_mean, gaussian_std = Gaussian_fit(df, file_names, k0_switch)
+    gauss = Gaussian_fit(df, file_names, k0_switch)
+    gaussian_mean = gauss[0]
+    gaussian_std  = gauss[1]
     
     # Linear fit (parameters)
     # Meassured Amplitude is x and the mean channel number is y
@@ -244,9 +246,6 @@ def k0():
     x_error = np.array([0.1])
     # Mean channel number was meassured with gaussian uncertainty
     y_error = gaussian_std
-    print(x_error)
-    print(y_error)
-    print(y_error**2)
 
 #    b, a = plotting(Amps, gaussian_mean_k0, gaussian_std_k0, k0_switch)
     b, a = plotting(x, y, x_error, y_error, k0_switch)
@@ -261,65 +260,65 @@ def alpha():
     k0_switch = False
     
     # Determine Energies
-    EH, EH2 = ENERGY()
+    y = np.array([ENERGY()[1], ENERGY()[0]])
+    print(y)
 
     # Dataframe (data) + file_names (for itteration)
-    df_alpha, file_names_alpha = Dataframe(data_dir)
+    df, file_names = Dataframe(data_dir)
 
-    name1 = file_names_alpha[0]
-    name2 = file_names_alpha[1]
+    name1 = file_names[0]
+    name2 = file_names[1]
 
     # Manual labour part 2
-    df_alpha2 = df_alpha.loc[100:500]
+    df1 = df.loc[100:500]
 
     # 3 Different peaks (for gaussians)
-    df_alpha3 = df_alpha[name1].loc[100:260]
-    df_alpha4 = df_alpha[name2].loc[260:367]
-    df_alpha5 = df_alpha[name2].loc[367:500]
+    df2 = df[name1].loc[100:260]
+    df3 = df[name2].loc[260:367]
+    df4 = df[name2].loc[367:500]
 
     plt.figure()
-    df_alpha3.plot()
-    df_alpha4.plot()
-    df_alpha5.plot()
+    df2.plot()
+    df3.plot()
+    df4.plot()
 
    # Gaussian uncertainties and determining mean value of channel bin
-    gaussian_mean_alpha1, gaussian_std_alpha1 = Gaussian_fit(df_alpha3,
-            name1, k0_switch)
-    gaussian_mean_alpha2, gaussian_std_alpha2 = Gaussian_fit(df_alpha4,
-            name2, k0_switch)
-    gaussian_mean_alpha3, gaussian_std_alpha3 = Gaussian_fit(df_alpha5,
-            [name1], k0_switch)
-#
-#
-#    print(gaussian_mean_alpha1, gaussian_std_alpha1)
-#    print(gaussian_mean_alpha2, gaussian_std_alpha2)
-#    print(gaussian_mean_alpha3, gaussian_std_alpha3)
-#
-#
-#    x = [gaussian_mean_alpha1, gaussian_mean_alpha3]
-#    y = [EH, EH2]
-#    x_error = [gaussian_std_alpha1, gaussian_std_alpha3]
-#
-#    # Linear fit (parameters) (chosen right values
-#    a, b = plotting(x, y, x_error, k0_switch)
-#
-#    alpha = a
-#    
-#    print("alpha is {:.2f}".format(alpha))
-    return
+    gauss1 = Gaussian_fit(df2, name1, k0_switch)
+    gauss2 = Gaussian_fit(df3, name2, k0_switch)
+    gauss3 = Gaussian_fit(df4, name1, k0_switch)
+
+    print(gauss1)
+    print(gauss2)
+    print(gauss3)
+
+    x = np.concatenate((gauss1[0], gauss3[0]), axis=0)
+    x_error = [gauss1[1], gauss3[1]]
+    y_error = [0, 0]
+
+    print(x)
+    print(y)
+
+    # Linear fit (parameters) (chosen right values
+    a, b = plotting(x, y, x_error, y_error, k0_switch)
+
+    alpha = a
+    
+    print("alpha is {:.2f}".format(alpha))
+    return alpha
 
 
-#k0()
-alpha()
+k0 = k0()
+alpha = alpha()
 
-plt.show()
 
 
 
 # # # # # # # # # # # # # # # Data Analysis # # # # # # # # # # # # # # # # # # 
-def E():
+def E(alpha, k0, k):
     return alpha * (k - k0)
 
+k = np.arange(0, 1000)
+plt.figure()
+plt.plot(k, E(alpha, k0, k))
 
-
-
+plt.show()
