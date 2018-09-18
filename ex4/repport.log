@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.9.13)  18 SEP 2018 08:36
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.9.13)  18 SEP 2018 09:04
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1897,12 +1897,7 @@ LaTeX Font Info:    External font `lmex10' loaded for size
  (./abstract.tex)
 LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <6> not available
 (Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 52.
-
-Overfull \hbox (240.22638pt too wide) in paragraph at lines 38--53
-[][]
- []
-
-(./introduction.tex
+ (./introduction.tex
 LaTeX Font Info:    Try loading font information for T1+lmss on input line 1.
  (/usr/share/texmf/tex/latex/lm/t1lmss.fd
 File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
@@ -1912,16 +1907,37 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 ) (./setup.tex
-Overfull \vbox (128.28462pt too high) has occurred while \output is active []
+Underfull \hbox (badness 10000) in paragraph at lines 3--8
 
- [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
+ []
+
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
 ]
-./setup.tex:14: Undefined control sequence.
+<./graphics/setup3.jpg, id=27, 4047.12pt x 3035.34pt>
+File: ./graphics/setup3.jpg Graphic file (type jpg)
+<use ./graphics/setup3.jpg>
+Package pdftex.def Info: ./graphics/setup3.jpg  used on input line 11.
+(pdftex.def)             Requested size: 3051.26614pt x 3035.33263pt.
+<./graphics/setup1.jpg, id=29, 4047.12pt x 3035.34pt>
+File: ./graphics/setup1.jpg Graphic file (type jpg)
+<use ./graphics/setup1.jpg>
+Package pdftex.def Info: ./graphics/setup1.jpg  used on input line 18.
+(pdftex.def)             Requested size: 209.65704pt x 157.24112pt.
+<./graphics/setup2.jpg, id=30, 4047.12pt x 3035.34pt>
+File: ./graphics/setup2.jpg Graphic file (type jpg)
+<use ./graphics/setup2.jpg>
+Package pdftex.def Info: ./graphics/setup2.jpg  used on input line 25.
+(pdftex.def)             Requested size: 209.65704pt x 157.24112pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+./setup.tex:37: Undefined control sequence.
 <argument> \seconds 
                     
-l.14 $\SI{123}{\seconds}
+l.37 $\SI{123}{\seconds}
                         $\fxnote{HUSK DETTE!}  and  connected to a computer....
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1929,10 +1945,10 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-./setup.tex:14: Undefined control sequence.
+./setup.tex:37: Undefined control sequence.
 <argument> \seconds 
                     
-l.14 $\SI{123}{\seconds}
+l.37 $\SI{123}{\seconds}
                         $\fxnote{HUSK DETTE!}  and  connected to a computer....
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1940,91 +1956,103 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-Package hyperref Info: bookmark level for unknown fixme defaults to 0 on input line 14.
-FiXme Note: 'HUSK DETTE!' on input line 14.
-<gaussian_fit.png, id=28, 614.295pt x 460.3599pt>
+Package hyperref Info: bookmark level for unknown fixme defaults to 0 on input line 37.
+FiXme Note: 'HUSK DETTE!' on input line 37.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [2 <./graphics/setup3.jpg> <./graphics/setup1.jpg> <./graphics/setup2.jpg>]
+<gaussian_fit.png, id=40, 614.295pt x 460.3599pt>
 File: gaussian_fit.png Graphic file (type png)
 <use gaussian_fit.png>
-Package pdftex.def Info: gaussian_fit.png  used on input line 36.
+Package pdftex.def Info: gaussian_fit.png  used on input line 59.
 (pdftex.def)             Requested size: 209.65704pt x 157.11737pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<gaussian_fit2.png, id=30, 614.295pt x 460.3599pt>
+<gaussian_fit2.png, id=42, 614.295pt x 460.3599pt>
 File: gaussian_fit2.png Graphic file (type png)
 <use gaussian_fit2.png>
-Package pdftex.def Info: gaussian_fit2.png  used on input line 45.
+Package pdftex.def Info: gaussian_fit2.png  used on input line 68.
 (pdftex.def)             Requested size: 209.65704pt x 157.11737pt.
+ [3 <./gaussian_fit.png> <./gaussian_fit2.png>] [4
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[2] [3
-
- <./gaussian_fit.png> <./gaussian_fit2.png>]
-<./graphics/process1.jpg, id=53, 4175.6pt x 3131.7pt>
+]
+<./graphics/process1.jpg, id=64, 4175.6pt x 3131.7pt>
 File: ./graphics/process1.jpg Graphic file (type jpg)
 <use ./graphics/process1.jpg>
-Package pdftex.def Info: ./graphics/process1.jpg  used on input line 106.
+Package pdftex.def Info: ./graphics/process1.jpg  used on input line 129.
 (pdftex.def)             Requested size: 209.65704pt x 71.51347pt.
-<./graphics/process2.jpg, id=55, 4175.6pt x 3131.7pt>
+<./graphics/process2.jpg, id=66, 4175.6pt x 3131.7pt>
 File: ./graphics/process2.jpg Graphic file (type jpg)
 <use ./graphics/process2.jpg>
-Package pdftex.def Info: ./graphics/process2.jpg  used on input line 115.
+Package pdftex.def Info: ./graphics/process2.jpg  used on input line 138.
 (pdftex.def)             Requested size: 209.65704pt x 50.088pt.
-<./graphics/process3.jpg, id=57, 4175.6pt x 3131.7pt>
+<./graphics/process3.jpg, id=68, 4175.6pt x 3131.7pt>
 File: ./graphics/process3.jpg Graphic file (type jpg)
 <use ./graphics/process3.jpg>
-Package pdftex.def Info: ./graphics/process3.jpg  used on input line 125.
+Package pdftex.def Info: ./graphics/process3.jpg  used on input line 148.
 (pdftex.def)             Requested size: 209.65704pt x 71.51347pt.
-<./graphics/process4.jpg, id=59, 4175.6pt x 3131.7pt>
+<./graphics/process4.jpg, id=70, 4175.6pt x 3131.7pt>
 File: ./graphics/process4.jpg Graphic file (type jpg)
 <use ./graphics/process4.jpg>
-Package pdftex.def Info: ./graphics/process4.jpg  used on input line 132.
+Package pdftex.def Info: ./graphics/process4.jpg  used on input line 155.
 (pdftex.def)             Requested size: 209.65704pt x 64.37164pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<./graphics/process5.jpg, id=61, 4175.6pt x 3131.7pt>
+<./graphics/process5.jpg, id=72, 4175.6pt x 3131.7pt>
 File: ./graphics/process5.jpg Graphic file (type jpg)
 <use ./graphics/process5.jpg>
-Package pdftex.def Info: ./graphics/process5.jpg  used on input line 140.
+Package pdftex.def Info: ./graphics/process5.jpg  used on input line 163.
 (pdftex.def)             Requested size: 209.65704pt x 163.69081pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<./graphics/setup1.jpg, id=63, 4047.12pt x 3035.34pt>
-File: ./graphics/setup1.jpg Graphic file (type jpg)
-<use ./graphics/setup1.jpg>
-Package pdftex.def Info: ./graphics/setup1.jpg  used on input line 152.
-(pdftex.def)             Requested size: 209.65704pt x 157.24112pt.
+) (./data.tex) (./discussion.tex
+LaTeX Font Info:    Try loading font information for TS1+lmr on input line 8.
+ (/usr/share/texmf/tex/latex/lm/ts1lmr.fd
+File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `lmr' (encoding: TS1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<./graphics/setup2.jpg, id=64, 4047.12pt x 3035.34pt>
-File: ./graphics/setup2.jpg Graphic file (type jpg)
-<use ./graphics/setup2.jpg>
-Package pdftex.def Info: ./graphics/setup2.jpg  used on input line 159.
-(pdftex.def)             Requested size: 209.65704pt x 157.24112pt.
+Package microtype Warning: Unknown slot number of character
+(microtype)                `\textminus '
+(microtype)                in font encoding `TS1' in protrusion list
+(microtype)                `textcomp'.
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<./graphics/setup3.jpg, id=65, 4047.12pt x 3035.34pt>
-File: ./graphics/setup3.jpg Graphic file (type jpg)
-<use ./graphics/setup3.jpg>
-Package pdftex.def Info: ./graphics/setup3.jpg  used on input line 166.
-(pdftex.def)             Requested size: 4047.11017pt x 3035.33263pt.
+Package microtype Warning: Unknown slot number of character
+(microtype)                `\texttrademark '
+(microtype)                in font encoding `TS1' in protrusion list
+(microtype)                `textcomp'.
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-) (./data.tex) (./discussion.tex) (./conclusion.tex) [4
+Package microtype Warning: Unknown slot number of character
+(microtype)                `\textcopyright '
+(microtype)                in font encoding `TS1' in protrusion list
+(microtype)                `textcomp'.
 
- <./graphics/process1.jpg> <./graphics/process2.jpg> <./graphics/process3.jpg> <./graphics/process4.jpg> <./graphics/process5.jpg> <./graphics/setup1.jpg>]
-Overfull \vbox (199.04408pt too high) has occurred while \output is active []
+
+Package microtype Warning: Unknown slot number of character
+(microtype)                `\textregistered '
+(microtype)                in font encoding `TS1' in protrusion list
+(microtype)                `textcomp'.
+
+
+Package microtype Warning: Unknown slot number of character
+(microtype)                `\textdegree '
+(microtype)                in font encoding `TS1' in protrusion list
+(microtype)                `textcomp'.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [5
 
- <./graphics/setup2.jpg> <./graphics/setup3.jpg>]
+ <./graphics/process1.jpg> <./graphics/process2.jpg> <./graphics/process3.jpg> <./graphics/process4.jpg> <./graphics/process5.jpg>]) (./conclusion.tex) [6]
 
 FiXme Summary: Number of notes: 1,
 (FiXme)        Number of warnings: 0,
@@ -2032,38 +2060,34 @@ FiXme Summary: Number of notes: 1,
 (FiXme)        Number of fatal errors: 0,
 (FiXme)        Total: 1.
 
-[6
+[7
 
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 65.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 65.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 64.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 64.
  (./repport.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 65.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 65.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 64.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 64.
 Package rerunfilecheck Info: File `repport.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
 Package logreq Info: Writing requests to 'repport.run.xml'.
 \openout1 = `repport.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 35667 strings out of 492982
- 652435 string characters out of 6134896
- 1261937 words of memory out of 5000000
- 38660 multiletter control sequences out of 15000+600000
- 646479 words of font info for 143 fonts, out of 8000000 for 9000
+ 35711 strings out of 492982
+ 653423 string characters out of 6134896
+ 1259938 words of memory out of 5000000
+ 38697 multiletter control sequences out of 15000+600000
+ 644873 words of font info for 145 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  48i,12n,80p,10396b,1895s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathex.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}</usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmex10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr17.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr9.pfb></usr/share/texmf/fonts/type1/public/lm/lmri10.pfb></usr/share/texmf/fonts/type1/public/lm/lmri12.pfb></usr/share/texmf/fonts/type1/public/lm/lmss9.pfb></usr/share/texmf/fonts/type1/public/lm/lmssbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy6.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy8.pfb>
-Output written on repport.pdf (6 pages, 14103555 bytes).
+{/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathex.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}</usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmex10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr17.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr9.pfb></usr/share/texmf/fonts/type1/public/lm/lmri10.pfb></usr/share/texmf/fonts/type1/public/lm/lmri12.pfb></usr/share/texmf/fonts/type1/public/lm/lmss9.pfb></usr/share/texmf/fonts/type1/public/lm/lmssbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy6.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy8.pfb>
+Output written on repport.pdf (7 pages, 14102824 bytes).
 PDF statistics:
- 168 PDF objects out of 1000 (max. 8388607)
- 125 compressed objects within 2 object streams
- 35 named destinations out of 1000 (max. 500000)
- 41553 words of extra memory for PDF output out of 42996 (max. 10000000)
+ 184 PDF objects out of 1000 (max. 8388607)
+ 139 compressed objects within 2 object streams
+ 37 named destinations out of 1000 (max. 500000)
+ 41047 words of extra memory for PDF output out of 42996 (max. 10000000)
 
