@@ -9,6 +9,9 @@
 *.synctex.gz.orig
 *.synctex.gz
 
+*.tps
+*.tcp
+
 #ikke sync pdf
 *.pdf.orig
 *.pdf
