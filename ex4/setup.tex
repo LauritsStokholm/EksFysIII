@@ -1,62 +1,61 @@
 \section{Materials and Methods}
 \subsection{Experimental Setup}
-Using a single Van-de-Graaf accelerator (see \cref{fig_setup3}), the incident
-beam of protons was accelerated to $\SI{400}{\kilo\electronvolt}$.
+To obtain energies in the order of a $\SI{400}{\kilo\electronvolt}$, a single Van-de-Graaf
+accelerator (see \cref{fig_setup3}) was used. The variety of incomming beam particles
+was limited by the source (a flask of hydrogen gas connected to the accelerator
+tank). Therefore, we only concider incomming ions $\mathrm{H^+}$ and
+$\mathrm{{H_{2}}^{+}}$, as the source was stationary, and not changed.
+
+The accelerator ionized the hydrogen gas which could escape in a narrow beam.
+The particles kinetic energy was controllable on the dashboard. The particles entered a big electromagnet which makes a magnetic field that controls the angle of deflection of the beam. By adjusting the field one could control which particles, depending on the mass and charge, could enter the beamline and thus interact with the target. 
+
+From the beamline the particles were directed toward a chosen target material, where they got scattered on atomic nuclei of the target. A detector was placed at a movable position around the target, such that scattering angles up 160 degrees could be measured. 
+The detector was coupled to a digitizer with a time resolution of
+$\SI{123}{\seconds}$\fxnote{HUSK DETTE!}  and  connected to a computer. During measurements the digitizer started a clock inside it. When the detector was hit by a particle, the digitizer translated the measured energy into a digital number and sent the number and the corresponding time stamp to the computer. 
+The program Mc2Analyzer was used to handle the data. The digital number is an arbitrary number called a channel number. It is translatable to the actual energy by a linear factor plus an offset. In order to convert these channel numbers to correct energies of the scattered particles a calibration was done.
 
 
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.99\columnwidth]{setup1}
-    \caption{something to do with setup1}
-    \label{fig_setup1}
+\subsection{Calibration}
+The measured energy of a scattered particle is given as a digital output called a channel number. A calibration is necessary to convert these channel numbers to the actual particle scattering energies. Assuming a linear relationship between the energy and the channel number the energy can be found as 
+\begin{equation}
+E = \alpha(k - k_0),
+\end{equation}
+where $k$ is the channel and $k_0$ and $\alpha$ are parameters. The parameters in the relation is determined by varying the incoming energy and writing down the corresponding values of energy and channel number. The constants are determined from a linear fit of the energies as function of channel numbers.
+With the Van de Graff accelerator the magnetic field can be adjusted to deflect either $\mathrm{H^+}$ or $\mathrm{{H_2}^+}$ into the beamline. For each of these a data point of energy related to channel number can be found. 
+By considering energy and momentum conservation for elastic scattering in two dimensions the energy of the scattered particles $E_f$ can be found from the incident proton energy and the scattering angle as: 
+\begin{equation}
+E_f = \left( \frac{m_p \cos\theta + \sqrt{{m_t}^2 - {m_p}^2 \sin^2\theta}}{m_p+m_t} \right)^2 E_i,
+\end{equation}
+where $E_i$ is the energy of the incident beam particles, $m_p$ and $m_t$ are the masses of the incident protons and the target particles, respectively, and $\theta$ is the angle between the direct outgoing non-scattered beam and the scattered particles - also called the scattering angle.
+
+Unfortunately, this only give two data points one from $\mathrm{H^+}$ and
+another from $\mathrm{{H_2}^+}$. Nonetheless, the incline from the linear fit to these data points is still useful. However, another method is used to determine the zero-amplitude constant $k_0$. Different energies are generated using a pulse generator by changing the amplitude (corresponding to a change of resistance). For each fixed amplitude, a normal distribution of counts around a certain mean channel is obtained. The mean channel (also called the centroid) is determined from a Gaussian fit to the distribution. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.99\columnwidth]{gaussian_fit}
+\caption{Gaussian fit of all data values. This was used to estimate the mean
+bin number (channel number), and the uncertainty of this bin number, in the
+energy-calibration.}
+\label{fig_gaussian_fit}
 \end{figure}
 
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.99\columnwidth]{setup2}
-    \caption{something to do with setup1}
-    \label{fig_setup2}
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.99\columnwidth]{gaussian_fit2}
+\caption{Gaussian fit of all data values. This was used to estimate the mean
+bin number (channel number), and the uncertainty of this bin number, in the
+energy-calibration.}
+\label{fig_gaussian_fit2}
 \end{figure}
 
-\begin{figure}[h!]
-    \centering
-    \includegraphics[angle=-90, width=0.99\columnwidth]{setup3}
-    \caption{something to do with setup1}
-    \label{fig_setup3}
-\end{figure}
 
-%\includegraphics[width=0.99\textwidth]{setup2}
-%\includegraphics[width=0.99\textwidth]{setup3}
-
-%The incident protons were generated using a Van de Graff accelerator as shown in Figures \ref{fig_setup1}, \ref{fig_setup2} and \ref{fig_setup3}. The variety of incoming particles were limited by the source, which was a flask of hydrogen gas connected to the accelerator tank. The flask was not changed, and thus this experiment only concerns the ions $\mathrm{H^+}$ and $\mathrm{{H^2}^+}$, in particular protons. The accelerator ionized a hydrogen gas which could escape in a narrow beam. The particles were accelerated to an energy up to 400 keV controllable on the accelerator. The particles entered a big electromagnet which makes a magnetic field that controls the angle of deflection of the beam. By adjusting the field one could control which particles, depending on the mass and charge, could enter the beamline and thus interact with the target. 
-%
-%From the beamline the particles were directed toward a chosen target material, where they got scattered on atomic nuclei of the target. A detector was placed at a movable position around the target, such that scattering angles up 160 degrees could be measured. 
-%The detector was coupled to a digitizer with a time resolution of xx s and  connected to a computer. During measurements the digitizer started a clock inside it. When the detector was hit by a particle, the digitizer translated the measured energy into a digital number and sent the number and the corresponding time stamp to the computer. 
-%The program Mc2Analyzer was used to handle the data. The digital number is an arbitrary number called a channel number. It is translatable to the actual energy by a linear factor plus an offset. In order to convert these channel numbers to correct energies of the scattered particles a calibration was done.
-%
-%
-%\subsection{Calibration}
-%
-%The measured energy of a scattered particle is given as a digital output called a channel number. A calibration is necessary to convert these channel numbers to the actual particle scattering energies. Assuming a linear relationship between the energy and the channel number the energy can be found as 
-%\begin{equation}
-%E = \alpha(k - k_0),
-%\end{equation}
-%where $k$ is the channel and $k_0$ and $\alpha$ are constants. The constants in the relation is determined by varying the incoming energy and writing down the corresponding values of energy and channel number. The constants are determined from a linear fit of the energies as function of channel numbers.
-%With the Van de Graff accelerator the magnetic field can be adjusted to deflect either $\mathrm{H^+}$ or $\mathrm{{H_2}^+}$ into the beamline. For each of these a data point of energy related to channel number can be found. 
-%By considering energy and momentum conservation for elastic scattering in two dimensions the energy of the scattered particles $E_f$ can be found from the incident proton energy and the scattering angle as: 
-%\begin{equation}
-%E_f = \left( \frac{m_p \cos\theta + \sqrt{{m_t}^2 - {m_p}^2 \sin^2\theta}}{m_p+m_t} \right)^2 E_i,
-%\end{equation}
-%where $E_i$ is the energy of the incident beam particles, $m_p$ and $m_t$ are the masses of the incident protons and the target particles, respectively, and $\theta$ is the angle between the direct outgoing non-scattered beam and the scattered particles - also called the scattering angle.
-%
-%Unfortunately, this only give two data points one from $\mathrm{H^+}$ and one from $\mathrm{{H_2}^+}$. The incline from the linear fit to these data points is still useful. However, another method is used to determine the zero-amplitude constant $k_0$. Different energies are generated using a pulse generator by changing the amplitude (corresponding to a change of resistance). For each fixed amplitude, a normal distribution of counts around a certain mean channel is obtained. The mean channel (also called the centroid) is determined from a Gaussian fit to the distribution. 
-%
 %TABLE WITH CORRESPONDING VALUES OF AMPLITUDE AND MEAN CHANNEL (AND THEIR UNCERTAINTIES)!
 %
 %FIGURE WITH AN EXAMPLE OF A GAUSSIAN FIT.
-%
-%Figure X shows the count distribution as function of channels for the amplitude X fitted with gaussian function. The data clearly follows a gaussian distribution and the data points are, within uncertainty, well described by a gauusian distribution. 
-%
+
+\cref{fig_gaussian_fit}  shows the count distribution as function of channels for the amplitude fitted with gaussian function. The data clearly follows a gaussian distribution and the data points are, within uncertainty, well described by a gausian distribution. 
+
 %From the fit the coefficient $k_0$ is .... 
 %
 %
@@ -81,32 +80,7 @@ beam of protons was accelerated to $\SI{400}{\kilo\electronvolt}$.
 %%\end{tabular}
 %%\label{tbl:eksempel}
 %%\end{table}
-%
-%
-%
-%
-%\begin{figure}[h]
-%\centering
-%\includegraphics[width=0.5\textwidth]{setup1}
-%\caption{Experimental setup 1: The detector and a computer for the data
-%analysis.}
-%\label{fig_setup1}
-%\end{figure}
-%
-%\begin{figure}[h]
-%\centering
-%\includegraphics[width=0.5\textwidth]{setup2}
-%\caption{Experimental setup 2: All components with variables.}
-%\label{fig_setup2}
-%\end{figure}
-%
-%\begin{figure}[h]
-%\centering
-%\includegraphics[width=0.5\textwidth]{setup3}
-%\caption{Experimental setup 3: The single Van-de-Graaf accelerator.}
-%\label{fig_setup3}
-%\end{figure}
-%
+
 %\subsection{Scattering on atomic nuclei}
 %The aim of this experiment was to use a particle accelerator to test certain dependencies of Rutherford scattering. Numerically, the Rutherford scattering differential cross section per target atom for any target atom is
 %\begin{equation}
@@ -120,4 +94,77 @@ beam of protons was accelerated to $\SI{400}{\kilo\electronvolt}$.
 %\end{equation}
 %where $N$ is the number of incoming particles per time, $n_\text{tar}$ is the particle density of the target, $dx$ is the thickness of the target, and $d\Omega$ is the solid angle of the detector.
 %
-%
+
+\clearpage
+\subsection{Procedure}
+First thing, the Van-de-Graaf. To accelerate the beam of incomming particles,
+one has to generate a hugh potential. Turning on the Belt, one hears the
+mechanical rhumming. This will generate a potential difference as described
+further in \cite[p.xx]{krane}.
+\begin{figure}[h]
+\centering
+\includegraphics[trim={0, 45cm, 0, 15cm}, clip, width=0.99\columnwidth]{process1}
+\caption{The belt}
+\label{fig_process1}
+\end{figure}
+
+Now adjust the terminal voltage patiently towards to wanted energy. Our lab
+instructor advised us to wait for each step, before going to the next.
+\begin{figure}[h]
+\centering
+\includegraphics[trim={0, 20cm, 0, 55cm}, clip, width=0.99\columnwidth]{process2}
+\caption{terminal voltage}
+\label{fig_process2}
+\end{figure}
+
+Turn on the electromagnet. Remember to calculate the wanted B-field for given
+element. Look on Faraday cup for received current of particles. Maximize with
+fine grid (small adjustments).
+\begin{figure}[h]
+\centering
+\includegraphics[trim={0, 30cm, 0, 30cm}, clip, width=0.99\columnwidth]{process3}
+\caption{terminal voltage}
+\label{fig_process3}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[trim={0, 35cm, 0, 30cm}, clip, width=0.99\columnwidth]{process4}
+\caption{terminal voltage}
+\label{fig_process4}
+\end{figure}
+
+When signal is good, set the voltage supply to ... 
+\begin{figure}[h]
+\centering
+\includegraphics[trim={25cm, 0, 0, 15cm}, clip, width=0.99\columnwidth]{process5}
+\caption{process5}
+\label{fig_process5}
+\end{figure}
+
+
+
+
+
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.99\columnwidth]{setup1}
+    \caption{something to do with setup1}
+    \label{fig_setup1}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.99\columnwidth]{setup2}
+    \caption{something to do with setup1}
+    \label{fig_setup2}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[angle=-90, width=0.99\columnwidth]{setup3}
+    \caption{something to do with setup1}
+    \label{fig_setup3}
+\end{figure}
+

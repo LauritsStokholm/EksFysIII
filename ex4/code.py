@@ -66,7 +66,7 @@ def linear(a, b, x):
 
 # Energy
 def ENERGY():
-    Ei = 400 # kev
+    Ei = 350 # kev
     theta_deg = 160 # degrees
     theta = 160 * (180 / np.pi)
     mAu = 196.9665690
@@ -123,6 +123,8 @@ def Gaussian_fit(df, file_names, k0_switch):
             # Scipy Optimization after Gaussian (guessing start values)
             mean = sum(x * y) / sum(y)
             sigma = np.sqrt(sum(y * (x - mean)**2) / sum(y))
+            
+            # Gaussian fit parameters
             popt,pcov = curve_fit(gaussian, x, y, p0=[max(y), mean, sigma])
             
             gaussian_mean.append(popt[1])
@@ -130,18 +132,20 @@ def Gaussian_fit(df, file_names, k0_switch):
             
             
             # Plotting the data + fit
-            plt.title("Calibration")
-            plt.xlabel("Channel \#")
-            plt.ylabel("Count \#")
-            plt.grid()
-            
-                # Fit (smooth x and fitted parameters)
+            # Fit (smooth x and fitted parameters)
             gauss_x = np.arange(x[0], x[-1], 0.0001)
             gauss_y = gaussian(gauss_x, *popt)
    
-            plt.plot(gauss_x, gauss_y, label='fit')
-            plt.plot(x,y, '.', label='data')
-            plt.legend(loc=1)
+            plt.plot(gauss_x, gauss_y, label='Gaussian fit')
+            plt.plot(x,y, 'o', label='data')
+
+        plt.title("Calibration")
+        plt.xlabel("Channel \#")
+        plt.ylabel("Number of counts")
+        plt.legend(loc=1)
+        plt.grid()
+        #plt.savefig('gaussian_fit')
+
 
         return np.array([gaussian_mean, gaussian_std])
     else:
@@ -155,27 +159,22 @@ def Gaussian_fit(df, file_names, k0_switch):
         # Scipy Optimization after Gaussian (guessing start values)
         mean = sum(x * y) / sum(y)
         sigma = np.sqrt(sum(y * (x - mean)**2) / sum(y))
+
+        # Gaussian fit parameters
         popt,pcov = curve_fit(gaussian, x, y, p0=[max(y), mean, sigma])
         
         gaussian_mean.append(popt[1])
         gaussian_std.append(popt[2])
         
-        
         # Plotting the data + fit
-        plt.title("Calibration")
-        plt.xlabel("Channel \#")
-        plt.ylabel("Count \#")
-        plt.grid()
         
         # Fit (smooth x and fitted parameters)
         gauss_x = np.arange(x[0], x[-1], 0.0001)
         gauss_y = gaussian(gauss_x, *popt)
    
-        plt.plot(gauss_x, gauss_y, label='fit')
-        plt.plot(x,y, '.', label='data')
-        plt.legend(loc=1)
+        plt.plot(gauss_x, gauss_y, label='Gaussian fit')
+        plt.plot(x, y, 'o', label='data')
         return np.array([gaussian_mean, gaussian_std])
-
 
 
 def plotting(x, y, x_error, y_error, k0_switch):
@@ -187,14 +186,8 @@ def plotting(x, y, x_error, y_error, k0_switch):
         # Curve fitting data for linear fit, with weights
         popt, pcov = curve_fit(linear, x, y, sigma = weights)
         
-        plt.figure()
-        plt.title("Calibration")
-        plt.xlabel("Amplitude")
-        plt.ylabel("Mean value of Gaussian Fit")
         plt.errorbar(x, y, xerr=x_error, yerr=y_error, fmt="o", label="Data")
         plt.plot(x, linear(x, *popt), label='Linear fit')
-        plt.legend()
-        plt.grid()
 
         # Determining parameters
         print("Linear fit parameters are a = {:.2f} and b = {:.2f}".format(popt[1],
@@ -203,14 +196,8 @@ def plotting(x, y, x_error, y_error, k0_switch):
     else:
         popt = curve_fit(linear, x, y)[0]
 
-        plt.figure()
-        plt.title("Calibration")
-        plt.xlabel("Amplitude")
-        plt.ylabel("Mean value of Gaussian fit")
         plt.errorbar(x, y, fmt='o', label="Data")
         plt.plot(x, linear(x, *popt), label="Linear fit")
-        plt.legend()
-        plt.grid()
 
         # Determine parameters
         print("Linear fit parameters are a = {:.2f} and b ={:.2f}".format(popt[1], popt[0]))
@@ -248,7 +235,14 @@ def k0():
     y_error = gaussian_std
 
 #    b, a = plotting(Amps, gaussian_mean_k0, gaussian_std_k0, k0_switch)
+    plt.figure()
+    plt.title("Calibration")
+    plt.xlabel("Amplitude")
+    plt.ylabel("Mean value of Gaussian Fit")
+    plt.legend()
+    plt.grid()
     b, a = plotting(x, y, x_error, y_error, k0_switch)
+    #plt.savefig("k0_plotting")
     k0 = b
     print("k0 is {:.2f}".format(k0))
 
@@ -277,32 +271,36 @@ def alpha():
     df3 = df[name2].loc[260:367]
     df4 = df[name2].loc[367:500]
 
-    plt.figure()
-    df2.plot()
-    df3.plot()
-    df4.plot()
 
    # Gaussian uncertainties and determining mean value of channel bin
+
+   # Figure of the gaussians
+    plt.figure()
     gauss1 = Gaussian_fit(df2, name1, k0_switch)
     gauss2 = Gaussian_fit(df3, name2, k0_switch)
     gauss3 = Gaussian_fit(df4, name1, k0_switch)
-
-    print(gauss1)
-    print(gauss2)
-    print(gauss3)
+    plt.title("Calibration")
+    plt.xlabel("Channel \#")
+    plt.ylabel("Number of counts")
+    plt.grid()
+    plt.legend(loc=2)
+    #plt.savefig('gaussian_fit2')
 
     x = np.concatenate((gauss1[0], gauss3[0]), axis=0)
     x_error = [gauss1[1], gauss3[1]]
     y_error = [0, 0]
 
-    print(x)
-    print(y)
-
     # Linear fit (parameters) (chosen right values
+    plt.figure()
+    plt.title("Calibration")
+    plt.xlabel("Energy")
+    plt.ylabel("Mean value of Gaussian fit")
+    plt.legend()
+    plt.grid()
     a, b = plotting(x, y, x_error, y_error, k0_switch)
+    #plt.savefig("alpha_plotting")
 
     alpha = a
-    
     print("alpha is {:.2f}".format(alpha))
     return alpha
 
@@ -317,8 +315,8 @@ alpha = alpha()
 def E(alpha, k0, k):
     return alpha * (k - k0)
 
-k = np.arange(0, 1000)
-plt.figure()
-plt.plot(k, E(alpha, k0, k))
+#k = np.arange(0, 1000)
+#plt.figure()
+#plt.plot(k, E(alpha, k0, k))
 
 plt.show()
