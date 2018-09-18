@@ -1,5 +1,5 @@
 % $ biblatex auxiliary file $
-% $ biblatex bbl format version 2.8 $
+% $ biblatex bbl format version 2.9 $
 % Do not modify the above lines!
 %
 % This is an auxiliary file used by the 'biblatex' package.
@@ -18,54 +18,67 @@
 
 
 \refsection{0}
-  \sortlist[entry]{nty/global/}
-    \entry{Eldyn}{book}{}
+  \datalist[entry]{nty/global//global/global}
+    \entry{krane}{book}{}
       \name{author}{1}{}{%
-        {{uniquename=0,hash=eaaffe4a7b16e2996259d6bd13cef2e8}{%
-           family={Griffiths},
-           familyi={G\bibinitperiod},
-           given={David\bibnamedelima J.},
-           giveni={D\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{uniquename=0,uniquepart=base,hash=ea1aabcad955892f069ed86ac1155fd4}{%
+           family={Krane},
+           familyi={K\bibinitperiod},
+           given={Kenneth\bibnamedelima S.},
+           giveni={K\bibinitperiod\bibinitdelim S\bibinitperiod},
+           givenun=0}}%
       }
       \list{publisher}{1}{%
-        {Cambridge}%
+        {John Wiley \& Sons}%
       }
-      \strng{namehash}{eaaffe4a7b16e2996259d6bd13cef2e8}
-      \strng{fullhash}{eaaffe4a7b16e2996259d6bd13cef2e8}
-      \strng{authornamehash}{eaaffe4a7b16e2996259d6bd13cef2e8}
-      \strng{authorfullhash}{eaaffe4a7b16e2996259d6bd13cef2e8}
-      \field{sortinit}{G}
-      \field{sortinithash}{618d986594b7198ba52cf8b00d348f3f}
+      \strng{namehash}{ea1aabcad955892f069ed86ac1155fd4}
+      \strng{fullhash}{ea1aabcad955892f069ed86ac1155fd4}
+      \strng{bibnamehash}{ea1aabcad955892f069ed86ac1155fd4}
+      \strng{authorbibnamehash}{ea1aabcad955892f069ed86ac1155fd4}
+      \strng{authornamehash}{ea1aabcad955892f069ed86ac1155fd4}
+      \strng{authorfullhash}{ea1aabcad955892f069ed86ac1155fd4}
+      \field{sortinit}{K}
+      \field{sortinithash}{9fd838a31ba64d981e8f44562bd33f89}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{isbn}{978-1-108-42041-9}
-      \field{title}{Introduction to Electrodynamics}
-      \field{year}{2017}
+      \field{number}{3}
+      \field{title}{Introduction to Nuclear Physics}
+      \field{year}{1987}
     \endentry
-    \entry{Statistik}{book}{}
+    \entry{noteBB}{book}{}
       \name{author}{1}{}{%
-        {{uniquename=0,hash=61d8a350f5a121098d88cbeebcd35e39}{%
-           family={Jensen},
-           familyi={J\bibinitperiod},
-           given={Jens\bibnamedelima Ledet},
-           giveni={J\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{uniquename=0,uniquepart=base,hash=c857dbb6044420635df42da4896f5701}{%
+           family={{Paetz gen Schleck}},
+           familyi={P\bibinitperiod},
+           given={{Hans}},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
       }
       \list{publisher}{1}{%
-        {Aarhus Universitetsforlag}%
+        {Springer}%
       }
-      \strng{namehash}{61d8a350f5a121098d88cbeebcd35e39}
-      \strng{fullhash}{61d8a350f5a121098d88cbeebcd35e39}
-      \strng{authornamehash}{61d8a350f5a121098d88cbeebcd35e39}
-      \strng{authorfullhash}{61d8a350f5a121098d88cbeebcd35e39}
-      \field{sortinit}{J}
-      \field{sortinithash}{c86bd6cced82a15683b396c2169909ef}
+      \strng{namehash}{c857dbb6044420635df42da4896f5701}
+      \strng{fullhash}{c857dbb6044420635df42da4896f5701}
+      \strng{bibnamehash}{c857dbb6044420635df42da4896f5701}
+      \strng{authorbibnamehash}{c857dbb6044420635df42da4896f5701}
+      \strng{authornamehash}{c857dbb6044420635df42da4896f5701}
+      \strng{authorfullhash}{c857dbb6044420635df42da4896f5701}
+      \field{sortinit}{P}
+      \field{sortinithash}{8d51b3d5b78d75b54308d706b9bbe285}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{isbn}{978-87-7124-0245}
-      \field{title}{Statistik viden fra data}
-      \field{year}{2012}
+      \field{isbn}{978-3-642-53985-5}
+      \field{number}{3}
+      \field{title}{Nuclear Reactions: An introduction}
+      \field{year}{2014}
     \endentry
-  \endsortlist
+  \enddatalist
 \endrefsection
 \endinput
 

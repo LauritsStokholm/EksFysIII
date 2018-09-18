@@ -14,15 +14,50 @@
 \date{\today}
 
 % BibLateX
+<<<<<<< HEAD
 \usepackage[backend=biber, style=authortitle, defernumbers=true,
             sorting=nty]{biblatex}
             
+=======
+% style = authortitle
+% nty
+\usepackage[backend=biber, style=apa, defernumbers=true,
+            sorting=nty, round]{biblatex}
+>>>>>>> 54b95a2bf683b756f377b9e084d2f304545c5cf3
 \addbibresource{bibliography.bib}
 \defbibheading{secbib}[\bibname]{%
     \section{#1}%
     \markboth{#1}{#1}}
 
+%\raggedbottom
+%\parindent = 0pt
+
+%Følgende gør, at subscripts bliver ikke-kursiv. Anvendes X_|<subscript>|. Erstattes evt. med X_{\mathrm{<subscript>}}.
+\makeatletter
+\begingroup
+\catcode`\_=\active
+\protected\gdef_{\@ifnextchar|\subtextup\sb}
+\endgroup
+\def\subtextup|#1|{\sb{\textup{#1}}}
+\AtBeginDocument{\catcode`\_=12 \mathcode`\_=32768 }
+\makeatother
+
+\DeclareSIUnit\gauss{G}
+
 \begin{document}
+% Dette er boksen i toppen. Lad den være.
+%\vspace*{-13cm}
+%\framebox[\textwidth][l]{\textbf{%
+%\begin{tabular}{p{\linewidth}l}
+%Received date: & {Approved:}\\
+%& Date:\\
+%& Signature:\\
+%(reserved for instructor) & \\
+%\end{tabular}
+%}}
+% Boksen slutter her .
+%\vspace*{+1cm}
+%\bigskip
 % Title og Abstract
 % Ignorerer twocolumn til abstract
 \begin{minipage}{\textwidth}
@@ -33,8 +68,8 @@
             \input{abstract}
         \end{onecolabstract}]
 \end{minipage}
-
 \saythanks{}
+%\vspace{9cm}
 \input{introduction}
 %\input{theory}
 %\input{hazards}
@@ -42,10 +77,8 @@
 \input{data}
 \input{discussion}
 \input{conclusion}
-\printbibliography[heading=subbibliography]{}
-\input{appendix}
 \clearpage
-\includepdf[pages={1-}]{logbook.pdf}
+\printbibliography[heading=subbibliography]{}
 \nocite{*}
 \end{document}
 
