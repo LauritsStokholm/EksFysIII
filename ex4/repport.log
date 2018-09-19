@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2017.9.16)  17 SEP 2018 13:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/W32TeX) (preloaded format=pdflatex 2017.9.16)  19 SEP 2018 14:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1988,17 +1988,7 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 )
-(./setup.tex
-
-LaTeX Warning: Reference `fig_setup1' on page 1 undefined on input line 3.
-
-
-LaTeX Warning: Reference `fig_setup2' on page 1 undefined on input line 3.
-
-
-LaTeX Warning: Reference `fig_setup3' on page 1 undefined on input line 3.
-
-[1{c:/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+(./setup.tex [1{c:/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 
 ]
@@ -2009,54 +1999,54 @@ Underfull \hbox (badness 2302) in paragraph at lines 37--38
 \T1/lmr/m/n/10.95 (+20) Something about the dif-fer-ent tar-gets...
  []
 
-<./graphics/setup1.jpg, id=33, 4047.12pt x 3035.34pt>
-File: ./graphics/setup1.jpg Graphic file (type jpg)
-<use ./graphics/setup1.jpg>
-Package pdftex.def Info: ./graphics/setup1.jpg  used on input line 62. on input
- line 62.
-Package pdftex.def Info: Requested size: 226.0pt x 169.46841pt on input line 62
-.
 
-Overfull \hbox (14.22638pt too wide) in paragraph at lines 62--64
- [][] 
- []
+! LaTeX Error: File `setup1' not found.
 
-<./graphics/setup2.jpg, id=34, 4047.12pt x 3035.34pt>
-File: ./graphics/setup2.jpg Graphic file (type jpg)
-<use ./graphics/setup2.jpg>
-Package pdftex.def Info: ./graphics/setup2.jpg  used on input line 70. on input
- line 70.
-Package pdftex.def Info: Requested size: 226.0pt x 169.46841pt on input line 70
-.
-
-Overfull \hbox (14.22638pt too wide) in paragraph at lines 70--71
- [][] 
- []
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.62 \includegraphics[width=0.5\textwidth]{setup1}
+                                                  
+I could not locate the file with any of these extensions:
+.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
 
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+! LaTeX Error: File `setup2' not found.
 
-<./graphics/setup3.jpg, id=35, 4047.12pt x 3035.34pt>
-File: ./graphics/setup3.jpg Graphic file (type jpg)
-<use ./graphics/setup3.jpg>
-Package pdftex.def Info: ./graphics/setup3.jpg  used on input line 77. on input
- line 77.
-Package pdftex.def Info: Requested size: 226.0pt x 169.46841pt on input line 77
-.
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.70 \includegraphics[width=0.5\textwidth]{setup2}
+                                                  
+I could not locate the file with any of these extensions:
+.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
 
-Overfull \hbox (14.22638pt too wide) in paragraph at lines 77--78
- [][] 
- []
 
+! LaTeX Error: File `setup3' not found.
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.77 \includegraphics[width=0.5\textwidth]{setup3}
+                                                  
+I could not locate the file with any of these extensions:
+.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
 
-[3 <./graphics/setup1.jpg> <./graphics/setup2.jpg> <./graphics/setup3.jpg>])
-(./data.tex) (./discussion.tex) (./conclusion.tex)
+) (./data.tex) (./discussion.tex) (./conclusion.tex)
 Package microtype Info: Character `029' is missing
 (microtype)             in font `T1/lmr/m/sc/10.95'.
 (microtype)             Ignoring protrusion settings for this character.
- (./appendix.tex) [4
+ (./appendix.tex) [3]
+[4
 
 ]
 <logbook.pdf, id=63, pagebox=cropbox, 597.50829pt x 845.0471pt>
@@ -2101,8 +2091,7 @@ Package pdftex.def Info: logbook.pdf , page1 used on input line 46. on input li
 ne 46.
 Package pdftex.def Info: Requested size: 597.53416pt x 845.08372pt on input lin
 e 46.
-
-[5
+ [5
 
  <./logbook.pdf>]
 <logbook.pdf, id=117, page=2, pagebox=cropbox, 597.50829pt x 845.0471pt>
@@ -2181,28 +2170,21 @@ Package rerunfilecheck Info: File `repport.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 
 
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
-Package biblatex Warning: Please (re)run Biber on the file:
-(biblatex)                repport
-(biblatex)                and rerun LaTeX afterwards.
+Package biblatex Warning: Please rerun LaTeX.
+(biblatex)                Page breaks have changed.
 
 Package logreq Info: Writing requests to 'repport.run.xml'.
 \openout1 = `repport.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 34596 strings out of 492990
- 627977 string characters out of 6136334
- 1222156 words of memory out of 5000000
- 37578 multiletter control sequences out of 15000+600000
- 647228 words of font info for 151 fonts, out of 8000000 for 9000
+ 34591 strings out of 492990
+ 627639 string characters out of 6136334
+ 1222762 words of memory out of 5000000
+ 37566 multiletter control sequences out of 15000+600000
+ 644067 words of font info for 148 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 48i,18n,80p,10398b,1549s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 48i,18n,80p,10398b,1546s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2017/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{c:/texlive/2017/tex
 mf-dist/fonts/enc/dvips/lm/lm-mathex.enc}{c:/texlive/2017/texmf-dist/fonts/enc/
 dvips/lm/lm-mathit.enc}{c:/texlive/2017/texmf-dist/fonts/enc/dvips/lm/lm-mathsy
@@ -2220,10 +2202,10 @@ t/fonts/type1/public/lm/lmr9.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public
 xmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/texlive/2017/texmf-dist/fonts/typ
 e1/public/lm/lmsy6.pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/lm/lmsy8.
 pfb><c:/texlive/2017/texmf-dist/fonts/type1/public/lm/lmtt10.pfb>
-Output written on repport.pdf (8 pages, 6622666 bytes).
+Output written on repport.pdf (8 pages, 315368 bytes).
 PDF statistics:
  211 PDF objects out of 1000 (max. 8388607)
- 172 compressed objects within 2 object streams
+ 175 compressed objects within 2 object streams
  30 named destinations out of 1000 (max. 500000)
- 41523 words of extra memory for PDF output out of 42996 (max. 10000000)
+ 40996 words of extra memory for PDF output out of 42996 (max. 10000000)
 
