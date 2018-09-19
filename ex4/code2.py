@@ -75,8 +75,14 @@ def doublegaussian(x, A1, mu1, std1, A2, mu2, std2):
         + A2 * np.exp(-(x - mu2)**2 / (2 * std2**2)))
 
 # Linear functions
-def linear(x, b, a):
+# For 2 parameters (fitting k0)
+def linear(x, a, b):
     return a*x + b
+
+# For 1 parameter (having k0)
+def linear2(x, a):
+    global k0
+    return a*x + k0
 
 # # # # # # # # # # # # # # Energy for H+ and H2+ # # # # # # # # # # # # # # # 
 def atomic_energy():
@@ -97,10 +103,14 @@ def atomic_energy():
             (np.sin(theta))**2)) / (mb+mt))**2) * Ei
 
     # Energies
-    E1 = E(mH, mAu)
-    E2 = E(2*mH, mAu)
+    E1 = E(mH, mAu)   #H+
+    E2 = E(2*mH, mAu) #H2+
 
     return E1, E2
+
+# # # # # # # # # # # # # # Energy-Calibration formula # # # # # # # # # # # # 
+def energy_calibration(alpha, k0, k):
+    return alpha * (k - k0)
 
 # # # # # # # # # # # # # # DataFrame Import # # # # # # # # # # # # # # # # # 
 """ Here we import given list of directories into dataframes """
@@ -230,7 +240,7 @@ def gaussian_fit(df, file_names, k0_switch, fig_ax_axins):
     return np_amplitudes, np_mean, np_std
 
 # # # # # # # # # # # # # # Linear fit # # # # # # # # # # # # # # # # # # # #
-def linear_fit(x, y, x_error, y_error, k0_switch, fig_ax_axins):
+def linear_fit(x, y, x_error, y_error, k0_switch, fig_ax_axins, *k0):
     fig, ax, axins = fig_ax_axins
     if k0_switch == True:
         # Weighing data
@@ -240,22 +250,36 @@ def linear_fit(x, y, x_error, y_error, k0_switch, fig_ax_axins):
         popt, pcov = curve_fit(linear, x, y, sigma = weights)
         perr = np.sqrt(np.diag(pcov))
 
+        # Plotting for zoom
+        axins.errorbar(x, linear(x, *popt))
+        axins.errorbar(x, y, xerr=x_error, yerr=y_error, fmt="o")
+    
+        # Plotting 
+        ax.errorbar(x, y, xerr=x_error, yerr=y_error, fmt="o", label="Data")
+        ax.plot(x, linear(x, *popt), label="Linear fit")
+
+        # The parameters are
+        print("""Linear fit parameters are a={:.2f} with an error of {:.2f}
+           and b={:.2f} with an error of {:.2f}""".format(popt[0], perr[0],
+               popt[1], perr[1]))
+
     else:
-        popt, pcov = curve_fit(linear, x, y)
+        popt, pcov = curve_fit(linear2, x, y)
+        print(popt)
+        #popt, pcov = curve_fit(lambda x, a: linear(x, a, b), x, b)
         perr = np.sqrt(np.diag(pcov))
 
-    # Plotting for zoom
-    axins.errorbar(x, linear(x, *popt))
-    axins.errorbar(x, y, xerr=x_error, yerr=y_error, fmt="o")
+        # Plotting for zoom
+        axins.errorbar(x, linear2(x, *popt))
+        axins.errorbar(x, y, xerr=x_error, yerr=y_error, fmt="o")
+    
+        # Plotting 
+        ax.errorbar(x, y, xerr=x_error, yerr=y_error, fmt="o", label="Data")
+        ax.plot(x, linear2(x, *popt), label="Linear fit")
 
-    # Plotting 
-    ax.errorbar(x, y, xerr=x_error, yerr=y_error, fmt="o", label="Data")
-    ax.plot(x, linear(x, *popt), label="Linear fit")
-
-    # The parameters are
-    print("""Linear fit parameters are a={:.2f} with an error of {:.2f}
-           and b={:.2f} with an error of {:.2f}""".format(popt[0], perr[0],
-        popt[1], perr[1]))
+        # The parameters are
+        print("""Linear fit parameters are a={:.2f} with an error of
+                {:.2f}""".format(popt[0], perr[0]))
 
     return popt, perr
 
@@ -303,7 +327,7 @@ def zoomplot(figure_settings, zoom_settings, *colorz):
 
     return fig, ax, axins
 
-# # # # # # # # # # # # # # # # Calibration # # # # # # # # # # # # # # # # # # 
+# # # # # # # # # # # # # # Calibration # # # # # # # # # # # # # # # # # # 
 """ In this calibration we determine alpha and k0, such we can transform
 channel numbers to energy by the E = alpha(k - k0), where k is the channel
 number and k0 is the channelnumber for zero amplitude (extrapolation)"""
@@ -400,7 +424,7 @@ def k0():
 
     return k0
 
-def alpha():
+def alpha(k0):
     """ Now we obtain the incline. Same procedure, but only 2 points. One from
     H+ another from H2+"""
     # Determine k0 or alpha?
@@ -416,20 +440,18 @@ def alpha():
     df, file_names = Dataframe(data_dir)
 
     # We have 2 files (H+ and H2+)
-    name1 = file_names[0]
-    name2 = file_names[1]
+    name1 = file_names[0] # H2+
+    name2 = file_names[1] # H+
 
     # Manual labour part 2
     df1 = df.loc[100:500]
 
     # 3 Different peaks (for gaussians)
-    df2 = df[name1].loc[100:260]
-    df3 = df[name2].loc[260:367]
-    df4 = df[name2].loc[367:500]
+    df2 = df[name1].loc[100:260] # H2+ (GOLD)
+    df3 = df[name2].loc[260:367] # H+  (CARBON)
+    df4 = df[name2].loc[367:500] # H+  (GOLD)
 
    # Gaussian uncertainties and determining mean value of channel bin
-
-
    # Figure of the gaussians
     # Preparing figure
     title = "Calibration"
@@ -449,6 +471,7 @@ def alpha():
     fig, ax, axins = zoomplot(figure_settings, zoom_settings)
     fig_ax_axins = [fig, ax, axins]
 
+    # Those of interests are mean1 and mean3 
     amplitude1, mean1, std1 = gaussian_fit(df2, name1, k0_switch, fig_ax_axins)
     amplitude2, mean2, std2 = gaussian_fit(df3, name2, k0_switch, fig_ax_axins)
     amplitude3, mean3, std3 = gaussian_fit(df4, name1, k0_switch, fig_ax_axins)
@@ -462,11 +485,13 @@ def alpha():
 # Linear
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-    x = np.concatenate((amplitude2[0], amplitude3[0]), axis=0)
-    x_error = np.concatenate((amplitude2[1], amplitude3[1]), axis=0)
+    # Fitting mean values for gold (1 and 3)
+    x = np.concatenate((mean1[0], mean3[0]), axis=0)
+    x_error = np.concatenate((mean1[1], mean3[1]), axis=0)
 
-    # Energies
+    # Energies for H2+ and H+ (Respectively)
     y = [E[1], E[0]]
+    
     y_error = [0.2, 0.2] # Theoretical? No, we meassured energy
 
 
@@ -488,14 +513,12 @@ def alpha():
     fig, ax, axins = zoomplot(figure_settings, zoom_settings)
     fig_ax_axins = [fig, ax, axins]
 
-    popt, perr = linear_fit(x, y, x_error, y_error, k0_switch, fig_ax_axins)
+    popt, perr = linear_fit(x, y, x_error, y_error, k0_switch, fig_ax_axins, k0)
+    # Only fitting 1 parameter = the incline (alpha)
     a_val   = popt[0]
     a_error = perr[0]
-    b_val   = popt[1]
-    b_error = perr[1]
 
     a = np.array([a_val, a_error])
-    b = np.array([b_val, b_error])
 
     handles, labels = ax.get_legend_handles_labels()
     fig.legend(handles, labels, loc=1, ncol=2, borderaxespad=0, frameon=False)
@@ -511,6 +534,7 @@ def alpha():
 
 
 
+# # # # # # # # # # # # # # Data Analysis # # # # # # # # # # # # # # # # # # #
 
 
 
@@ -522,6 +546,14 @@ k0 = k0()
 k0_val, k0_error = [k0[0], k0[1]]
 
 # Determine alpha
-alpha = alpha()
+alpha = alpha(k0_val)
 alpha_val, alpha_error = [alpha[0], alpha[1]]
+
+
+
+
+
 plt.show()
+
+
+
