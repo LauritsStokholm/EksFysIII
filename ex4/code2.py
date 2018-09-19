@@ -466,7 +466,7 @@ def alpha():
     x_error = np.concatenate((amplitude2[1], amplitude3[1]), axis=0)
 
     # Energies
-    y = E
+    y = [E[1], E[0]]
     y_error = [0.2, 0.2] # Theoretical? No, we meassured energy
 
 
@@ -477,10 +477,10 @@ def alpha():
     figure_settings = [title, xlabel, ylabel]
 
     ## Preparing zoom
-    zoom_factor = 5
+    zoom_factor = 11
     zoom_plot_loc = 2
-    xmin, xmax, ymin, ymax = [195, 220, 336.2, 336.5]
-    corner1, corner2 = [2, 4]
+    xmin, xmax, ymin, ymax = [16, 18, 336.15, 336.6]
+    corner1, corner2 = [3, 4]
     zoom_settings = [zoom_factor, zoom_plot_loc, xmin, xmax, ymin, ymax,
             corner1, corner2]
 
@@ -518,10 +518,10 @@ def alpha():
 # # # # # # # # # # # # # # Function calls # # # # # # # # # # # # # # # # # #
 
 # Determine k0
-#k0 = k0()
-#k0_val, k0_error = [k0[0], k0[1]]
+k0 = k0()
+k0_val, k0_error = [k0[0], k0[1]]
 
 # Determine alpha
 alpha = alpha()
-#alpha_val, alpha_error = [alpha[0], alpha[1]]
+alpha_val, alpha_error = [alpha[0], alpha[1]]
 plt.show()
