@@ -535,6 +535,97 @@ def alpha(k0):
 
 
 # # # # # # # # # # # # # # Data Analysis # # # # # # # # # # # # # # # # # # #
+def angular_dependence():
+    # To avoid several function calls:
+    k0 = 1.36
+    k0_error = 0.15
+    alpha = 0.95
+    alpha_error = 0.32
+
+    # Dataframe (data) + file_names (for itteration)
+    df, file_names = Dataframe(data_angles_dir)
+
+    # Manual labour pt. 3
+    file_names.sort()
+    detector_angles = [80, 160, 150, 140, 40, 50, 130, 120, 60, 70]
+
+
+    # Defining double gaussian parameters
+
+    # Carbon
+    gaussian_amplitude1       = []
+    gaussian_mean1            = []
+    gaussian_std1             = []
+    gaussian_amplitude_error1 = []
+    gaussian_mean_error1      = []
+    gaussian_std_error1       = []
+   
+    # Gold
+    gaussian_amplitude2       = []
+    gaussian_mean2            = []
+    gaussian_std2             = []
+    gaussian_amplitude_error2 = []
+    gaussian_mean_error2      = []
+    gaussian_std_error2       = []
+
+
+    for name in file_names:
+        # Choosing non-zero values
+        df_data = df[name].loc[df[name].nonzero()]
+        df_data = df_data.loc[100:]
+
+        # Transforming to np.array (Might be unnecesarry)
+        np_data = np.array([np.array(df_data.index), df_data.values])
+        bins = np_data[0]
+        counts = np_data[1]
+
+        # Scipy optimization (Double Gaussian)
+        # # Guessing start values of parameters
+        # Carbon
+        amplitude1 = 50
+        mean_bin1 = 200
+        sigma1    = 10
+
+        # Gold
+        amplitude2 = max(counts)
+        mean_bin2 = sum(bins * counts) / sum(counts)
+        sigma2 = np.sqrt(sum(counts + (bins - mean_bin2)**2) / sum(counts))
+
+
+        # # Fit parameters
+        popt, pcov = curve_fit(doublegaussian, bins, counts, p0=[amplitude1,\
+            mean_bin1, sigma1, amplitude2, mean_bin2, sigma2])
+        # # Uncertainties of parameters
+        perr = np.sqrt(np.diag(pcov))
+
+        # Carbon
+        gaussian_amplitude1.append(popt[0])
+        gaussian_mean1.append(popt[1])
+        gaussian_std1.append(popt[2])
+
+        gaussian_amplitude_error1.append(perr[0])
+        gaussian_mean_error1.append(perr[1])
+        gaussian_std_error1.append(perr[2])
+
+        # Gold
+        gaussian_amplitude2.append(popt[3])
+        gaussian_mean2.append(popt[4])
+        gaussian_std2.append(popt[5])
+
+        gaussian_amplitude_error2.append(perr[3])
+        gaussian_mean_error2.append(perr[4])
+        gaussian_std_error2.append(perr[5])
+
+
+        # Plotting data + fit
+        plt.figure()
+        gauss_x = np.arange(bins[0], bins[-1], 0.001)
+        gauss_y = doublegaussian(gauss_x, *popt)
+
+        plt.plot(gauss_x, gauss_y, label="Gaussian fit")
+        plt.plot(bins, counts, 'o', label="Data")
+
+    return
 
 
 
@@ -542,12 +633,15 @@ def alpha(k0):
 # # # # # # # # # # # # # # Function calls # # # # # # # # # # # # # # # # # #
 
 # Determine k0
-k0 = k0()
-k0_val, k0_error = [k0[0], k0[1]]
+#k0 = k0()
+#k0_val, k0_error = [k0[0], k0[1]]
 
 # Determine alpha
-alpha = alpha(k0_val)
-alpha_val, alpha_error = [alpha[0], alpha[1]]
+#alpha = alpha(k0_val)
+#alpha_val, alpha_error = [alpha[0], alpha[1]]
+
+# Angular dependency
+angular_dependence()
 
 
 
