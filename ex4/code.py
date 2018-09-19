@@ -154,6 +154,8 @@ def Gaussian_fit(df, file_names, k0_switch, *alpha):
             # Scipy Optimization after Gaussian (guessing start values)
             mean = sum(x * y) / sum(y)
             sigma = np.sqrt(sum(y * (x - mean)**2) / sum(y))
+            print(sigma)
+            print(mean)
             
             # Gaussian fit parameters
             popt,pcov = curve_fit(gaussian, x, y, p0=[max(y), mean, sigma])
@@ -418,7 +420,7 @@ def alpha():
     return alpha
 
 
-#k0 = k0()
+k0 = k0()
 alpha = alpha()
 
 
