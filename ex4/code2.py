@@ -81,32 +81,40 @@ def linear(x, a, b):
 
 # For 1 parameter (having k0)
 def linear2(x, a):
+    # E = alpha * (k-k0)
     global k0
-    return a*x + k0
+    return a * (x - k0)
 
 # # # # # # # # # # # # # # Energy for H+ and H2+ # # # # # # # # # # # # # # # 
-def atomic_energy():
+def atomic_energy(switch):
     # Incident energy (accelerator)
     Ei = 350 # keV
+
     # Meassured degree (theoretically, but identical to used experimental
     # setup)
     theta_deg = 160 # degrees
     theta = theta_deg * (np.pi/180) # radians
-    # Target mass
-    mAu = 196.9665690
-
-    # Quanta of mass (assume m(H+)=m(H) and m(H2+)=2m(H)
-    mH = 1.008
 
     # Formula for energy (derrived)
-    E = lambda mb, mt: (((mb*np.cos(theta) + np.sqrt(mt**2 - mb**2 *
-            (np.sin(theta))**2)) / (mb+mt))**2) * Ei
-
-    # Energies
-    E1 = E(mH, mAu)   #H+
-    E2 = E(2*mH, mAu) #H2+
-
-    return E1, E2
+    # E2 = k**2 * E1
+    E = lambda mb, mt: (((mb*np.cos(theta) + np.sqrt(mt**2 - (mb**2
+        *(np.sin(theta))**2))) / (mb+mt))**2) * Ei
+    # Meassuring on gold?
+    if switch == True:
+        # Target mass
+        mAu = 196.9665690
+    
+        # Quanta of mass (assume m(H+)=m(H) and m(H2+)=2m(H)
+        mH = 1.008
+    
+    
+        # Energies
+        E1 = E(mH, mAu)   #H+
+        E2 = E(2*mH, mAu)/2 #H2+
+    
+        return E1, E2
+    else:
+        return 
 
 # # # # # # # # # # # # # # Energy-Calibration formula # # # # # # # # # # # # 
 def energy_calibration(alpha, k0, k):
@@ -265,8 +273,6 @@ def linear_fit(x, y, x_error, y_error, k0_switch, fig_ax_axins, *k0):
 
     else:
         popt, pcov = curve_fit(linear2, x, y)
-        print(popt)
-        #popt, pcov = curve_fit(lambda x, a: linear(x, a, b), x, b)
         perr = np.sqrt(np.diag(pcov))
 
         # Plotting for zoom
@@ -490,21 +496,29 @@ def alpha(k0):
     x_error = np.concatenate((mean1[1], mean3[1]), axis=0)
 
     # Energies for H2+ and H+ (Respectively)
-    y = [E[1], E[0]]
-    
+    y = np.array([E[1], E[0]])
     y_error = [0.2, 0.2] # Theoretical? No, we meassured energy
 
+    print("x og y")
+    print(x)
+    print(y)
+
+    gradient = (y[1] - y[0]) / (x[1] - x[0])
+    print("Gradienten er {}".format(gradient))
+
+    #print(x)
+    #print(y)
 
     # Preparing figure
     title = "Calibration"
-    xlabel = "Energy"
-    ylabel = "Mean value of Gaussian Fit"
+    xlabel = "Mean value of Gaussian Fit"
+    ylabel = "Energy"
     figure_settings = [title, xlabel, ylabel]
 
     ## Preparing zoom
     zoom_factor = 11
     zoom_plot_loc = 2
-    xmin, xmax, ymin, ymax = [16, 18, 336.15, 336.6]
+    xmin, xmax, ymin, ymax = [336.15, 336.6, 16, 18]
     corner1, corner2 = [3, 4]
     zoom_settings = [zoom_factor, zoom_plot_loc, xmin, xmax, ymin, ymax,
             corner1, corner2]
@@ -514,6 +528,7 @@ def alpha(k0):
     fig_ax_axins = [fig, ax, axins]
 
     popt, perr = linear_fit(x, y, x_error, y_error, k0_switch, fig_ax_axins, k0)
+
     # Only fitting 1 parameter = the incline (alpha)
     a_val   = popt[0]
     a_error = perr[0]
@@ -547,8 +562,9 @@ def angular_dependence():
 
     # Manual labour pt. 3
     file_names.sort()
-    detector_angles = [80, 160, 150, 140, 40, 50, 130, 120, 60, 70]
-
+    detector_angles = np.array([80, 160, 150, 140, 40, 50, 130, 120, 60, 70])
+    detector_angles_sorted = np.array([40, 50, 60, 70, 80, 120, 130, 140, 150,
+        160])
 
     # Defining double gaussian parameters
 
@@ -625,20 +641,69 @@ def angular_dependence():
         plt.plot(gauss_x, gauss_y, label="Gaussian fit")
         plt.plot(bins, counts, 'o', label="Data")
 
-    return
+    # Parameters and uncertainties
+    # Carbon
+    np_amplitudes1 = np.array([gaussian_amplitude1, gaussian_amplitude_error1])
+    np_mean1       = np.array([gaussian_mean1, gaussian_mean_error1])
+    np_std1        = np.array([gaussian_std1, gaussian_std_error1])
 
+    # Gold
+    np_amplitudes2 = np.array([gaussian_amplitude2, gaussian_amplitude_error2])
+    np_mean2       = np.array([gaussian_mean2, gaussian_mean_error2])
+    np_std2        = np.array([gaussian_std2, gaussian_std_error2])
 
+    harryplotter(detector_angles_sorted)
 
+    return np_amplitudes1, np_mean1, np_std1, np_amplitudes2, np_mean2, np_std2
+
+def RutherfordCrossSection(Z1, Z2, theta):
+    E_inf = 350 * 10**(-3) # MeV
+    dsdo = 1.296*((Z1 * Z2) / (E_inf * (np.sin(theta/2))**2) ) **2 # mb/sr
+    return dsdo
+
+def harryplotter(theta):
+    # Defining variable
+    Z_Au = 79
+    Z_C  = 6
+    Z_p  = 1
+
+    # Theoretical
+    theta_theoretical_rad = np.arange(0.01, np.pi, 0.01)
+    theta_theoretical_deg = theta_theoretical_rad * (180/np.pi)
+    x_the = theta_theoretical_deg
+    y_the_Au = RutherfordCrossSection(Z_Au, Z_p, theta_theoretical_rad)
+    y_the_C = RutherfordCrossSection(Z_C, Z_p, theta_theoretical_rad)
+
+    # Meassured
+    theta_deg = theta
+
+    #y_mes_Au = 
+
+    plt.figure()
+    #plt.semilogy(theta_deg, y_Au, fmt='o', label="Theoretical Au")
+    plt.semilogy(x_the, y_the_Au, label="Theoretical Au")
+    plt.semilogy(x_the, y_the_C,  label="Theoretical C")
+    plt.title("Harryplotter")
+    plt.xlabel(r'Scattering Angle $[\si{\degree}]$')
+    plt.ylabel(r'Cross Section $[\si{\milli\barn\per\steradian}]$')
+    plt.grid()
+    plt.xticks(np.arange(0, 190, 15))
+    plt.legend()
+    #plt.savefig('rutherford_graph')
+#    plt.semilogy(theta_deg, y_Au, label="Au")
+
+    # Defining variables
+    return 
 
 # # # # # # # # # # # # # # Function calls # # # # # # # # # # # # # # # # # #
 
 # Determine k0
-#k0 = k0()
-#k0_val, k0_error = [k0[0], k0[1]]
+k0 = k0()
+k0_val, k0_error = [k0[0], k0[1]]
 
 # Determine alpha
-#alpha = alpha(k0_val)
-#alpha_val, alpha_error = [alpha[0], alpha[1]]
+alpha = alpha(k0_val)
+alpha_val, alpha_error = [alpha[0], alpha[1]]
 
 # Angular dependency
 angular_dependence()
