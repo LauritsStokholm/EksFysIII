@@ -83,12 +83,19 @@ def linear(x, a, b):
 def linear2(x, a):
     # E = alpha * (k-k0)
     global k0
-    return a * (x - k0)
+    return a * (x - k0[0]) # k0 is a matrix with uncertainty, pick out value
 
 # # # # # # # # # # # # # # Energy for H+ and H2+ # # # # # # # # # # # # # # # 
 def atomic_energy(switch):
     # Incident energy (accelerator)
-    Ei = 350 # keV
+    Ei = 350  # keV
+
+    # Target mass
+    mAu = 196.9665690
+    mC =  12.0107
+
+    # Quanta of mass (assume m(H+)=m(H) and m(H2+)=2m(H)
+    mH = 1.008
 
     # Meassured degree (theoretically, but identical to used experimental
     # setup)
@@ -101,20 +108,15 @@ def atomic_energy(switch):
         *(np.sin(theta))**2))) / (mb+mt))**2) * Ei
     # Meassuring on gold?
     if switch == True:
-        # Target mass
-        mAu = 196.9665690
-    
-        # Quanta of mass (assume m(H+)=m(H) and m(H2+)=2m(H)
-        mH = 1.008
-    
-    
-        # Energies
         E1 = E(mH, mAu)   #H+
-        E2 = E(2*mH, mAu)/2 #H2+
-    
+        E2 = E(2*mH, mAu)/2 # H2+
         return E1, E2
+    elif switch == False:
+        E1 = E(mH, mC)     # H+
+        E2 = E(2*mH, mC)/2 # H2+
+        return E1 # Only this is seen (middle of the 3 Gaussians)
     else:
-        return 
+        print("atomic_energy has a false switch")
 
 # # # # # # # # # # # # # # Energy-Calibration formula # # # # # # # # # # # # 
 def energy_calibration(alpha, k0, k):
@@ -195,8 +197,8 @@ def gaussian_fit(df, file_names, k0_switch, fig_ax_axins):
 
             # Choosing 1 of the many to zoom in on
             if name == "cal2_0.csv":
-                axins.plot(gauss_x, gauss_y, color="crimson")
-                axins.plot(bins, counts, 'o', color="plum")
+                axins.plot(gauss_x, gauss_y, color="blue")
+                axins.plot(bins, counts, 'o', color="red")
 
 
     #alpha
@@ -285,7 +287,7 @@ def linear_fit(x, y, x_error, y_error, k0_switch, fig_ax_axins, *k0):
 
         # The parameters are
         print("""Linear fit parameters are a={:.2f} with an error of
-                {:.2f}""".format(popt[0], perr[0]))
+                {:.5f}""".format(popt[0], perr[0]))
 
     return popt, perr
 
@@ -388,7 +390,7 @@ def k0():
     handles, labels = ax.get_legend_handles_labels()
     fig.legend(handles[:2], labels[:2], loc=1, ncol=2, borderaxespad=0,
             frameon=False)
-    #plt.savefig(Gaussian_fit)
+    plt.savefig("gaussian_fit")
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # Linear
@@ -421,7 +423,7 @@ def k0():
     handles, labels = ax.get_legend_handles_labels()
     fig.legend(handles, labels, loc=1, ncol=2, borderaxespad=0, frameon=False)
 
-    #plt.savefig("k0_plotting")
+    plt.savefig("k0_plotting")
     # We fit for (zero-amplitude/b) value, and obtain alpha in other function
     k0_val = b[0]
     k0_error = b[1]
@@ -437,7 +439,11 @@ def alpha(k0):
     k0_switch = False
 
     # Determine Energies
-    E = atomic_energy()
+    E_Au = np.array(atomic_energy(True))
+    E_C = np.array(atomic_energy(False))
+
+    # Combining in right order
+    E = np.array([E_Au[1], E_C, E_Au[0]])
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # Gaussian
@@ -485,40 +491,31 @@ def alpha(k0):
     handles, labels = ax.get_legend_handles_labels()
     fig.legend(handles[:2], labels[:2], loc=1, ncol=2, borderaxespad=0, frameon=False)
 
-    #plt.savefig('gaussian_fit2')
+    plt.savefig('gaussian_fit2')
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # Linear
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
     # Fitting mean values for gold (1 and 3)
-    x = np.concatenate((mean1[0], mean3[0]), axis=0)
-    x_error = np.concatenate((mean1[1], mean3[1]), axis=0)
+
+    x = np.concatenate(([mean1[0], mean2[0], mean3[0]]), axis=0)
+    x_error = np.concatenate(([mean1[1], mean2[1], mean3[1]]), axis=0)
 
     # Energies for H2+ and H+ (Respectively)
-    y = np.array([E[1], E[0]])
-    y_error = [0.2, 0.2] # Theoretical? No, we meassured energy
-
-    print("x og y")
-    print(x)
-    print(y)
-
-    gradient = (y[1] - y[0]) / (x[1] - x[0])
-    print("Gradienten er {}".format(gradient))
-
-    #print(x)
-    #print(y)
+    y = E
+    y_error = np.ones(np.size(y)) * 0.02 # Theoretical? No, we meassured energy
 
     # Preparing figure
     title = "Calibration"
     xlabel = "Mean value of Gaussian Fit"
-    ylabel = "Energy"
+    ylabel = r"Energy [\si{\kilo\electronvolt}]"
     figure_settings = [title, xlabel, ylabel]
 
     ## Preparing zoom
-    zoom_factor = 11
+    zoom_factor = 5
     zoom_plot_loc = 2
-    xmin, xmax, ymin, ymax = [336.15, 336.6, 16, 18]
+    xmin, xmax, ymin, ymax = [x[0]-1, x[0]+1, y[0]-1, y[0]+1]
     corner1, corner2 = [3, 4]
     zoom_settings = [zoom_factor, zoom_plot_loc, xmin, xmax, ymin, ymax,
             corner1, corner2]
@@ -528,6 +525,7 @@ def alpha(k0):
     fig_ax_axins = [fig, ax, axins]
 
     popt, perr = linear_fit(x, y, x_error, y_error, k0_switch, fig_ax_axins, k0)
+    #ax.errorbar(mean2[0], E_C, xerr=mean2[1], yerr=0.2, fmt='o')
 
     # Only fitting 1 parameter = the incline (alpha)
     a_val   = popt[0]
@@ -538,24 +536,27 @@ def alpha(k0):
     handles, labels = ax.get_legend_handles_labels()
     fig.legend(handles, labels, loc=1, ncol=2, borderaxespad=0, frameon=False)
 
-    #plt.savefig("alpha_plotting")
+    plt.savefig("alpha_plotting")
 
     alpha = a
-    print("alpha is {:.2f} with an uncertainty of {:.2f}".format(alpha[0],
+    print("alpha is {:.2f} with an uncertainty of {:.5f}".format(alpha[0],
         alpha[1]))
 
     return alpha
 
 
-
+def channel_to_energy(alpha, k0, channel):
+    E = alpha * (channel - k0)
+    return(E)
 
 # # # # # # # # # # # # # # Data Analysis # # # # # # # # # # # # # # # # # # #
-def angular_dependence():
+def doublegaussian_fit(plot_switch):
+    """ Here we obtain all parameters of both Gold and Carbon gaussians"""
     # To avoid several function calls:
     k0 = 1.36
     k0_error = 0.15
-    alpha = 0.95
-    alpha_error = 0.32
+    alpha = 0.80
+    alpha_error = 0.00473
 
     # Dataframe (data) + file_names (for itteration)
     df, file_names = Dataframe(data_angles_dir)
@@ -563,8 +564,8 @@ def angular_dependence():
     # Manual labour pt. 3
     file_names.sort()
     detector_angles = np.array([80, 160, 150, 140, 40, 50, 130, 120, 60, 70])
-    detector_angles_sorted = np.array([40, 50, 60, 70, 80, 120, 130, 140, 150,
-        160])
+    #detector_angles_sorted = np.array([40, 50, 60, 70, 80, 120, 130, 140, 150,
+    #    160])
 
     # Defining double gaussian parameters
 
@@ -583,7 +584,10 @@ def angular_dependence():
     gaussian_amplitude_error2 = []
     gaussian_mean_error2      = []
     gaussian_std_error2       = []
+    
+    # Area (all counts) detected (dN) in the solid angle at an angle
 
+    dN  = []
 
     for name in file_names:
         # Choosing non-zero values
@@ -633,13 +637,27 @@ def angular_dependence():
         gaussian_std_error2.append(perr[5])
 
 
-        # Plotting data + fit
-        plt.figure()
-        gauss_x = np.arange(bins[0], bins[-1], 0.001)
-        gauss_y = doublegaussian(gauss_x, *popt)
+        if plot_switch == True:
+            # Plotting data + fit
+            plt.figure()
+            plt.title("Double Gaussian fit")
+            plt.xlabel("Channel number")
+            plt.ylabel("Number of counts")
+            plt.grid()
 
-        plt.plot(gauss_x, gauss_y, label="Gaussian fit")
-        plt.plot(bins, counts, 'o', label="Data")
+            gauss_x = np.arange(bins[0], bins[-1], 0.001)
+            
+            doublegauss_y = doublegaussian(gauss_x, *popt)
+            gauss_C_y     = gaussian(gauss_x, *popt[:3])
+            gauss_Au_y    = gaussian(gauss_x, *popt[3:])
+
+    
+            plt.plot(gauss_x, doublegauss_y, label="Double gaussian fit")
+            plt.plot(gauss_x, gauss_C_y,     label="Single gaussian fit (C)")
+            plt.plot(gauss_x, gauss_Au_y,    label="Single gaussian fit (Au)")
+            plt.plot(bins, counts,           'o', label="Data")
+
+            plt.legend()
 
     # Parameters and uncertainties
     # Carbon
@@ -652,13 +670,59 @@ def angular_dependence():
     np_mean2       = np.array([gaussian_mean2, gaussian_mean_error2])
     np_std2        = np.array([gaussian_std2, gaussian_std_error2])
 
-    harryplotter(detector_angles_sorted)
+    return detector_angles, np_amplitudes1, np_mean1, np_std1, np_amplitudes2, np_mean2, np_std2
 
-    return np_amplitudes1, np_mean1, np_std1, np_amplitudes2, np_mean2, np_std2
+def energy_angle_plot(theta, energy):
+    """ Plotting energy as a function of scattering angle (detector)"""
+    detector_angles = theta
 
-def RutherfordCrossSection(Z1, Z2, theta):
-    E_inf = 350 * 10**(-3) # MeV
-    dsdo = 1.296*((Z1 * Z2) / (E_inf * (np.sin(theta/2))**2) ) **2 # mb/sr
+    # Meassured error
+    theta_error = np.ones(np.size(detector_angles)) * 0.1
+    plt.errorbar(theta, energy, xerr=theta_error, fmt="o")
+
+    return
+
+def RutherfordCrossSection(counts, target_switch):
+    # Defining constants:
+    Z_Au   = 79 # #protons/#atoms
+    Z_C    = 6  # #protons/#atoms
+    Z_p    = 1  # #protons/#atoms
+
+    rho_Au = 19.30 # kg/m3
+    rho_C  = 3.539 # kg/m3
+
+    N_avogadros = 6.022 * 10**(23) # #particles/mol
+    M_Au = 197.96655
+    M_C  = 12.0107
+    # Conversion factor
+    beta = 6.24150913 * 10**(18) # e/C
+
+    # Counts (10**11 counts per coulomb) (READ OFF MACHINE)
+    N = counts * 10**(-11) * beta # [counts] * [C/counts] * [e/C]
+
+    if target_switch == "Au":
+        n = rho_Au * Z_Au * N_avogadros / M_Au
+        # [kg/m3] * [mol/kg] * [#atomer/mol] * [#protoner/#atomer]
+    else: n = rho_C * Z_C * N_avogadros / M_C
+    
+    # Target thickness (read off whiteboard)
+    dx = 25 * 10**(-10) # 25 Angstrom
+
+    
+    # Solid angle
+    # Distance from detector to target
+    r = 49 * 10**(-3) # m
+    # Diameter of detector
+    D = 1.88 * 10**(-3) # m
+    dA = np.pi * (D/2)**2
+
+    domega = dA / r**2 # per definition
+
+    dN = sum(counts)
+
+
+
+    dsdo = (1 / (N*n*dx)) * (dN/domega)
     return dsdo
 
 def harryplotter(theta):
@@ -696,17 +760,45 @@ def harryplotter(theta):
     return 
 
 # # # # # # # # # # # # # # Function calls # # # # # # # # # # # # # # # # # #
+# To avoid several function calls:
+k0_val = 1.36
+k0_error = 0.15
+alpha_val = 0.80
+alpha_error = 0.00473
 
 # Determine k0
-k0 = k0()
-k0_val, k0_error = [k0[0], k0[1]]
+#k0 = k0()
+#k0_val, k0_error = [k0[0], k0[1]]
 
 # Determine alpha
-alpha = alpha(k0_val)
-alpha_val, alpha_error = [alpha[0], alpha[1]]
+#alpha = alpha(k0_val)
+#alpha_val, alpha_error = [alpha[0], alpha[1]]
 
-# Angular dependency
-angular_dependence()
+# Determing gaussian parameters
+plot_switch = True
+detector_angles, A1, mean1, std1, A2, mean2, std2 =\
+doublegaussian_fit(plot_switch)
+
+# Convertion of Channel numbers to Energies (calibration)
+#E_C = channel_to_energy(k0_val, alpha_val, mean1[0])
+#E_Au = channel_to_energy(k0_val, alpha_val, mean2[0])
+#
+#print("The energies of carbon is:")
+#print(E_C)
+#print("The energies of Gold is:")
+#print(E_Au)
+
+# Plotting energy angle dependency
+#plt.figure()
+#plt.grid()
+#plt.xlabel("Angle")
+#plt.ylabel("Energy")
+#energy_angle_plot(detector_angles, E_C)
+#energy_angle_plot(detector_angles, E_Au)
+
+# Rutherford cross sections
+
+
 
 
 
