@@ -585,9 +585,6 @@ def doublegaussian_fit(plot_switch):
     gaussian_mean_error2      = []
     gaussian_std_error2       = []
     
-    # Area (all counts) detected (dN) in the solid angle at an angle
-
-    dN  = []
 
     for name in file_names:
         # Choosing non-zero values
@@ -688,8 +685,8 @@ def RutherfordCrossSection(counts, target_switch):
     Z_C    = 6  # #protons/#atoms
     Z_p    = 1  # #protons/#atoms
 
-    rho_Au = 19.30 # kg/m3
-    rho_C  = 3.539 # kg/m3
+    rho_Au = 19.30 * 10**(3)# kg/m3
+    rho_C  = 3.50 * 10**(3)# kg/m3
 
     N_avogadros = 6.022 * 10**(23) # #particles/mol
     M_Au = 197.96655
@@ -699,6 +696,7 @@ def RutherfordCrossSection(counts, target_switch):
 
     # Counts (10**11 counts per coulomb) (READ OFF MACHINE)
     N = counts * 10**(-11) * beta # [counts] * [C/counts] * [e/C]
+    
 
     if target_switch == "Au":
         n = rho_Au * Z_Au * N_avogadros / M_Au
@@ -718,12 +716,11 @@ def RutherfordCrossSection(counts, target_switch):
 
     domega = dA / r**2 # per definition
 
-    dN = sum(counts)
+    #dN = sum(counts)
 
 
-
-    dsdo = (1 / (N*n*dx)) * (dN/domega)
-    return dsdo
+    #dsdo = (1 / (N*n*dx)) * (dN/domega)
+    return #dsdo
 
 def harryplotter(theta):
     # Defining variable
@@ -775,26 +772,26 @@ alpha_error = 0.00473
 #alpha_val, alpha_error = [alpha[0], alpha[1]]
 
 # Determing gaussian parameters
-plot_switch = True
+plot_switch = False
 detector_angles, A1, mean1, std1, A2, mean2, std2 =\
 doublegaussian_fit(plot_switch)
 
 # Convertion of Channel numbers to Energies (calibration)
-#E_C = channel_to_energy(k0_val, alpha_val, mean1[0])
-#E_Au = channel_to_energy(k0_val, alpha_val, mean2[0])
+E_C = channel_to_energy(alpha_val, k0_val, mean1[0])
+E_Au = channel_to_energy(alpha_val, k0_val, mean2[0])
 #
-#print("The energies of carbon is:")
-#print(E_C)
-#print("The energies of Gold is:")
-#print(E_Au)
+print("The energies of carbon is:")
+print(E_C)
+print("The energies of Gold is:")
+print(E_Au)
 
 # Plotting energy angle dependency
-#plt.figure()
-#plt.grid()
-#plt.xlabel("Angle")
-#plt.ylabel("Energy")
-#energy_angle_plot(detector_angles, E_C)
-#energy_angle_plot(detector_angles, E_Au)
+plt.figure()
+plt.grid()
+plt.xlabel("Angle")
+plt.ylabel("Energy")
+energy_angle_plot(detector_angles, E_C)
+energy_angle_plot(detector_angles, E_Au)
 
 # Rutherford cross sections
 
