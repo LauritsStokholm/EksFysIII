@@ -14,16 +14,11 @@
 \date{\today}
 
 % BibLateX
-<<<<<<< HEAD
+
 \usepackage[backend=biber, style=authortitle, defernumbers=true,
             sorting=nty]{biblatex}
             
-=======
-% style = authortitle
-% nty
-\usepackage[backend=biber, style=apa, defernumbers=true,
-            sorting=nty, round]{biblatex}
->>>>>>> 54b95a2bf683b756f377b9e084d2f304545c5cf3
+
 \addbibresource{bibliography.bib}
 \defbibheading{secbib}[\bibname]{%
     \section{#1}%
@@ -45,6 +40,7 @@
 \DeclareSIUnit\gauss{G}
 
 \begin{document}
+
 % Dette er boksen i toppen. Lad den være.
 %\vspace*{-13cm}
 %\framebox[\textwidth][l]{\textbf{%
@@ -74,6 +70,7 @@
 %\input{theory}
 %\input{hazards}
 \input{setup}
+\input{angledep_crosssec}
 \input{data}
 \input{discussion}
 \input{conclusion}
