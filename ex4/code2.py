@@ -563,9 +563,10 @@ def doublegaussian_fit(plot_switch):
 
     # Manual labour pt. 3
     file_names.sort()
-    detector_angles = np.array([80, 160, 150, 140, 40, 50, 130, 120, 60, 70])
-    #detector_angles_sorted = np.array([40, 50, 60, 70, 80, 120, 130, 140, 150,
-    #    160])
+    file_counts = np.array([11360, 6867, 9675, 9638, 47449, 48048, 45934,
+        32847, 42593, 33412, 11769, 12881,16538, 16209, 16670])
+    detector_angles = np.array([80, 160, 150, 140, 40, 50, 130, 120, 60, 70,
+        90, 100, 110, 140, 80])
 
     # Defining double gaussian parameters
 
@@ -585,6 +586,9 @@ def doublegaussian_fit(plot_switch):
     gaussian_mean_error2      = []
     gaussian_std_error2       = []
     
+    # Targets
+    dN_Au = []
+    dN_C  = []
 
     for name in file_names:
         # Choosing non-zero values
@@ -598,15 +602,35 @@ def doublegaussian_fit(plot_switch):
 
         # Scipy optimization (Double Gaussian)
         # # Guessing start values of parameters
+        if "90" in name:
         # Carbon
-        amplitude1 = 50
-        mean_bin1 = 200
-        sigma1    = 10
+            amplitude1 = 320
+            mean_bin1 = 130
+            sigma1 = 100
+        # Gold
+            amplitude2 = 284
+            mean_bin2 = 430
+            sigma = 25
+        elif "100" in name:
+        # Carbon
+            amplitude1 = 75
+            mean1_bin1 = 300
+            sigma1 = 100
 
         # Gold
-        amplitude2 = max(counts)
-        mean_bin2 = sum(bins * counts) / sum(counts)
-        sigma2 = np.sqrt(sum(counts + (bins - mean_bin2)**2) / sum(counts))
+            amplitude2 = max(counts)
+            mean_bin2 = sum(bins * counts) / sum(counts)
+            sigma2 = np.sqrt(sum(counts + (bins - mean_bin2)**2) / sum(counts))
+
+        else:
+            amplitude1 = 50
+            mean_bin1 = 200
+            sigma1    = 10
+
+            # Gold
+            amplitude2 = max(counts)
+            mean_bin2 = sum(bins * counts) / sum(counts)
+            sigma2 = np.sqrt(sum(counts + (bins - mean_bin2)**2) / sum(counts))
 
 
         # # Fit parameters
@@ -647,7 +671,6 @@ def doublegaussian_fit(plot_switch):
             doublegauss_y = doublegaussian(gauss_x, *popt)
             gauss_C_y     = gaussian(gauss_x, *popt[:3])
             gauss_Au_y    = gaussian(gauss_x, *popt[3:])
-
     
             plt.plot(gauss_x, doublegauss_y, label="Double gaussian fit")
             plt.plot(gauss_x, gauss_C_y,     label="Single gaussian fit (C)")
@@ -655,6 +678,18 @@ def doublegaussian_fit(plot_switch):
             plt.plot(bins, counts,           'o', label="Data")
 
             plt.legend()
+
+
+        # Last thing is to calculate the dN for each target
+
+        # Each value of gaussian evaluated in interval (histogram-like)
+        gridz = np.arange(bins[0], bins[-1], 1)
+        y_C  = np.array([gaussian(gridz, *popt[:3])])
+        y_Au  = np.array([gaussian(gridz, *popt[3:])])
+
+        dN_C.append(np.sum(y_C))
+        dN_Au.append(np.sum(y_Au))
+
 
     # Parameters and uncertainties
     # Carbon
@@ -667,7 +702,11 @@ def doublegaussian_fit(plot_switch):
     np_mean2       = np.array([gaussian_mean2, gaussian_mean_error2])
     np_std2        = np.array([gaussian_std2, gaussian_std_error2])
 
-    return detector_angles, np_amplitudes1, np_mean1, np_std1, np_amplitudes2, np_mean2, np_std2
+    dN_C = np.array(dN_C)
+    dN_Au = np.array(dN_Au)
+
+    return(detector_angles, np_amplitudes1, np_mean1, np_std1, np_amplitudes2,
+np_mean2, np_std2, dN_C, dN_Au)
 
 def energy_angle_plot(theta, energy):
     """ Plotting energy as a function of scattering angle (detector)"""
@@ -679,7 +718,7 @@ def energy_angle_plot(theta, energy):
 
     return
 
-def RutherfordCrossSection(counts, target_switch):
+def RutherfordCrossSection(dN, target_switch):
     # Defining constants:
     Z_Au   = 79 # #protons/#atoms
     Z_C    = 6  # #protons/#atoms
@@ -689,61 +728,74 @@ def RutherfordCrossSection(counts, target_switch):
     rho_C  = 3.50 * 10**(3)# kg/m3
 
     N_avogadros = 6.022 * 10**(23) # #particles/mol
-    M_Au = 197.96655
-    M_C  = 12.0107
-    # Conversion factor
-    beta = 6.24150913 * 10**(18) # e/C
+    M_Au = 197.96655 * 10**(-3)# kg/mol
+    M_C  = 12.0107  * 10**(-3) # kg/mol
+
+    file_counts = np.array([11360, 6867, 9675, 9638, 47449, 48048, 45934,
+        32847, 42593, 33412, 11769, 12881,16538, 16209, 16670])
 
     # Counts (10**11 counts per coulomb) (READ OFF MACHINE)
-    N = counts * 10**(-11) * beta # [counts] * [C/counts] * [e/C]
-    
 
-    if target_switch == "Au":
-        n = rho_Au * Z_Au * N_avogadros / M_Au
+    # Conversion factor
+    beta = 6.24150913 * 10**(18) # e/C
+    N = file_counts * 10**(-11) * beta # [#protoner]
+    # [counts] * [C/counts] * [e/C]
+
+    if target_switch == True:
+        print("Gold")
+        # Target thickness (read off whiteboard)
+        # 25 Angstrom
+        dx = 25 * 10**(-10) # [m]
+        n = rho_Au * Z_Au * N_avogadros / M_Au # [#protoner/m3]
         # [kg/m3] * [mol/kg] * [#atomer/mol] * [#protoner/#atomer]
-    else: n = rho_C * Z_C * N_avogadros / M_C
+    elif target_switch == False: 
+        print("Carbon")
+        # Target thickness (read off whiteboard)
+        # 200 Angstrom
+        dx = 200 * 10**(-10) # [m]
+        n = rho_C * Z_C * N_avogadros / M_C # [protoner/m3]
+        # [kg/m3] * [mol/kg] * [#atomer/mol] * [#protomer/#atomer]
+    else: print("Wrong switch")
     
-    # Target thickness (read off whiteboard)
-    dx = 25 * 10**(-10) # 25 Angstrom
-
     
     # Solid angle
     # Distance from detector to target
     r = 49 * 10**(-3) # m
     # Diameter of detector
     D = 1.88 * 10**(-3) # m
-    dA = np.pi * (D/2)**2
+    dA = np.pi * (D/2)**2 # [m2]
 
     domega = dA / r**2 # per definition
+    dsdo = (1 / (N*n*dx)) * (dN/domega) # [#protoner] [m2/sr]
+    # (([#protoner]/[sr])  / ([#protoner][#protoner/m3][m])))
 
-    #dN = sum(counts)
+    dsdo = dsdo * (10**(31)) # [#protoner] [mb/sr]
+    print(dsdo)
 
+    return dsdo
 
-    #dsdo = (1 / (N*n*dx)) * (dN/domega)
-    return #dsdo
+def RutherfordcrossSection_theoretical(Z1, Z2, theta):
+    E = 350 * 10**(-3) # MeV
+    return (1.296*((Z1 * Z2)/(E))**(2)) * (1/(np.sin(theta/2))**4)
 
-def harryplotter(theta):
-    # Defining variable
-    Z_Au = 79
-    Z_C  = 6
-    Z_p  = 1
+def harryplotter(theta, dsdo_C, dsdo_Au):
+    z1 = 1
+    zAu = 79
+    zC  = 6
 
+    #### plotting
     # Theoretical
-    theta_theoretical_rad = np.arange(0.01, np.pi, 0.01)
-    theta_theoretical_deg = theta_theoretical_rad * (180/np.pi)
-    x_the = theta_theoretical_deg
-    y_the_Au = RutherfordCrossSection(Z_Au, Z_p, theta_theoretical_rad)
-    y_the_C = RutherfordCrossSection(Z_C, Z_p, theta_theoretical_rad)
+    theta_rad =  np.arange(0.3491, np.pi, 0.01)
+    theta_deg = theta_rad * (180/np.pi)
 
-    # Meassured
-    theta_deg = theta
-
-    #y_mes_Au = 
+    dsdo_Au_the = RutherfordcrossSection_theoretical(z1, zAu, theta_rad)
+    dsdo_C_the  = RutherfordcrossSection_theoretical(z1, zC, theta_rad)
 
     plt.figure()
-    #plt.semilogy(theta_deg, y_Au, fmt='o', label="Theoretical Au")
-    plt.semilogy(x_the, y_the_Au, label="Theoretical Au")
-    plt.semilogy(x_the, y_the_C,  label="Theoretical C")
+    plt.semilogy(theta, dsdo_Au, 'o', label="Data Au")
+    plt.semilogy(theta, dsdo_C, 'x', label="Data C")
+    plt.semilogy(theta_deg, dsdo_Au_the, label="Theoretical Au")
+    plt.semilogy(theta_deg, dsdo_C_the,  label="Theoretical C")
     plt.title("Harryplotter")
     plt.xlabel(r'Scattering Angle $[\si{\degree}]$')
     plt.ylabel(r'Cross Section $[\si{\milli\barn\per\steradian}]$')
@@ -754,7 +806,11 @@ def harryplotter(theta):
 #    plt.semilogy(theta_deg, y_Au, label="Au")
 
     # Defining variables
-    return 
+    return
+
+def target_thickness():
+    return
+
 
 # # # # # # # # # # # # # # Function calls # # # # # # # # # # # # # # # # # #
 # To avoid several function calls:
@@ -773,13 +829,15 @@ alpha_error = 0.00473
 
 # Determing gaussian parameters
 plot_switch = False
-detector_angles, A1, mean1, std1, A2, mean2, std2 =\
+detector_angles, A1, mean1, std1, A2, mean2, std2, dN_C, dN_Au =\
 doublegaussian_fit(plot_switch)
 
+print(dN_Au)
+print(dN_C)
 # Convertion of Channel numbers to Energies (calibration)
 E_C = channel_to_energy(alpha_val, k0_val, mean1[0])
 E_Au = channel_to_energy(alpha_val, k0_val, mean2[0])
-#
+
 print("The energies of carbon is:")
 print(E_C)
 print("The energies of Gold is:")
@@ -794,6 +852,13 @@ energy_angle_plot(detector_angles, E_C)
 energy_angle_plot(detector_angles, E_Au)
 
 # Rutherford cross sections
+dsdo_Au = RutherfordCrossSection(dN_Au, True)
+dsdo_C  = RutherfordCrossSection(dN_C , False)
+
+harryplotter(detector_angles, dsdo_C, dsdo_Au)
+
+
+
 
 
 
