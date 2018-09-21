@@ -8,9 +8,16 @@
 *.xml
 *.synctex.gz.orig
 *.synctex.gz
+*.fls
+*.fdb_latexmk
+
+
+*.tps
+*.tcp
 
 #ikke sync pdf
 *.pdf.orig
 *.pdf
 #skrald fra vim
 *.swp
+*.swo

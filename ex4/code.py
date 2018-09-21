@@ -23,8 +23,8 @@ params = {'legend.fontsize'     : '20',
           'legend.numpoints'    : 1,
           'text.latex.preamble' : [r'\usepackage{siunitx}',
                                    r'\usepackage{amsmath}'],
-          'axes.spines.right'   : False,
-          'axes.spines.top'     : False,
+          #'axes.spines.right'   : False,
+          #'axes.spines.top'     : False,
           'figure.figsize'      : [8.5, 6.375],
           'legend.frameon'      : False
           }
@@ -32,6 +32,11 @@ params = {'legend.fontsize'     : '20',
 plt.rcParams.update(params)
 plt.rc('text',usetex =True)
 plt.rc('font', **{'family' : "sans-serif"})
+
+# This is for awesome zoom
+from mpl_toolkits.axes_grid1.inset_locator import zoomed_inset_axes
+from mpl_toolkits.axes_grid1.inset_locator import mark_inset
+
 
 # # # # # # # # # # # # # # # # Importing Data # # # # # # # # # # # # # # # # 
 
@@ -66,9 +71,9 @@ def linear(a, b, x):
 
 # Energy
 def ENERGY():
-    Ei = 400 # kev
+    Ei = 350 # kev
     theta_deg = 160 # degrees
-    theta = 160 * (180 / np.pi)
+    theta = 160 * (np.pi / 180)
     mAu = 196.9665690
     mH = 1.008
 
@@ -78,7 +83,7 @@ def ENERGY():
     E1 = E(mH, mAu)
     E2 = E(2*mH, mAu)
 
-    return E1, E2
+    return np.array([E1, E2])
 
 
 
@@ -104,13 +109,39 @@ def Dataframe(directory):
     # We make Dataframes and return file name
     return df, file_names
 
-def Gaussian_fit(df, file_names, k0_switch):
+def Gaussian_fit(df, file_names, k0_switch, *alpha):
     """ This is a Gaussian fit factory"""
-    # Gaussian mean and std saved for later
-    gaussian_mean = []
-    gaussian_std  = []
-    
     if k0_switch == True:
+        # Gaussian mean and std saved for later
+        gaussian_mean = []
+        gaussian_std  = []
+
+         # Preparing figure
+        fig, ax = plt.subplots()
+        plt.title("Calibration")
+        plt.xlabel("Channel \#")
+        plt.ylabel("Number of counts")
+        plt.grid()
+        
+        # Preparing zoom
+        zoom_factor = 2
+        
+        # Make a double of figure untop of old
+        axins = zoomed_inset_axes(ax, zoom_factor, loc=2) 
+        
+        # Setting limitation of double (minimal)
+        x1, x2, y1, y2 = 220, 260, 0, 5000
+        axins.set_xlim(x1, x2)
+        axins.set_ylim(y1, y2)
+        
+        # Removing ticks on double
+        plt.xticks(visible=False)
+        plt.yticks(visible=False)
+        
+        # fc (fill colour) and ec (line colour)
+        # loc1 and loc2 is the corners to connect
+        mark_inset(ax, axins, loc1=3, loc2=4, fc="none", ec="0.3")
+
         for name in file_names:
             # Choosing non zero values
             df_data = df[name].loc[df[name].nonzero()]
@@ -123,6 +154,10 @@ def Gaussian_fit(df, file_names, k0_switch):
             # Scipy Optimization after Gaussian (guessing start values)
             mean = sum(x * y) / sum(y)
             sigma = np.sqrt(sum(y * (x - mean)**2) / sum(y))
+            print(sigma)
+            print(mean)
+            
+            # Gaussian fit parameters
             popt,pcov = curve_fit(gaussian, x, y, p0=[max(y), mean, sigma])
             
             gaussian_mean.append(popt[1])
@@ -130,21 +165,27 @@ def Gaussian_fit(df, file_names, k0_switch):
             
             
             # Plotting the data + fit
-            plt.title("Calibration")
-            plt.xlabel("Channel \#")
-            plt.ylabel("Count \#")
-            plt.grid()
-            
-                # Fit (smooth x and fitted parameters)
+            # Fit (smooth x and fitted parameters)
             gauss_x = np.arange(x[0], x[-1], 0.0001)
             gauss_y = gaussian(gauss_x, *popt)
    
-            plt.plot(gauss_x, gauss_y, label='fit')
-            plt.plot(x,y, '.', label='data')
-            plt.legend(loc=1)
+            ax.plot(gauss_x, gauss_y, label='Gaussian fit')
+            ax.plot(x,y, 'o', label='data')
+            if name == "cal2_0.csv":
+                axins.plot(gauss_x, gauss_y)
+                axins.plot(x, y, 'o')
+        handles, labels = ax.get_legend_handles_labels()
+        fig.legend(handles[:2], labels[:2], loc=1, ncol=2, borderaxespad=0, frameon=False)
 
-        return np.array(gaussian_mean), np.array(gaussian_std)
+        plt.savefig('gaussian_fit')
+
+        return np.array([gaussian_mean, gaussian_std])
     else:
+        fig, ax, axins = alpha
+        # Gaussian mean and std saved for later
+        gaussian_mean = []
+        gaussian_std  = []
+
         df_data = df
 
         # Transforming to array (Might be unnecesarry) [index, count]
@@ -155,68 +196,53 @@ def Gaussian_fit(df, file_names, k0_switch):
         # Scipy Optimization after Gaussian (guessing start values)
         mean = sum(x * y) / sum(y)
         sigma = np.sqrt(sum(y * (x - mean)**2) / sum(y))
+
+        # Gaussian fit parameters
         popt,pcov = curve_fit(gaussian, x, y, p0=[max(y), mean, sigma])
         
         gaussian_mean.append(popt[1])
         gaussian_std.append(popt[2])
         
-        
         # Plotting the data + fit
-        plt.title("Calibration")
-        plt.xlabel("Channel \#")
-        plt.ylabel("Count \#")
-        plt.grid()
         
         # Fit (smooth x and fitted parameters)
         gauss_x = np.arange(x[0], x[-1], 0.0001)
         gauss_y = gaussian(gauss_x, *popt)
+
    
-        plt.plot(gauss_x, gauss_y, label='fit')
-        plt.plot(x,y, '.', label='data')
-        plt.legend(loc=1)
-        return np.array(gaussian_mean), np.array(gaussian_std)
+        ax.plot(gauss_x, gauss_y, label='Gaussian fit')
+        ax.plot(x, y, 'o', label='data')
+
+        if int(mean) == 206:
+            axins.plot(gauss_x, gauss_y)
+            axins.plot(x, y, 'o')
+
+        return np.array([gaussian_mean, gaussian_std])
 
 
-def plotting(x, y, x_error, y_error, k0_switch):
+def plotting(x, y, x_error, y_error, k0_switch, fig, ax, axins):
     x_error = np.ones(len(x)) * x_error
     if k0_switch == True:
         # Weighing data
         weights = (1 / y_error)**2
-        
+
         # Curve fitting data for linear fit, with weights
         popt, pcov = curve_fit(linear, x, y, sigma = weights)
-        #popt, pcov = curve_fit(linear, x, y)
-        
-        plt.figure()
-        plt.title("Calibration")
-        plt.xlabel("Amplitude")
-        plt.ylabel("Mean value of Gaussian Fit")
-        plt.errorbar(x, y, xerr=x_error, yerr=y_error, fmt="o", label="Data")
-        plt.plot(x, linear(x, *popt), label='Linear fit')
-        plt.legend()
-        plt.grid()
-
-        # Determining parameters
-        print("Linear fit parameters are a = {:.2f} and b = {:.2f}".format(popt[1],
-            popt[0]))
-        return popt
     else:
-        popt, pcov = curve_fit(linear, x, y)
+        popt = curve_fit(linear, x, y)[0]
+        
+    # Plotting for zoom
+    axins.errorbar(x, linear(x, *popt))
+    axins.errorbar(x, y, xerr=x_error, yerr=y_error, fmt="o")
+        
+    # Plotting whole scale
+    ax.errorbar(x, y, xerr=x_error, yerr=y_error, fmt="o", label="Data")
+    ax.plot(x, linear(x, *popt), label='Linear fit')
 
-        plt.figure()
-        plt.title("Calibration")
-        plt.xlabel("Amplitude")
-        plt.ylabel("Mean value of Gaussian fit")
-        plt.plot(x, y, label="Data")
-        plt.plot(x, linea(x, *popt), label="Linear fit")
-        plt.legend()
-        plt.grid()
-
-        # Determine parameters
-        print("Linear fit parameters are a = {:.2f} and b ={:.2f}".format(popt[1], popt[0]))
-        return popt
-
-
+    # Determining parameters
+    print("Linear fit parameters are a = {:.2f} and b = {:.2f}".format(popt[1],
+    popt[0]))
+    return popt
 
 
 # # # # # # # # # # # # # # # Output # # # # # # # # # # # # # # # # # # # # # 
@@ -234,7 +260,9 @@ def k0():
     Amps = np.array([1.62, 2.0, 2.5, 3.0, 3.5, 4.0, 5.0, 6.0])
 
     # Gaussian uncertainties and determining mean value of channel bin
-    gaussian_mean, gaussian_std = Gaussian_fit(df, file_names, k0_switch)
+    gauss = Gaussian_fit(df, file_names, k0_switch)
+    gaussian_mean = gauss[0]
+    gaussian_std  = gauss[1]
     
     # Linear fit (parameters)
     # Meassured Amplitude is x and the mean channel number is y
@@ -244,12 +272,38 @@ def k0():
     x_error = np.array([0.1])
     # Mean channel number was meassured with gaussian uncertainty
     y_error = gaussian_std
-    print(x_error)
-    print(y_error)
-    print(y_error**2)
 
-#    b, a = plotting(Amps, gaussian_mean_k0, gaussian_std_k0, k0_switch)
-    b, a = plotting(x, y, x_error, y_error, k0_switch)
+    # Preparing figure
+    fig, ax = plt.subplots()
+    plt.title("Calibration")
+    plt.xlabel("Amplitude")
+    plt.ylabel("Mean value of Gaussian Fit")
+    plt.grid()
+
+    # Preparing zoom
+    zoom_factor = 5
+
+    # Make a double of figure untop of old
+    axins = zoomed_inset_axes(ax, zoom_factor, loc=2) 
+
+    # Setting limitation of double (minimal)
+    x1, x2, y1, y2 = 2.8, 3.2, 338, 378
+    axins.set_xlim(x1, x2)
+    axins.set_ylim(y1, y2)
+
+    # Removing ticks on double
+    plt.xticks(visible=False)
+    plt.yticks(visible=False)
+
+    # fc (fill colour) and ec (line colour)
+    # loc1 and loc2 is the corners to connect
+    mark_inset(ax, axins, loc1=1, loc2=3, fc="none", ec="0.3")
+    b, a = plotting(x, y, x_error, y_error, k0_switch, fig, ax, axins)
+
+    handles, labels = ax.get_legend_handles_labels()
+    fig.legend(handles, labels, loc=1, ncol=2, borderaxespad=0, frameon=False)
+
+    #plt.savefig("k0_plotting")
     k0 = b
     print("k0 is {:.2f}".format(k0))
 
@@ -261,65 +315,123 @@ def alpha():
     k0_switch = False
     
     # Determine Energies
-    EH, EH2 = ENERGY()
+    y = np.array([ENERGY()[1], ENERGY()[0]])
+    print(y)
 
     # Dataframe (data) + file_names (for itteration)
-    df_alpha, file_names_alpha = Dataframe(data_dir)
+    df, file_names = Dataframe(data_dir)
 
-    name1 = file_names_alpha[0]
-    name2 = file_names_alpha[1]
+    name1 = file_names[0]
+    name2 = file_names[1]
 
     # Manual labour part 2
-    df_alpha2 = df_alpha.loc[100:500]
+    df1 = df.loc[100:500]
 
     # 3 Different peaks (for gaussians)
-    df_alpha3 = df_alpha[name1].loc[100:260]
-    df_alpha4 = df_alpha[name2].loc[260:367]
-    df_alpha5 = df_alpha[name2].loc[367:500]
+    df2 = df[name1].loc[100:260]
+    df3 = df[name2].loc[260:367]
+    df4 = df[name2].loc[367:500]
 
-    plt.figure()
-    df_alpha3.plot()
-    df_alpha4.plot()
-    df_alpha5.plot()
 
    # Gaussian uncertainties and determining mean value of channel bin
-    gaussian_mean_alpha1, gaussian_std_alpha1 = Gaussian_fit(df_alpha3,
-            name1, k0_switch)
-    gaussian_mean_alpha2, gaussian_std_alpha2 = Gaussian_fit(df_alpha4,
-            name2, k0_switch)
-    gaussian_mean_alpha3, gaussian_std_alpha3 = Gaussian_fit(df_alpha5,
-            [name1], k0_switch)
-#
-#
-#    print(gaussian_mean_alpha1, gaussian_std_alpha1)
-#    print(gaussian_mean_alpha2, gaussian_std_alpha2)
-#    print(gaussian_mean_alpha3, gaussian_std_alpha3)
-#
-#
-#    x = [gaussian_mean_alpha1, gaussian_mean_alpha3]
-#    y = [EH, EH2]
-#    x_error = [gaussian_std_alpha1, gaussian_std_alpha3]
-#
-#    # Linear fit (parameters) (chosen right values
-#    a, b = plotting(x, y, x_error, k0_switch)
-#
-#    alpha = a
-#    
-#    print("alpha is {:.2f}".format(alpha))
-    return
 
 
-#k0()
-alpha()
+   # Figure of the gaussians
+    # Preparing figure
+    fig, ax = plt.subplots()
+    plt.title("Calibration")
+    plt.xlabel("Channel \#")
+    plt.ylabel("Number of counts")
+    plt.grid()
+    
+    # Preparing zoom
+    zoom_factor = 2
+    
+    # Make a double of figure untop of old
+    axins = zoomed_inset_axes(ax, zoom_factor, loc=2) 
+    
+    # Setting limitation of double (minimal)
+    x1, x2, y1, y2 = 165, 255, 0, 42
+    axins.set_xlim(x1, x2)
+    axins.set_ylim(y1, y2)
+    
+    # Removing ticks on double
+    plt.xticks(visible=False)
+    plt.yticks(visible=False)
+    
+    # fc (fill colour) and ec (line colour)
+    # loc1 and loc2 is the corners to connect
+    mark_inset(ax, axins, loc1=1, loc2=3, fc="none", ec="0.3")
 
-plt.show()
+    gauss1 = Gaussian_fit(df2, name1, k0_switch, fig, ax, axins)
+    gauss2 = Gaussian_fit(df3, name2, k0_switch, fig, ax, axins)
+    gauss3 = Gaussian_fit(df4, name1, k0_switch, fig, ax, axins)
+
+    handles, labels = ax.get_legend_handles_labels()
+    fig.legend(handles[:2], labels[:2], loc=1, ncol=2, borderaxespad=0, frameon=False)
+
+    plt.savefig('gaussian_fit2')
+
+    x = np.concatenate((gauss1[0], gauss3[0]), axis=0)
+    x_error = [gauss1[1], gauss3[1]]
+    y_error = [0, 0] # Theoretical?
+
+
+    # Preparing figure
+    fig, ax = plt.subplots()
+    plt.title("Calibration")
+    plt.xlabel("Energy")
+    plt.ylabel("Mean value of Gaussian Fit")
+    plt.grid()
+    
+    # Preparing zoom
+    zoom_factor = 5
+    
+    # Make a double of figure untop of old
+    axins = zoomed_inset_axes(ax, zoom_factor, loc=2) 
+    
+    # Setting limitation of double (minimal)
+    x1, x2, y1, y2 = 195, 220, 336.2, 336.5
+    axins.set_xlim(x1, x2)
+    axins.set_ylim(y1, y2)
+    
+    # Removing ticks on double
+    plt.xticks(visible=False)
+    plt.yticks(visible=False)
+    
+    # fc (fill colour) and ec (line colour)
+    # loc1 and loc2 is the corners to connect
+    mark_inset(ax, axins, loc1=2, loc2=4, fc="none", ec="0.3")
+    b, a = plotting(x, y, x_error, y_error, k0_switch, fig, ax, axins)
+    
+    handles, labels = ax.get_legend_handles_labels()
+    fig.legend(handles, labels, loc=1, ncol=2, borderaxespad=0, frameon=False)
+    
+    #plt.savefig("k0_plotting")
+
+
+
+    # Linear fit (parameters) (chosen right values
+    a, b = plotting(x, y, x_error, y_error, k0_switch, fig, ax, axins)
+    plt.savefig("alpha_plotting")
+
+    alpha = a
+    print("alpha is {:.2f}".format(alpha))
+    return alpha
+
+
+k0 = k0()
+alpha = alpha()
+
 
 
 
 # # # # # # # # # # # # # # # Data Analysis # # # # # # # # # # # # # # # # # # 
-def E():
+def E(alpha, k0, k):
     return alpha * (k - k0)
 
+#k = np.arange(0, 1000)
+#plt.figure()
+#plt.plot(k, E(alpha, k0, k))
 
-
-
+plt.show()
