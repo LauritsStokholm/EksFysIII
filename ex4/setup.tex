@@ -1,11 +1,6 @@
 \section{Materials and Methods}
 \subsection{Experimental Setup}
-To obtain energies in the order of a $\SI{400}{\kilo\electronvolt}$, a single Van-de-Graaf
-accelerator (see \cref{fig_setup3}) was used. The variety of incomming beam particles
-was limited by the source (a flask of hydrogen gas connected to the accelerator
-tank). Therefore, we only concider incomming ions $\mathrm{H^+}$ and
-$\mathrm{{H_{2}}^{+}}$, as the source was stationary, and not changed.
-%The beam position may be corrected by adjusting four electrostatic plates, two vertical parallel and two horizontal parallel, before entering the scattering chamber.
+To obtain energies in the order of a $\SI{400}{\kilo\electronvolt}$, a single Van-de-Graaff accelerator (see \cref{fig_setup3}) was used. The variety of incomming beam particles was limited by the source (a flask of hydrogen gas connected to the accelerator tank), which was stationary and not changed. Therefore, we only concider the incomming $\mathrm{H^+}$ and $\mathrm{{H_{2}}^{+}}$ ions. %The beam position may be corrected by adjusting four electrostatic plates, two vertical parallel and two horizontal parallel, before entering the scattering chamber.
 %
 \begin{figure}[t]
     \centering
@@ -15,36 +10,28 @@ $\mathrm{{H_{2}}^{+}}$, as the source was stationary, and not changed.
 \end{figure}
 %
 Acceleration of the ions was controllable by changing the voltage drop on the
-dashboard (see \cref{fig_setup2}), and thus also the kinetic energy of the
-incomming beam. This will be described furhter in the section Procedure.
+dashboard (see \cref{fig_setup2}) and thus also the kinetic energy of the
+incoming beam. This will be described further in the section Procedure.
 
-The detector was at an angle of the accelerator arm, and by changing the
-magnetic field strength of the electromagnet, one can choose which of the two
-possible incomming ions was deflected to interact with the target.
-The motion of a charged particle in a magnetic field is governed by the Lorentz
-force law, and as the trajectory of the motion is traced as part of a circle,
-one obtains the necesarry equality for the motion to be\footnote{Dealing with
-    forces and spatial confinements to circular paths is true in the classical
-    regime. Had we wanted a fully relativistic and quantum mechanical
-description, this would not be the case.}
+The beamline was placed in an angle relative to the accelerator. By changing the magnetic field strength of the electromagnet, one could choose which of the two possible incoming ions were deflected into the beamline and thus directed towards scattering on the target material at the end of the beamline.
+The motion of a charged particle in a magnetic field is governed by the Lorentz force law, and as the trajectory of the motion is traced as part of a circle, one obtains the necessary equality for the motion to be\footnote{Dealing with forces and spatial confinements to circular paths this is true in the classical regime. This is not the case for a full relativistic and quantum mechanical description.}
 \begin{equation}
 F_|m| = QvB = F_|cp| = \frac{mv^2}{r}.
 \end{equation}
-This gives a ratio of the two magnetic fields needed for the respective ions
+From this a ratio between the two magnetic fields needed for the respective ions is
 \begin{align}
-    R_|B| = & \frac{B({H_2}^+)}{B(H^+)} = \frac{m({H_2}^+)
-    v({H_2}^+)}{m(H^+)v(H^+)}\\
-    & 2 \frac{v({H_2}^+)}{v(H^+)} = \sqrt{2}
+    R_|B| = & \frac{B(\mathrm{{H_2}^+})}{B(\mathrm{H^+})} = \frac{m(\mathrm{{H_2}^+})
+    v(\mathrm{{H_2}^+})}{m(\mathrm{H^+})v(\mathrm{H^+})}\\
+    & 2 \frac{v(\mathrm{{H_2}^+})}{v(\mathrm{H^+})} = \sqrt{2},
 \end{align}
+
 %
-By assuming that the mass of the two ions are related by $m(H^+) =
-2m({H_2}^+)$, and using $v(X) = \sqrt{\frac{2E}{m(X)}}$ for each ion.
+where it has been assumed that the mass of the two ions are related by $m(H^+) = 2m(\mathrm{{H_2}^+})$ and the speed of each ion is given as $v(\mathrm{X}) = \sqrt{\frac{2E}{m(\mathrm{X})}}$. 
 %
-Given one of the magnetic fields, the other is determined by this ratio factor.
-We used the following magnetic fields for the two ions:
+Given one of the magnetic fields, the other is determined from this ratio factor. The following magnetic field strengths were used:
 %
 \begin{equation}
-    B(H^+) = \SI{1070}{\gauss} \quad B({H_2}^+) = \SI{1513}{\gauss}
+    B(\mathrm{H^+}) = \SI{1070}{\gauss} \quad B(\mathrm{{H_2}^+}) = \SI{1513}{\gauss}
 \label{}
 \end{equation}
 %
@@ -156,6 +143,7 @@ incident proton energy and the scattering angle as:
 \begin{equation}
 E_f = \left( \frac{m_|p| \cos\theta + \sqrt{{m_|t|}^2 - {m_|p|}^2
 \sin^2\theta}}{m_|p|+m_|t|} \right)^2 E_|i|,
+\label{eq_5}
 \end{equation}
 where $E_|i|$ is the energy of the incident beam particles, $m_|p|$ and $m_|t|$ are
 the masses of the incident protons and the target particles, respectively, and
