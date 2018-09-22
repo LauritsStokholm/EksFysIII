@@ -395,7 +395,7 @@ def k0():
     handles, labels = ax.get_legend_handles_labels()
     fig.legend(handles[:2], labels[:2], loc=1, ncol=2, borderaxespad=0,
             frameon=False)
-    plt.savefig("gaussian_fit")
+    #plt.savefig("gaussian_fit")
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # Linear
@@ -428,7 +428,7 @@ def k0():
     handles, labels = ax.get_legend_handles_labels()
     fig.legend(handles, labels, loc=1, ncol=2, borderaxespad=0, frameon=False)
 
-    plt.savefig("k0_plotting")
+    #plt.savefig("k0_plotting")
     # We fit for (zero-amplitude/b) value, and obtain alpha in other function
     k0_val = b[0]
     k0_error = b[1]
@@ -496,7 +496,7 @@ def alpha(k0):
     handles, labels = ax.get_legend_handles_labels()
     fig.legend(handles[:2], labels[:2], loc=1, ncol=2, borderaxespad=0, frameon=False)
 
-    plt.savefig('gaussian_fit2')
+    #plt.savefig('gaussian_fit2')
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # Linear
@@ -541,7 +541,7 @@ def alpha(k0):
     handles, labels = ax.get_legend_handles_labels()
     fig.legend(handles, labels, loc=1, ncol=2, borderaxespad=0, frameon=False)
 
-    plt.savefig("alpha_plotting")
+    #plt.savefig("alpha_plotting")
 
     alpha = a
     print("alpha is {:.2f} with an uncertainty of {:.5f}".format(alpha[0],
@@ -1017,24 +1017,24 @@ def target_thickness():
 
 # # # # # # # # # # # # # # Function calls # # # # # # # # # # # # # # # # # #
 # To avoid several function calls:
-k0_val = 1.36
-k0_error = 0.15
-alpha_val = 0.80
-alpha_error = 0.00473
+#k0_val = 1.36
+#k0_error = 0.15
+#alpha_val = 0.80
+#alpha_error = 0.00473
 
-alpha = np.array([alpha_val, alpha_error])
-k0    = np.array([k0_val, k0_error])
+#alpha = np.array([alpha_val, alpha_error])
+#k0    = np.array([k0_val, k0_error])
 
 # Determine k0
-#k0 = k0()
-#k0_val, k0_error = [k0[0], k0[1]]
+k0 = k0()
+k0_val, k0_error = [k0[0], k0[1]]
 
 # Determine alpha
-#alpha = alpha(k0_val)
-#alpha_val, alpha_error = [alpha[0], alpha[1]]
+alpha = alpha(k0_val)
+alpha_val, alpha_error = [alpha[0], alpha[1]]
 
 # Determing gaussian parameters
-plot_switch = False
+plot_switch = True
 detector_angles, A1, mean1, std1, A2, mean2, std2, dN_C, dN_Au =\
 doublegaussian_fit(plot_switch)
 
