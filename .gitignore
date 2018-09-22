@@ -8,6 +8,7 @@
 *.xml
 *.synctex.gz.orig
 *.synctex.gz
+*.run.xml
 *.fls
 *.fdb_latexmk
 
