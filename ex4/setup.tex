@@ -1,7 +1,7 @@
 \section{Materials and Methods}
 \subsection{Experimental Setup}
-To obtain energies in the order of a $\SI{400}{\kilo\electronvolt}$, a single
-Van-de-Graaf accelerator \cref{fig_setup3} was used. The variety of incomming
+To obtain energies up to $\SI{400}{\kilo\electronvolt}$, a single
+Van-de-Graaff accelerator \cref{fig_setup3} was used. The variety of incomming
 beam particles was limited by the source (a flask of hydrogen gas connected to
 the accelerator tank), which was stationary and not changed. Therefore, we only
 concider incomming ions $\mathrm{H^+}$ and $\mathrm{{H_2}^{+}}$. 
@@ -15,13 +15,12 @@ concider incomming ions $\mathrm{H^+}$ and $\mathrm{{H_2}^{+}}$.
 %
 Acceleration of the ions was controllable by changing the voltage drop on the
 dashboard \cref{fig_setup2} and thus also adjusting the kinetic energy of the
-incoming beam. This will be described further in the section Procedure.
+incoming beam. This will be described further later on (see section Procedure).
 
-The beamline was placed in an angle relative to the accelerator. By changing
-the magnetic field strength of the electromagnet, one could choose which of the
-two possible incoming ions were deflected into the beamline and thus directed
-towards scattering on the target material at the end of the beamline.
-
+The beamline was placed in an angle relative to the accelerator
+\cref{fig_setup1}. By changing the magnetic field strength of the
+electromagnet, one could choose which of the two possible incoming ions were
+deflected into the beamline and thus directed towards scattering on the target material at the end of the beamline. 
 The motion of a charged particle in a magnetic field is governed by the Lorentz
 force law, and as the trajectory of the motion is traced as part of a circle,
 one obtains the necesarry equality for the motion to be\footnote{Concepts as
@@ -38,11 +37,11 @@ ions is
     R_|B| = & \frac{B({\mathrm{H_2}^+})}{B(\mathrm{H^+})} =
     \frac{m({\mathrm{H_2}^+})
     v({\mathrm{H_2}^+})}{m(\mathrm{H^+})v(\mathrm{H^+})}\\
-    & 2 \frac{v({\mathrm{H_2}^+})}{v(\mathrm{H^+})} = \sqrt{2}
+    & 2 \frac{v({\mathrm{H_2}^+})}{v(\mathrm{H^+})} = \sqrt{2},
 \end{align}
 %
 where it has been assumed that the mass of the two ions are related by
-$m(\mathrm{H^+}) = 2m(\mathrm{{H_2}^+})$ and the speed of each ion is given as
+$m(\mathrm{{H_2}^+}) = 2m(\mathrm{H^+}) $ and the speed of each ion is given as
 $v(\mathrm{X}) = \sqrt{\frac{2E}{m(\mathrm{X})}}$.
 %
 Given one of the magnetic fields, the other is determined from this ratio
@@ -53,9 +52,13 @@ factor. The following magnetic field strengths were used:
 \end{equation}
 %
 Conclusively, by changing the magnetic field strength, one changes the
-incomming ion. BE AWARE: The magnetic field can change over the time scale of meassurements
-due to mechanical heating of the metal in the electromagnet. This leads to expansion and thus
-the magnetic field will be reduced.
+incomming ion. However, the magnetic field strength can change over time scales
+of a meassurement. This is a consequence of heating. The iron core is heated
+mechanically and thus its magnetic permeability changes. Also, the wire is
+heated electrically. As the resistance increases with temperature the
+current at a given potential will decrease; giving a lower effective magnetic
+field.
+
 %
 \begin{figure}[t]
     \centering
@@ -67,7 +70,7 @@ the magnetic field will be reduced.
 \begin{figure}[t]
     \centering
     \includegraphics[width=0.99\columnwidth]{setup1}
-    \caption{Overview of detector and electromagnet (red brick).}
+    \caption{From left to right; Overview of the Faraday cup, Silicium detector, beamline, and electromagnet (red brick).}
     \label{fig_setup1}
 \end{figure}
 %
@@ -79,19 +82,27 @@ the magnetic field will be reduced.
     \label{fig_setup4}
 \end{figure}
 %
-From the beamline the particles were directed toward a chosen target material
-\cref{fig_setup4}, where they were scattered on atomic nuclei of the
-target. A detector was placed at a movable position around the target, such
-that scattering angles up $160$ degrees could be measured.
+Subsequently, the incomming ions were directed towards the thin target foil
+\cref{fig_setup4}, and the scattered particles were detected by a Silicon
+detector at a variable angle up to $\SI{160}{\degrees}$ relative to the
+direct beam. 
+
+The detector was at a constant seperation from the target, $r =
+\SI{49\pm1}{\milli\meter}$, and it had a circular area of given diameter
+$D=\SI{1.88 \pm 0.01}{\milli\meter}$. Of importance is the solid angle of 
+\begin{equation}
+d\Omega = \frac{dA}{r^2}
+\end{equation}
+used in the Rutherford differential cross section later on.
 
 The detector was coupled to a digitizer connected to a computer. During
-measurements the digitizer started a clock inside it. When the detector was hit
-by a particle, the digitizer translated the measured energy into a digital
-number and sent the number and the corresponding time stamp to the computer.
-The program Mc2Analyzer was used to handle the data. The digital number is an
-arbitrary number called a channel number. It is translatable to the actual
-energy by a linear factor plus an offset. In order to convert these channel
-numbers to correct energies of the scattered particles a calibration was done.
+measurements the digitizer started a clock. When an ion was detected, the
+digitizer translated the measured energy into a digital number and sent the
+number and the corresponding time stamp to the computer.  The program
+Mc2Analyzer was used to handle the data. The digital number is an arbitrary
+number called a channel number. It is translatable to the actual energy by a
+linear factor plus an offset. In order to convert these channel numbers to
+correct energies of the scattered particles a calibration was done.
 
 \subsection{Calibration}
 An energy meassurement of the scattered ion gives a digitial output, which we call
@@ -104,9 +115,9 @@ energy can be found as
 \begin{equation}
     E = \alpha(k - k_|0|), \label{eq_calibration}
 \end{equation}
-where $k$ is the meassured channel, $k_0$ is the channelnumber corresponding to
+where $k$ is the meassured channel, $k_0$ is the channel number corresponding to
 a zero--amplitude input, and $\alpha$ is a conversion parameter.
-The parameters in the relation is determined \cref{tab_parameters} by a two
+The parameters in the relation \cref{tab_parameters} is determined by a two
 step program.
 
 \begin{table}[b]
@@ -129,19 +140,19 @@ k_|0| & 1.36\pm 0.15 \\
 First, by connecting a pulser (variable output voltage), a relation between the
 varied energy and the corresponding channel number is obtained. 
 We did this for equidistant pulsed energies, and although unimportant for the
-time being, we included the threshold input for a detected signal.
+time being, we included the threshold pulser amplitude -- the minimal amplitude
+for a detected signal.
 
 Data obtained can be plotted as count numbers versus bin numbers. Due to the
 central limit theorem \parencite[p. 49]{statistics}, data can be fitted to a
 gaussian distribution. This is done for each value of pulsed energy, for which
 one gains parameter values for each gaussian within an uncertainty, determined
-by the square root of covariance matrix diagonal \cref{fig_gaussian_fit}.
+by the square root of the covariance matrix diagonal \cref{fig_gaussian_fit}.
 
 Each centroid (the mean bin number of the gaussian fit) was then compared as a
 function of the pulser amplitude. As expected from \cref{eq_calibration}, this
-shows a linear relation \cref{fig_linear_fit}.
-The intersection is interpretated as the bin number for zero amplitude ($k_|0|$).
-For values \cref{tab_parameters}.
+follows a linear relation \cref{fig_linear_fit}.
+The intersection is interpretated as the bin number at zero amplitude ($k_|0|$).
 
 \begin{figure}[t]
 \centering
@@ -167,8 +178,8 @@ electromagnet can be adjusted to deflect either $\mathrm{H^+}$ or
 $\mathrm{{H_2}^+}$ into the beamline. For each of these a data point of energy
 related to channel number can be found at a given angle.
 
-The energy of the scattered particles, $E_|f|$, can be found by energy- and
-momentum-conservation considerations for elastic scattering in two dimensions.
+The energy of the scattered particles, $E_|f|$, can be found by energy and
+momentum conservation considerations for elastic scattering in two dimensions.
 One is lead to the relation;
 \begin{equation}
 E_|f| = \left( \frac{m_|p| \cos\theta + \sqrt{{m_|t|}^2 - {m_|p|}^2
@@ -176,14 +187,14 @@ E_|f| = \left( \frac{m_|p| \cos\theta + \sqrt{{m_|t|}^2 - {m_|p|}^2
 \label{eq_5}
 \end{equation}
 where $E_|i|$ is the energy of the incident beam particles, $m_|p|$ and $m_|t|$ are
-the masses of the incident protons and the target particles, respectively, and
+the masses of the incident and the target particles, respectively. 
 $\theta$ is the angle between the direct outgoing non-scattered beam and the
 scattered particles - also called the scattering angle.
 
-Unfortunately, this only give two data points one from $\mathrm{H^+}$ and
+Unfortunately, this only gives two data points one from $\mathrm{H^+}$ and
 another from $\mathrm{{H_2}^+}$. Nonetheless, the incline from the linear fit
-to these data points is still useful. We however found a work around solution
-for this specific problem. By using a target of two layers; gold and carbon
+to these data points is still useful. However, a work around solution
+for this specific problem exists. By using a target of two layers; gold and carbon
 respectively, we have multiple centroids; one for $\mathrm{H_2^+}$ and the gold
 layer, another two for $\mathrm{H^+}$
 scattering off both gold and carbon \cref{fig_gaussian_fit2}. Thus the linear fit
@@ -237,13 +248,13 @@ are around $\pm \SI{30}{\degree}$ in each side of the target holder, see figure 
 %
 
 \clearpage
-\subsection{Procedure}
+\subsection{Procedure}\label{sec_procedure}
 For a complete description of the experimental setup, we have provided this
 short review of the startup procedure. This can be omitted, but found valueable
 for the course examination.
 
-First thing, the Van-de-Graaf. To accelerate the beam of incomming particles,
-one has to generate a hugh potential. Turning on the Belt, one hears the
+First thing, the Van-de-Graaff. To accelerate the beam of incomming particles,
+one has to generate a high potential. Turning on the belt, one hears the
 mechanical rhumming. This will generate a potential difference as described
 further in \cite[p. 565]{krane}.
 \begin{figure}[h!]
@@ -253,7 +264,7 @@ further in \cite[p. 565]{krane}.
 \label{fig_process1}
 \end{figure}
 
-Now adjust the terminal voltage patiently towards the wanted energy. Our lab
+Now adjust the terminal voltage patiently towards the desired energy. Our lab
 instructor advised us to wait for each step, before going to the next.
 \begin{figure}[h!]
 \centering
@@ -263,9 +274,9 @@ instructor advised us to wait for each step, before going to the next.
 \end{figure}
 
 Turn on the electromagnet. One can dial in the calculated magnetic field
-strength wanted. This will do absolutely nothing, but translate the origin of
-the scale. To do actual change of the magnetic field strength, one has to
-change the current throught the electromagnet.
+strength. This will do absolutely nothing to the experimental setup, but to
+translate the origin of the scale. To change the magnetic field strength, one
+has to change the current throught the electromagnet.
 \begin{figure}[h!]
 \centering
 \includegraphics[trim={0, 30cm, 0, 30cm}, clip, width=0.9\columnwidth]{process3}
@@ -274,7 +285,7 @@ change the current throught the electromagnet.
 \end{figure}
 
 Now open the vacuum valve, so the incomming ions can be detected.
-If the Faraday cup (detector for $0$ degree scatter) is connected to an Ampere
+If the Faraday cup (detector for $0$ degree scattering) is connected to an Ampere
 meter, one can look for received current of charged particles. This should be
 maximized, by a variational principle about the calculated magnetic field,
 using the fine grid for adjustments.

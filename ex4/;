@@ -13,7 +13,7 @@
 \usepackage[english]{babel}
 % Daleif recommends:
 % Orddeling og ordentligt mellemrum efter forkortelser
-% \renewcommand{\danishhyphenmins}{22} % bedre orddeling
+\renewcommand{\danishhyphenmins}{22} % bedre orddeling
 
 % Sørger for ordentligt mellemrum efter forkortelser (e.g.)
 \frenchspacing  
@@ -49,12 +49,12 @@
 \newcolumntype{C}{>{$}{c}<{$}}
 
 % Sektioner er højest prioriteret
-  \usepackage{chngcntr}
-      \counterwithout{section}{chapter}
-      \counterwithout{figure}{section}
-      \counterwithout{figure}{chapter}
-      \counterwithout{table}{chapter}
-      \counterwithout{equation}{chapter}
+ \usepackage{chngcntr}
+     \counterwithout{section}{chapter}
+     \counterwithout{figure}{section}
+     \counterwithout{figure}{chapter}
+     \counterwithout{table}{chapter}
+     \counterwithout{equation}{chapter}
 
 % Mathematics
 % Mathematical characters
@@ -76,7 +76,7 @@
 
 % Debuggin
 \usepackage{lipsum}
-%\usepackage[margin, draft]{fixme} \fxusetheme{color}
+\usepackage[margin, draft]{fixme} \fxusetheme{color}
 % Vil gøre det til
 % \fxnote (grøn), \fxerror (gul), \fxwarning (orange), \fxfatal (rød)
 
@@ -96,14 +96,14 @@
 
 % Testing sections
 % Sections
-%\setsecheadstyle{\Large\bfseries\sffamily\raggedright}
-%\setsubsecheadstyle{\large\bfseries\sffamily\raggedright}
+\setsecheadstyle{\Large\bfseries\sffamily\raggedright}
+\setsubsecheadstyle{\large\bfseries\sffamily\raggedright}
 
 % Figures & Tables on page with TOC
-%\usepackage{tocloft}
+\usepackage{tocloft}
 
 % TOC går til subsection (Benytter nu istedet 'chapter' til sections og 'section' til subsections)
-%\setcounter{tocdepth}{0}
+\setcounter{tocdepth}{0}
 
 
 % Bibliography
