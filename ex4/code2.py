@@ -395,7 +395,7 @@ def k0():
     handles, labels = ax.get_legend_handles_labels()
     fig.legend(handles[:2], labels[:2], loc=1, ncol=2, borderaxespad=0,
             frameon=False)
-    plt.savefig("gaussian_fit")
+    #plt.savefig("gaussian_fit")
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # Linear
@@ -428,7 +428,7 @@ def k0():
     handles, labels = ax.get_legend_handles_labels()
     fig.legend(handles, labels, loc=1, ncol=2, borderaxespad=0, frameon=False)
 
-    plt.savefig("k0_plotting")
+    #plt.savefig("k0_plotting")
     # We fit for (zero-amplitude/b) value, and obtain alpha in other function
     k0_val = b[0]
     k0_error = b[1]
@@ -496,7 +496,7 @@ def alpha(k0):
     handles, labels = ax.get_legend_handles_labels()
     fig.legend(handles[:2], labels[:2], loc=1, ncol=2, borderaxespad=0, frameon=False)
 
-    plt.savefig('gaussian_fit2')
+    #plt.savefig('gaussian_fit2')
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # Linear
@@ -541,7 +541,7 @@ def alpha(k0):
     handles, labels = ax.get_legend_handles_labels()
     fig.legend(handles, labels, loc=1, ncol=2, borderaxespad=0, frameon=False)
 
-    plt.savefig("alpha_plotting")
+    #plt.savefig("alpha_plotting")
 
     alpha = a
     print("alpha is {:.2f} with an uncertainty of {:.5f}".format(alpha[0],
@@ -719,6 +719,7 @@ def doublegaussian_fit(plot_switch):
             plt.plot(bins, counts, 'o',      label="Data\
                     {}".format(detector_angles[i]))
             plt.legend()
+            #plt.savefig("Data_{}".format(detector_angles[i]))
 
 
         # bin count (dN)
@@ -732,10 +733,10 @@ def doublegaussian_fit(plot_switch):
         dN_C.append(np.sum(y_C))
         dN_Au.append(np.sum(y_Au))
 
-        if plot_switch == True:
-            plt.scatter(bins, y_C,   color="k", marker='x')
-            plt.scatter(bins, y_Au,  color="k", marker='.')
-            plt.scatter(bins, y_tot, color="k", marker='o')
+#        if plot_switch == True:
+#            plt.scatter(bins, y_C,   color="k", marker='x')
+#            plt.scatter(bins, y_Au,  color="k", marker='.')
+#            plt.scatter(bins, y_tot, color="k", marker='o')
 
         i = i + 1
 
@@ -806,8 +807,8 @@ def energy_angle_plot(theta, E_Au, E_C):
     plt.plot(x, y_Au)
     plt.plot(x, y_C)
 
-    #plt.plot(
     plt.legend()
+    plt.savefig("fig_energy")
 
 
     return
@@ -1017,21 +1018,21 @@ def target_thickness():
 
 # # # # # # # # # # # # # # Function calls # # # # # # # # # # # # # # # # # #
 # To avoid several function calls:
-k0_val = 1.36
-k0_error = 0.15
-alpha_val = 0.80
-alpha_error = 0.00473
+#k0_val = 1.36
+#k0_error = 0.15
+#alpha_val = 0.80
+#alpha_error = 0.00473
 
-alpha = np.array([alpha_val, alpha_error])
-k0    = np.array([k0_val, k0_error])
+#alpha = np.array([alpha_val, alpha_error])
+#k0    = np.array([k0_val, k0_error])
 
 # Determine k0
-#k0 = k0()
-#k0_val, k0_error = [k0[0], k0[1]]
+k0 = k0()
+k0_val, k0_error = [k0[0], k0[1]]
 
 # Determine alpha
-#alpha = alpha(k0_val)
-#alpha_val, alpha_error = [alpha[0], alpha[1]]
+alpha = alpha(k0_val)
+alpha_val, alpha_error = [alpha[0], alpha[1]]
 
 # Determing gaussian parameters
 plot_switch = False
