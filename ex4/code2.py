@@ -719,6 +719,7 @@ def doublegaussian_fit(plot_switch):
             plt.plot(bins, counts, 'o',      label="Data\
                     {}".format(detector_angles[i]))
             plt.legend()
+            #plt.savefig("Data_{}".format(detector_angles[i]))
 
 
         # bin count (dN)
@@ -732,10 +733,10 @@ def doublegaussian_fit(plot_switch):
         dN_C.append(np.sum(y_C))
         dN_Au.append(np.sum(y_Au))
 
-        if plot_switch == True:
-            plt.scatter(bins, y_C,   color="k", marker='x')
-            plt.scatter(bins, y_Au,  color="k", marker='.')
-            plt.scatter(bins, y_tot, color="k", marker='o')
+#        if plot_switch == True:
+#            plt.scatter(bins, y_C,   color="k", marker='x')
+#            plt.scatter(bins, y_Au,  color="k", marker='.')
+#            plt.scatter(bins, y_tot, color="k", marker='o')
 
         i = i + 1
 
@@ -806,8 +807,8 @@ def energy_angle_plot(theta, E_Au, E_C):
     plt.plot(x, y_Au)
     plt.plot(x, y_C)
 
-    #plt.plot(
     plt.legend()
+    plt.savefig("fig_energy")
 
 
     return
@@ -1034,7 +1035,7 @@ alpha = alpha(k0_val)
 alpha_val, alpha_error = [alpha[0], alpha[1]]
 
 # Determing gaussian parameters
-plot_switch = True
+plot_switch = False
 detector_angles, A1, mean1, std1, A2, mean2, std2, dN_C, dN_Au =\
 doublegaussian_fit(plot_switch)
 
