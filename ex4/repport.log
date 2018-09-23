@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.9.13)  23 SEP 2018 15:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.9.13)  23 SEP 2018 16:38
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1581,7 +1581,29 @@ Package biblatex Info: Trying to load language 'english'...
 Package biblatex Info: ... file 'english.lbx' found.
  (/usr/share/texlive/texmf-dist/tex/latex/biblatex/lbx/english.lbx
 File: english.lbx 2017/12/19 v3.10 biblatex localization (PK/JW/AB)
-) (./repport.aux)
+) (./repport.aux
+./repport.aux:46: Extra }, or forgotten \endgroup.
+l.46 }
+      {nty/global//global/global}
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+
+./repport.aux:46: LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.46 }{n
+        ty/global//global/global}
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+)
 \openout1 = `repport.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 42.
@@ -1785,325 +1807,4 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
 LaTeX Font Info:    Try loading font information for U+msb on input line 42.
- (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msb.cfg
-File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
-)
-LaTeX Font Info:    Try loading font information for OT1+lmss on input line 42.
- (/usr/share/texmf/tex/latex/lm/ot1lmss.fd
-File: ot1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-Package microtype Info: Loading generic protrusion settings for font family
-(microtype)             `lmss' (encoding: OT1).
-(microtype)             For optimal results, create family-specific settings.
-(microtype)             See the microtype manual for details.
-\c__siunitx_mathtt_int=\count489
-LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 42.
- (/usr/share/texmf/tex/latex/lm/ot1lmtt.fd
-File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-Package microtype Info: Loading generic protrusion settings for font family
-(microtype)             `lmtt' (encoding: OT1).
-(microtype)             For optimal results, create family-specific settings.
-(microtype)             See the microtype manual for details.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 52.
-LaTeX Font Info:    Try loading font information for OMS+lmr on input line 52.
- (/usr/share/texmf/tex/latex/lm/omslmr.fd
-File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <8> not available
-(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 52.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 52.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 52.
- (./abstract.tex)
-LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <6> not available
-(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 54.
- (./introduction.tex) (./setup.tex
-<./graphics/setup3.jpg, id=38, 4047.12pt x 3035.34pt>
-File: ./graphics/setup3.jpg Graphic file (type jpg)
-<use ./graphics/setup3.jpg>
-Package pdftex.def Info: ./graphics/setup3.jpg  used on input line 11.
-(pdftex.def)             Requested size: 2283.04361pt x 3035.33263pt.
- [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
-
-
-]
-<./graphics/setup2.jpg, id=64, 4047.12pt x 3035.34pt>
-File: ./graphics/setup2.jpg Graphic file (type jpg)
-<use ./graphics/setup2.jpg>
-Package pdftex.def Info: ./graphics/setup2.jpg  used on input line 65.
-(pdftex.def)             Requested size: 209.65704pt x 157.24112pt.
-<./graphics/setup1.jpg, id=65, 4047.12pt x 3035.34pt>
-File: ./graphics/setup1.jpg Graphic file (type jpg)
-<use ./graphics/setup1.jpg>
-Package pdftex.def Info: ./graphics/setup1.jpg  used on input line 72.
-(pdftex.def)             Requested size: 209.65704pt x 157.24112pt.
-<./graphics/setup4.jpg, id=66, 3131.7pt x 4175.6pt>
-File: ./graphics/setup4.jpg Graphic file (type jpg)
-<use ./graphics/setup4.jpg>
-Package pdftex.def Info: ./graphics/setup4.jpg  used on input line 79.
-(pdftex.def)             Requested size: 209.65704pt x 184.28369pt.
-
-./setup.tex:87: Undefined control sequence.
-<argument> \degrees 
-                    
-l.87 ...a variable angle up to $\SI{160}{\degrees}
-                                                  $ relative to the
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-./setup.tex:87: Undefined control sequence.
-<argument> \degrees 
-                    
-l.87 ...a variable angle up to $\SI{160}{\degrees}
-                                                  $ relative to the
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-[2 <./graphics/setup3.jpg> <./graphics/setup2.jpg>]
-Underfull \vbox (badness 1259) has occurred while \output is active []
-
- [3 <./graphics/setup4.jpg> <./graphics/setup1.jpg>]
-<gaussian_fit.png, id=102, 614.295pt x 460.3599pt>
-File: gaussian_fit.png Graphic file (type png)
-<use gaussian_fit.png>
-Package pdftex.def Info: gaussian_fit.png  used on input line 159.
-(pdftex.def)             Requested size: 209.65704pt x 157.11737pt.
-<k0_plotting.png, id=104, 614.295pt x 460.3599pt>
-File: k0_plotting.png Graphic file (type png)
-<use k0_plotting.png>
-Package pdftex.def Info: k0_plotting.png  used on input line 168.
-(pdftex.def)             Requested size: 209.65704pt x 157.11737pt.
- [4 <./gaussian_fit.png> <./k0_plotting.png>]
-<gaussian_fit2.png, id=123, 614.295pt x 460.3599pt>
-File: gaussian_fit2.png Graphic file (type png)
-<use gaussian_fit2.png>
-Package pdftex.def Info: gaussian_fit2.png  used on input line 210.
-(pdftex.def)             Requested size: 209.65704pt x 157.11737pt.
-<alpha_plotting.png, id=124, 614.295pt x 460.3599pt>
-File: alpha_plotting.png Graphic file (type png)
-<use alpha_plotting.png>
-Package pdftex.def Info: alpha_plotting.png  used on input line 218.
-(pdftex.def)             Requested size: 209.65704pt x 157.11737pt.
-
-./setup.tex:224: Undefined control sequence.
-l.224 \fxnote
-             {FIX}
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 224--227
-
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [5 <./gaussian_fit2.png> <./alpha_plotting.png>]
-<./graphics/process1.jpg, id=137, 4175.6pt x 3131.7pt>
-File: ./graphics/process1.jpg Graphic file (type jpg)
-<use ./graphics/process1.jpg>
-Package pdftex.def Info: ./graphics/process1.jpg  used on input line 262.
-(pdftex.def)             Requested size: 190.59496pt x 65.01422pt.
-<./graphics/process2.jpg, id=139, 4175.6pt x 3131.7pt>
-File: ./graphics/process2.jpg Graphic file (type jpg)
-<use ./graphics/process2.jpg>
-Package pdftex.def Info: ./graphics/process2.jpg  used on input line 271.
-(pdftex.def)             Requested size: 190.59496pt x 45.53593pt.
-<./graphics/process3.jpg, id=141, 4175.6pt x 3131.7pt>
-File: ./graphics/process3.jpg Graphic file (type jpg)
-<use ./graphics/process3.jpg>
-Package pdftex.def Info: ./graphics/process3.jpg  used on input line 282.
-(pdftex.def)             Requested size: 190.59496pt x 65.01422pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<./graphics/process4.jpg, id=143, 4175.6pt x 3131.7pt>
-File: ./graphics/process4.jpg Graphic file (type jpg)
-<use ./graphics/process4.jpg>
-Package pdftex.def Info: ./graphics/process4.jpg  used on input line 295.
-(pdftex.def)             Requested size: 190.59496pt x 58.52145pt.
-<./graphics/process5.jpg, id=145, 4175.6pt x 3131.7pt>
-File: ./graphics/process5.jpg Graphic file (type jpg)
-<use ./graphics/process5.jpg>
-Package pdftex.def Info: ./graphics/process5.jpg  used on input line 305.
-(pdftex.def)             Requested size: 190.59496pt x 145.06886pt.
-) (./angledep_crosssec.tex [6
-
- <./graphics/process1.jpg> <./graphics/process2.jpg> <./graphics/process3.jpg> <./graphics/process4.jpg> <./graphics/process5.jpg>]
-<Data_40.png, id=165, 614.295pt x 460.3599pt>
-File: Data_40.png Graphic file (type png)
-<use Data_40.png>
-Package pdftex.def Info: Data_40.png  used on input line 61.
-(pdftex.def)             Requested size: 209.65704pt x 157.11737pt.
-<Data_50.png, id=166, 614.295pt x 460.3599pt>
-File: Data_50.png Graphic file (type png)
-<use Data_50.png>
-Package pdftex.def Info: Data_50.png  used on input line 62.
-(pdftex.def)             Requested size: 209.65704pt x 157.11737pt.
-<Data_60.png, id=167, 614.295pt x 460.3599pt>
-File: Data_60.png Graphic file (type png)
-<use Data_60.png>
-Package pdftex.def Info: Data_60.png  used on input line 63.
-(pdftex.def)             Requested size: 209.65704pt x 157.11737pt.
-<Data_70.png, id=168, 614.295pt x 460.3599pt>
-File: Data_70.png Graphic file (type png)
-<use Data_70.png>
-Package pdftex.def Info: Data_70.png  used on input line 64.
-(pdftex.def)             Requested size: 209.65704pt x 157.11737pt.
-<Data_80.png, id=169, 614.295pt x 460.3599pt>
-File: Data_80.png Graphic file (type png)
-<use Data_80.png>
-Package pdftex.def Info: Data_80.png  used on input line 65.
-(pdftex.def)             Requested size: 209.65704pt x 157.11737pt.
-<Data_90.png, id=170, 614.295pt x 460.3599pt>
-File: Data_90.png Graphic file (type png)
-<use Data_90.png>
-Package pdftex.def Info: Data_90.png  used on input line 66.
-(pdftex.def)             Requested size: 209.65704pt x 157.11737pt.
-<Data_100.png, id=171, 614.295pt x 460.3599pt>
-File: Data_100.png Graphic file (type png)
-<use Data_100.png>
-Package pdftex.def Info: Data_100.png  used on input line 67.
-(pdftex.def)             Requested size: 209.65704pt x 157.11737pt.
-<Data_110.png, id=172, 614.295pt x 460.3599pt>
-File: Data_110.png Graphic file (type png)
-<use Data_110.png>
-Package pdftex.def Info: Data_110.png  used on input line 68.
-(pdftex.def)             Requested size: 209.65704pt x 157.11737pt.
-
-
-LaTeX Warning: Float too large for page by 35.66922pt on input line 70.
-
-<Data_120.png, id=173, 614.295pt x 460.3599pt>
-File: Data_120.png Graphic file (type png)
-<use Data_120.png>
-Package pdftex.def Info: Data_120.png  used on input line 74.
-(pdftex.def)             Requested size: 209.65704pt x 157.11737pt.
-<Data_130.png, id=174, 614.295pt x 460.3599pt>
-File: Data_130.png Graphic file (type png)
-<use Data_130.png>
-Package pdftex.def Info: Data_130.png  used on input line 75.
-(pdftex.def)             Requested size: 209.65704pt x 157.11737pt.
-<Data_140.png, id=175, 614.295pt x 460.3599pt>
-File: Data_140.png Graphic file (type png)
-<use Data_140.png>
-Package pdftex.def Info: Data_140.png  used on input line 76.
-(pdftex.def)             Requested size: 209.65704pt x 157.11737pt.
-<Data_150.png, id=176, 614.295pt x 460.3599pt>
-File: Data_150.png Graphic file (type png)
-<use Data_150.png>
-Package pdftex.def Info: Data_150.png  used on input line 77.
-(pdftex.def)             Requested size: 209.65704pt x 157.11737pt.
-Package epstopdf Info: Source file: <./graphics/Differential_cross_section.eps>
-(epstopdf)                    date: 2018-09-21 16:35:03
-(epstopdf)                    size: 48145 bytes
-(epstopdf)             Output file: <./graphics/Differential_cross_section-eps-converted-to.pdf>
-(epstopdf)                    date: 2018-09-23 00:34:59
-(epstopdf)                    size: 23487 bytes
-(epstopdf)             Command: <repstopdf --outfile=./graphics/Differential_cross_section-eps-converted-to.pdf ./graphics/Differential_cross_section.eps>
-(epstopdf)             \includegraphics on input line 85.
-Package epstopdf Info: Output file is already uptodate.
-<./graphics/Differential_cross_section-eps-converted-to.pdf, id=177, 614.295pt x 460.72125pt>
-File: ./graphics/Differential_cross_section-eps-converted-to.pdf Graphic file (type pdf)
-<use ./graphics/Differential_cross_section-eps-converted-to.pdf>
-Package pdftex.def Info: ./graphics/Differential_cross_section-eps-converted-to.pdf  used on input line 85.
-(pdftex.def)             Requested size: 203.39862pt x 152.55167pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<fig_energy.png, id=178, 614.295pt x 460.3599pt>
-File: fig_energy.png Graphic file (type png)
-<use fig_energy.png>
-Package pdftex.def Info: fig_energy.png  used on input line 95.
-(pdftex.def)             Requested size: 209.65704pt x 157.11737pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[7] [8 <./Data_40.png> <./Data_50.png> <./Data_60.png> <./Data_70.png> <./Data_80.png> <./Data_90.png> <./Data_100.png> <./Data_110.png>]) (./data.tex
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-Overfull \vbox (134.08241pt too high) has occurred while \output is active []
-
- [9 <./Data_120.png> <./Data_130.png> <./Data_140.png> <./Data_150.png> <./graphics/Differential_cross_section-eps-converted-to.pdf> <./fig_energy.png>]
-<tykkelse.png, id=259, 452.18938pt x 157.08687pt>
-File: tykkelse.png Graphic file (type png)
-<use tykkelse.png>
-Package pdftex.def Info: tykkelse.png  used on input line 11.
-(pdftex.def)             Requested size: 209.65704pt x 72.8313pt.
-
-
-LaTeX Warning: Reference `eq:5' on page 1 undefined on input line 22.
-
-
-Underfull \vbox (badness 4048) has occurred while \output is active []
-
-Package epstopdf Info: Source file: <Dterminethicknessplot.eps>
-(epstopdf)                    date: 2018-09-23 00:17:13
-(epstopdf)                    size: 406700 bytes
-(epstopdf)             Output file: <Dterminethicknessplot-eps-converted-to.pdf>
-(epstopdf)                    date: 2018-09-23 00:17:17
-(epstopdf)                    size: 149179 bytes
-(epstopdf)             Command: <repstopdf --outfile=Dterminethicknessplot-eps-converted-to.pdf Dterminethicknessplot.eps>
-(epstopdf)             \includegraphics on input line 46.
-Package epstopdf Info: Output file is already uptodate.
-<Dterminethicknessplot-eps-converted-to.pdf, id=260, 421.575pt x 316.18124pt>
-File: Dterminethicknessplot-eps-converted-to.pdf Graphic file (type pdf)
-<use Dterminethicknessplot-eps-converted-to.pdf>
-Package pdftex.def Info: Dterminethicknessplot-eps-converted-to.pdf  used on input line 46.
-(pdftex.def)             Requested size: 209.65704pt x 157.24593pt.
-) [10 <./tykkelse.png> <./Dterminethicknessplot-eps-converted-to.pdf>]
-Package microtype Info: Character `029' is missing
-(microtype)             in font `T1/lmr/m/sc/10.95'.
-(microtype)             Ignoring protrusion settings for this character.
- [11
-
-
-]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 64.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 64.
- (./repport.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 64.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 64.
-Package rerunfilecheck Info: File `repport.out' has not changed.
-(rerunfilecheck)             Checksum: B64B96FB90CD9B1267DB63CE0E40EE04;545.
-
-
-LaTeX Warning: There were undefined references.
-
-Package logreq Info: Writing requests to 'repport.run.xml'.
-\openout1 = `repport.run.xml'.
-
- ) 
-Here is how much of TeX's memory you used:
- 34824 strings out of 492982
- 636993 string characters out of 6134896
- 1200910 words of memory out of 5000000
- 37774 multiletter control sequences out of 15000+600000
- 642628 words of font info for 160 fonts, out of 8000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 48i,13n,53p,10396b,1647s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathex.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}</usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmcsc10.pfb></usr/share/texmf/fonts/type1/public/lm/lmex10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi10.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr17.pfb></usr/share/texmf/fonts/type1/public/lm/lmr6.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr9.pfb></usr/share/texmf/fonts/type1/public/lm/lmri10.pfb></usr/share/texmf/fonts/type1/public/lm/lmri12.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy6.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy8.pfb>
-Output written on repport.pdf (11 pages, 16218741 bytes).
-PDF statistics:
- 358 PDF objects out of 1000 (max. 8388607)
- 231 compressed objects within 3 object streams
- 61 named destinations out of 1000 (max. 500000)
- 40700 words of extra memory for PDF output out of 42996 (max. 10000000)
-
+ (/usr/share/texlive/texmf-dist/tex/latex/ams
