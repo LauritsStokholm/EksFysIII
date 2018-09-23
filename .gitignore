@@ -8,6 +8,7 @@
 *.xml
 *.synctex.gz.orig
 *.synctex.gz
+*.synctex
 *.fls
 *.fdb_latexmk
 
