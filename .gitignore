@@ -9,10 +9,9 @@
 *.synctex.gz.orig
 *.synctex.gz
 *.synctex
+*.run.xml
 *.fls
 *.fdb_latexmk
-
-
 *.tps
 *.tcp
 
