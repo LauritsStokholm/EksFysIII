@@ -15,7 +15,7 @@ concider incomming ions $\mathrm{H^+}$ and $\mathrm{{H_2}^{+}}$.
 %
 Acceleration of the ions was controllable by changing the voltage drop on the
 dashboard \cref{fig_setup2} and thus also adjusting the kinetic energy of the
-incoming beam. This will be described further later on (see section Procedure).
+incoming beam. This process will be described more in depth later on (see section Procedure).
 
 The beamline was placed in an angle relative to the accelerator
 \cref{fig_setup1}. By changing the magnetic field strength of the
@@ -67,7 +67,7 @@ field.
 \begin{figure}[t]
     \centering
     \includegraphics[width=0.99\columnwidth]{setup1}
-    \caption{From left to right; Overview of the Faraday cup, Silicium detector, beamline, and electromagnet (red brick).}
+    \caption{From left to right; Overview of the Faraday cup, target + Silicon detector, beamline, and electromagnet (red brick).}
     \label{fig_setup1}
 \end{figure}
 %
@@ -92,19 +92,19 @@ d\Omega = \frac{dA}{r^2}
 \end{equation}
 used in the Rutherford differential cross section later on.
 
-The detector was coupled to a digitizer connected to a computer. During
+The Silicon detector was coupled to a digitizer connected to a computer. During
 measurements the digitizer started a clock. When an ion was detected, the
 digitizer translated the measured energy into a digital number and sent the
 number and the corresponding time stamp to the computer.  The program
-Mc2Analyzer was used to handle the data. The digital number is an arbitrary
-number called a channel number. It is translatable to the actual energy by a
-linear factor plus an offset. In order to convert these channel numbers to
-correct energies of the scattered particles a calibration was done.
+Mc2Analyzer was used to handle the data. The digital number is also called a
+channel number. It is translatable to the actual energy by a linear factor plus
+an offset. In order to convert these channel numbers to correct energies of the
+scattered particles a calibration was done.
 
 \subsection{Calibration}
 An energy meassurement of the scattered ion gives a digitial output, which we call
 a channel number (or bin number). These hold no physical interpretation, but
-can be translated to the equivalent energy of the scattered particle. To
+can be translated to an equivalent energy of the scattered particle. To
 convert these channel numbers, a calibration is necesarry. 
 
 Assuming a linear relationship between the energy and the channel number the
@@ -174,7 +174,6 @@ As described in the previous section, the magnetic field strength of the
 electromagnet can be adjusted to deflect either $\mathrm{H^+}$ or
 $\mathrm{{H_2}^+}$ into the beamline. For each of these a data point of energy
 related to channel number can be found at a given angle.
-
 The energy of the scattered particles, $E_|f|$, can be found by energy and
 momentum conservation considerations for elastic scattering in two dimensions.
 One is lead to the relation;
@@ -219,7 +218,10 @@ and $\mathrm{H^+}$ scattering off the carbon and gold layer respectively.}
 
 \subsection{Targets}
 %\fxnote{FIX}
-The targets of interest in this experiment was a thin gold coated carbon plate. The gold layer was about one tenth of the carbon thickness. The thickness of the carbon layer have previously been determined as $\approx\SI{250}{\angstrom}$, and the thickness of the gold layer as $\approx\SI{25}{\angstrom}$.\footnotemark \\
+The targets of interest in this experiment was a thin gold coated carbon plate.
+The gold layer was about one tenth of the carbon thickness. The thickness of
+the carbon layer have previously been determined as $\mathrm{d}x_|C|
+\approx\SI{250}{\angstrom}$, and the thickness of the gold layer as $\mathrm{d}x_|Au|\approx\SI{25}{\angstrom}$.\footnotemark \\
 \footnotetext{The estimated thickness of each target available have been determined by the previous users of the experimental setup and written down on the whiteboard next to the setup.} 
 The target was placed in holder, which contains several other targets. The height of the holder was fixed, though it was not investigated whether the marked height was optimal with respect to the beam position.\\
 %
@@ -246,7 +248,7 @@ for the course examination.
 
 First thing, the Van-de-Graaff. To accelerate the beam of incomming particles,
 one has to generate a high potential. Turning on the belt, one hears the
-mechanical rhumming. This will generate a potential difference as described
+mechanical rhumming. The Van-de-Graaff will generate a potential difference as described
 further in \cite[p. 565]{krane}.
 \begin{figure}[h!]
 \centering
