@@ -14,7 +14,8 @@ This formula neglects the recoil energy of the target.
 As mentioned earlier, the target has two layers, and thus the incomming beam of
 ions can scatter on both gold and carbon. 
 
-However, as the Rutherford scattering is a coulomb interaction and $Z_|Au| > Z_|C|$, the Rutherford differential crosssection for gold is greater than for carbon at any given angle. Hence we would expect the gold layer to scatter more particles at higher angles compared to carbon. Due to the same inequality of the nuclei number gold will also have a lower recoil energy, and thus from conservation of energy the particles scattered on gold will have a higher energy - bin number - than carbon.
+However, as the Rutherford scattering is a coulomb interaction and $Z_|Au| >
+Z_|C|$, the Rutherford differential cross section for gold is greater than for carbon at any given angle. Hence we would expect the gold layer to scatter more particles at higher angles compared to carbon. Due to the same inequality of the nuclei number gold will also have a lower recoil energy, and thus from conservation of energy the particles scattered on gold will have a higher energy - bin number - than carbon.
 %Furthermore, from the calibration it is found that the channel numbers are directly proportional to the meassured energies of the scattered particles. Combined with the fact that gold has a higher nuclei number than carbon and thus a lower recoil energy, we will expect the particles scattered on gold will have a higher energy than those of carbon from conservation of energy.
 
 %From the calibration it is found that the channel number is directly proportional to the energy of the scattered particles. Combined with the fact, that gold has a higher mass number, and thus a lower recoil energy, it is expected that the particles scattered on the gold layer will have a higher energy, due to conservation of energy.
@@ -22,45 +23,57 @@ However, as the Rutherford scattering is a coulomb interaction and $Z_|Au| > Z_|
 %% %%
 
 \subsection{Data analysis}
-To test the angular dependency of the Rutherford cross section, the Silicon detector was set at a variable angle. At each angle the total number of incomming particles and scattered particles have to be measured.\\
+To test the angular dependency of the Rutherford differential cross section,
+the Silicon detector was set at a variable angle. At each angle the total
+number of incomming particles and scattered particles were measured.\\
 
 A Faraday cup was used to meassure the amount of non-scattered particles. 
-Since this number is far greater than the amount of scattered particles, the number of incomming particles can be assumed to be the number of detected particles within the Faraday cup.\\
+Since this number is far greater than the amount of scattered particles, the
+number of incomming particles can be assumed to be the number of detected
+particles within the Faraday cup.\\
 
-The number of any detected events in both the Faraday cup and the Silicon detector follows a Poisson
-distribution, and thus the statistical uncertainty goes as the square root of the total number of detected events.\\
+The number of any detected events in both the Faraday cup and the Silicon
+detector follows a Poisson distribution, and thus the statistical uncertainty
+goes as the square root of the total number of detected events.\\
 
 The counted events from the Faraday cup can be read off the collector. 
-The collector was set to relate $10^{11}$ counts per coulomb, and as there are $6,24150913\ \cdot10^{18}$ elementary
+The collector was set to relate $10^{11}$ counts per coulomb, and as there are
+$6,24150913\ \cdot10^{18}$ elementary
 charges per coulomb, we can relate the count number to an amount of detected
-protons, $N$.
+protons, $N$. Due to the beampipe, a factor of one half is also
+necesarry.\footnote{Hans Fynbo, course responsible, mentioned this factor,
+    which surprisingly fit well into our calculations.}
 
 The relation between the number of incoming, $N$, and scattered particles, $dN$, is
 \begin{equation}\label{eq:dN}
     \mathrm{d}N = N n_|tar| \mathrm{d}x \mathrm{d}\Omega,
     \diff[d]{\sigma(\theta,\phi)}{\Omega}.
 \end{equation}
-where $n_|tar|$ and $\mathrm{d}x$ is the nuclei density of the target thickness of the target respectivly, and $\mathrm{d}\Omega$ is the small solid angle through which the scattered particles emerge.
+\parencite[eq. 14.42, p. 582]{taylor} where $n_|tar|$ and $\mathrm{d}x$ is the
+nuclei density of the target thickness of the target respectivly, and
+$\mathrm{d}\Omega$ is the small solid angle through which the scattered
+particles emerge.
 
-As previously mentioned  the two layered target will result in a double scattered profile, thus a linear combination of two gaussians can describe the count distribution \cref{fig_doublegauss}.\\
+As previously mentioned  the two layered target will result in a double
+scattered profile, thus a fit is expected to follow a double gaussian
+distribution. Asuming a linear combination of the two gaussians one can
+describe the count distribution \cref{fig_doublegauss}.\\
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.99\columnwidth]{Data_70}
 \caption{A double gaussian fit at a detector angle of $70$ degrees.}
 \label{fig_doublegauss}
 \end{figure}
-
 Through a double gaussian fit we can distinguish between the scattered particles of gold and carbon, and determine their mean channel number corresponding to their energy.  \\
 Fitting a double gaussian, one gather six parameters; amplitude, centroid and standard deviation
 of both gaussians.  \\
-
-
 %Notice in figure \ref{fig_angular_dependency} that the gaussian of greatest amplitude corresponds to gold, which
 %is in agreement with the relative sizes of the two atoms. . Thus the recoil energy of gold is negligible compared to that of carbon.\\
- 
-Each gaussian term within the fit was used to determine the total count number by summing over all channels, in order to obtain $\mathrm{d}N$ for particles scattered of gold and carbon respectively.\\
-
-From \cref{eq:dN} the differential crosssection for each detector angle is then calculated and compared to the expected differential crosssection \cref{eq:cross}.
+Each gaussian term was used to determine the total count number by summing over
+all channels, in order to obtain $\mathrm{d}N$ for particles scattered of gold
+and carbon respectively.\\
+%
+From \cref{eq:dN} the differential cross section for each detector angle is then calculated and compared to the expected differential cross section \cref{eq:cross}.
 
 \begin{figure}[h]
 	\centering
@@ -68,14 +81,14 @@ From \cref{eq:dN} the differential crosssection for each detector angle is then 
 	\caption{The differential crossection  of carbon and gold as a function of the scattering angle. The dashed line represents the theoretical values.}
 	\label{fig:Differential_cross_section}
 \end{figure}
-The data and the theoretical derived differential crosssection have the same characteristics though it seems as if all data is shifted to higher values than what is expected by the theory. 
+The data and the theoretical derived differential cross section have the same characteristics though it seems as if all data is shifted to higher values than what is expected by the theory. 
 
-The theoretical determined values are based on \cref{eq:cross}, which is under the assumption of a classical regime governt by the Sommerfeld criterion\parencite[p. 14]{noteBB}.
+The theoretical determined values are based on \cref{eq:cross}, which is under the assumption of a classical regime governt by the Sommerfeld criterion \parencite[p. 14]{noteBB}.
 \begin{align}\label{eq:som}
 \eta_|S|=0.16\cdot Z_1Z_2\sqrt{\frac{A_|proj|}{E_|lab|[\si{\mega\electronvolt}]}}\gg 1
 \end{align}
-For gold the $\eta_|S|\sim 300$ whereas it for carbon is $\eta_|S|\sim 6$. 
-It is interesting that the values for gold and carbon are in the order of $10^2$. Which could influence our theoretical assumptions for carbon.   \\
+For gold and carbon the values of the parameter is $\eta_|S|\sim 300$ and
+$\eta_|S|\sim 6$ respectivly. It is interesting that the values for gold and carbon are in the order of $10^2$. Which could influence our theoretical assumptions for carbon.   \\
 
 The vertical errorbars in figure \cref{fig:Differential_cross_section} are much lower for carbon than for gold. This corresponds to the lower values and uncertainties of $\mathrm{d}N$ for the carbon scattering. 
 
