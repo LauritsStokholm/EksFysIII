@@ -144,7 +144,8 @@ def Gaussian_fit(df, file_names, k0_switch, *alpha):
 
         for name in file_names:
             # Choosing non zero values
-            df_data = df[name].loc[df[name].nonzero()]
+            #df_data = df[name].loc[df[name].nonzero()]
+            df_data = df[name].loc[df[name] > 5]
         
             # Transforming to array (Might be unnecesarry) [index, count]
             np_data = np.array([np.array(df_data.index), df_data.values])

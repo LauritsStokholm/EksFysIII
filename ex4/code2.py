@@ -839,7 +839,7 @@ def RutherfordCrossSection(dN, target_switch):
 
     # Conversion factor
     beta = 6.24150913 * 10**(18) # e/C
-    N = file_counts * (10**(-11)) * (beta) # [#protoner]
+    N = file_counts * (10**(-11)) * (beta) * 2 # [#protoner]
     # [counts] * [C/counts] * [e/C]
 
     if target_switch == True:
@@ -853,6 +853,9 @@ def RutherfordCrossSection(dN, target_switch):
         sigma_M = sigma_M_Au
         rho = rho_Au
         #n = 5.7 * 10**(28)
+        print("Sommerfeld criterion:")
+        eta = 0.16 * 79 * np.sqrt(197/(350 * 10**(-3)))
+        print(eta)
     elif target_switch == False: 
         #print("Carbon")
         # Target thickness (read off whiteboard)
@@ -864,6 +867,9 @@ def RutherfordCrossSection(dN, target_switch):
         sigma_M = sigma_M_C
         rho = rho_C
         # [kg/m3] * [mol/kg] * [#atomer/mol] * [#protomer/#atomer]
+        eta = 0.16 * 6 * np.sqrt(12/(350 * 10**(-3)))
+        print("Sommerfeld criterion:")
+        print(eta)
     else: 
         print("Wrong switch")
     
