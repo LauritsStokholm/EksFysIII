@@ -91,12 +91,14 @@ The theoretical determined values are based on \cref{eq:cross}, which is under t
 \eta_|S|=0.16\cdot Z_1Z_2\sqrt{\frac{A_|proj|}{E_|lab|[\si{\mega\electronvolt}]}}\gg 1
 \end{align}
 For gold and carbon the values of the parameter is $\eta_|S|\sim 300$ and
-$\eta_|S|\sim 6$ respectivly. It is interesting that the values for gold and carbon are in the order of $10^2$. Which could influence our theoretical assumptions for carbon.   \\
-
-The vertical errorbars in figure \cref{fig:Differential_cross_section} are much lower for carbon than for gold. This corresponds to the lower values and uncertainties of $\mathrm{d}N$ for the carbon scattering. 
+$\eta_|S|\sim 6$ respectivly. It is interesting that the values for gold and carbon are in the order of $10^2$. Which could influence our theoretical assumptions for carbon. 
 
 \section{Angular dependency of the proton energy}
-From the gaussian fits one obtains two centroids; one for each target layer. These can be converted to the equivalent energies as described in the calibration. Plotting the energy as a function of the detector angle \cref{fig_energy}, it can be seen that the carbon layer radically changes energies.\\
+From the double gaussian one obtains two centroids; one for each target layer.
+These can be converted to the equivalent energies as described in the
+calibration. Plotting the energy as a function of the detector angle
+\cref{fig_energy}, it can be seen that the carbon layer radically changes
+energies.
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.99\columnwidth]{fig_energy}
@@ -105,11 +107,20 @@ function.}
 \label{fig_energy}
 \end{figure}
 
-On the otherhand gold is nearly constant. This is what is expected, as carbon has a much higher recoil. Including the theoretical plot, as derived in \cref{eq_5}, one can see that there exists some deviations from the expected values. Especially at detector angles of $90$ and $100$ degrees.
-A reason for this tendency, can be seen from \cref{fig_data}. We assume a linear combination of the gold and carbon distribution and thus fit a double gaussian. Nonetheless, a small bump is seen between the carbon and gold contributions. In a further analysis, one could fit a tripple gaussian and identify the reason for this. The correction in bin number would shift it to higher energy, which is just what would explain the lower energy than expected.
+On the otherhand gold is nearly constant. This is what is expected, as carbon
+has a much higher recoil. Including the theoretical plot, as derived in
+\cref{eq_5}, one can see that there exists some deviations from the expected
+values. Especially at detector angles of $90$ and $100$ degrees.
+A reason for this tendency, can be seen from \cref{fig_angular_dependency}. We
+assume a linear combination of the gold and carbon distribution and thus fit a
+double gaussian. Nonetheless, a small bump is seen between the carbon and gold
+contributions. In a further analysis, one could fit a tripple gaussian and
+identify the reason for this. The correction in bin number would shift it to
+higher energy, which is just what would explain the lower energy than
+expected.
 
 Another interesting factor is how the two peaks change relative position as a
-function of scattering, merging their gaussian distribution at low angles, \cref{fig_angular_dependency2}. A complete overlap makes the seperation job more difficult, which explains the deviations at lower angles.
+function of scattering, merging their gaussian distribution at low angles, \cref{fig_angular_dependency}. A complete overlap makes the seperation job more difficult, which explains the deviations at lower angles.
 
 
 \begin{figure*}
@@ -132,5 +143,5 @@ function of scattering, merging their gaussian distribution at low angles, \cref
 \includegraphics[width=0.99\columnwidth]{Data_140}
 \includegraphics[width=0.99\columnwidth]{Data_150}
 \caption{Angular dependency}
-\label{fig_angular_dependency2}
+\label{fig_angular_dependency}
 \end{figure*}
