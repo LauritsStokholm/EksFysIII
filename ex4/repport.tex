@@ -24,21 +24,6 @@
     \section{#1}%
     \markboth{#1}{#1}}
 
-%\raggedbottom
-%\parindent = 0pt
-
-%Følgende gør, at subscripts bliver ikke-kursiv. Anvendes X_|<subscript>|. Erstattes evt. med X_{\mathrm{<subscript>}}.
-\makeatletter
-\begingroup
-\catcode`\_=\active
-\protected\gdef_{\@ifnextchar|\subtextup\sb}
-\endgroup
-\def\subtextup|#1|{\sb{\textup{#1}}}
-\AtBeginDocument{\catcode`\_=12 \mathcode`\_=32768 }
-\makeatother
-
-\DeclareSIUnit\gauss{G}
-
 \begin{document}
 
 % Title og Abstract
@@ -57,6 +42,7 @@
 \input{angledep_crosssec}
 \input{data}
 \input{conclusion}
+
 \input{appendix}
 \clearpage
 \printbibliography[heading=subbibliography]{}

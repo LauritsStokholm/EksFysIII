@@ -74,6 +74,8 @@
          exponent-product = {\cdot},
          per-mode = fraction}
 
+\DeclareSIUnit\gauss{G}
+
 % Debuggin
 \usepackage{lipsum}
 %\usepackage[margin, draft]{fixme} \fxusetheme{color}
@@ -180,3 +182,15 @@
 % Code names
 \newcommand\numpy{NumPy\xspace}
 \newcommand\scipy{SciPy\xspace}
+
+% Subscripts
+%Følgende gør, at subscripts bliver ikke-kursiv. Anvendes X_|<subscript>|. Erstattes evt. med X_{\mathrm{<subscript>}}.
+\makeatletter
+\begingroup
+\catcode`\_=\active
+\protected\gdef_{\@ifnextchar|\subtextup\sb}
+\endgroup
+\def\subtextup|#1|{\sb{\textup{#1}}}
+\AtBeginDocument{\catcode`\_=12 \mathcode`\_=32768 }
+\makeatother
+

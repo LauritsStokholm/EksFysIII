@@ -699,7 +699,7 @@ def doublegaussian_fit(plot_switch):
         if plot_switch == True:
             # Plotting data + fit
             plt.figure()
-            plt.title("Double Gaussian fit")
+            plt.title("Detector angle {}".format(detector_angles[i]))
             plt.xlabel("Channel number")
             plt.ylabel("Number of counts")
             plt.grid()
@@ -719,7 +719,7 @@ def doublegaussian_fit(plot_switch):
             plt.plot(bins, counts, 'o',      label="Data\
                     {}".format(detector_angles[i]))
             plt.legend()
-            #plt.savefig("Data_{}".format(detector_angles[i]))
+            plt.savefig("Data_{}".format(detector_angles[i]))
 
 
         # bin count (dN)
@@ -1041,7 +1041,7 @@ alpha = alpha(k0_val)
 alpha_val, alpha_error = [alpha[0], alpha[1]]
 
 # Determing gaussian parameters
-plot_switch = False
+plot_switch = True
 detector_angles, A1, mean1, std1, A2, mean2, std2, dN_C, dN_Au =\
 doublegaussian_fit(plot_switch)
 
