@@ -114,7 +114,6 @@ data_cal = [x for x in data_files_cal if 'txt' in x]
 # Paths for chosen datafiles
 data_dir     = [os.path.join(data_path, x) for x in data]
 data_dir_cal = [os.path.join(data_path_cal, x) for x in data_cal]
-data_dir_cal.sort()
 d1 = [os.path.join(data_path, 'calibration/Cs137.csv')]
 
 
@@ -151,11 +150,10 @@ def Cs137(directory, threshold):
         df = pd.concat([df, df1], axis=1)
         return df, column_names
 
-
-
 def Preperation_Dataframe(directory, threshold):
-    lower = threshold[0]
-    upper = threshold[1]
+    lower_Cs, upper_Cs = threshold[0][0], threshold[0][1]
+    lower_Co, upper_Co = threshold[1][0], threshold[1][1]
+    lower_BGO, upper_BGO = threshold[2][0], threshold[2][1]
 
     # Preparing dataframe structure
     df = pd.DataFrame()
@@ -174,8 +172,15 @@ def Preperation_Dataframe(directory, threshold):
         column_names.append(name2)
 
         df1 = pd.read_csv(directory[i], delimiter=' ', skiprows=[0,1,2,3,4], usecols=[0,1], names=[name1, name2])
-        df1 = df1.loc[lower < df1[name2]]
-        df1 = df1.loc[df1[name2] < upper]
+        if "Cs" in directory[i] and "ch000" in directory[i]:
+            df1 = df1.loc[lower_Cs < df1[name2]]
+            df1 = df1.loc[df1[name2] < upper_Cs]
+        elif "Co" in directory[i] and "ch000" in directory[i]:
+            df1 = df1.loc[lower_Co < df1[name2]]
+            df1 = df1.loc[df1[name2] < upper_Co]
+        elif "ch001" in directory[i]:
+            df1 = df1.loc[lower_BGO < df1[name2]]
+            df1 = df1.loc[df1[name2] < upper_BGO]
 
         ## Concatenate
         df = pd.concat([df, df1], axis=1)
@@ -236,74 +241,85 @@ def cal1():
     return()
 
 def Calibration():
-    df, column_names = Preperation_Dataframe(data_dir_cal, [200, 1000])
+
+    # Lower and Upper bounds (Cs, Co, BGO)
+    threshold = np.array([[300, 1500], [300, 1500], [300, 1500]])
+
+    # Calling DataFrame factory
+    df, column_names = Preperation_Dataframe(data_dir_cal, threshold)
 
     # Assigning names
-    t_Cs = column_names[0]
-    c_Cs = column_names[1]
-    t_BGO1 = column_names[2]
-    c_BGO1 = column_names[3]
+    t_Cs, c_Cs, t_BGO1, c_BGO1, t_Co, c_Co, t_BGO2, c_BGO2 = column_names
 
-    t_Co = column_names[4]
-    c_Co = column_names[5]
-    t_BGO2 = column_names[6]
-    c_BGO2 = column_names[7]
-
-
+    # Assigning values
     Co = np.array([df[t_Co], df[c_Co]])
     Cs = np.array([df[t_Cs], df[c_Cs]])
     BGO = np.array([[df[t_BGO1], df[c_BGO1]], [df[t_BGO2], df[c_BGO2]]])
 
+
     # For calibration, we are not time interested
+    # Spline
     x_Co = np.arange(min(Co[1]), max(Co[1]), 0.1)
     x_Cs = np.arange(min(Cs[1]), max(Cs[1]), 0.1)
     x_BGO1 = np.arange(min(BGO[0][1]), max(BGO[0][1]), 0.1)
     x_BGO2 = np.arange(min(BGO[1][1]), max(BGO[1][1]), 0.1)
 
-    n_bins = 1000
-    dx = np.ptp(x_Cs) / n_bins
+    # Number of bins
+    n_bins_Cs = np.ptp(threshold[0])
+    n_bins_Co = np.ptp(threshold[1])
+    n_bins_BGO = np.ptp(threshold[2])
+
+    # Bin width
+    dx_Cs = np.ptp(x_Cs) / n_bins_Cs
+    dx_Co = np.ptp(x_Co) / n_bins_Co
+    dx_BGO1 = np.ptp(x_BGO1) / n_bins_BGO
+    dx_BGO2 = np.ptp(x_BGO2) / n_bins_BGO
+
+    # Logics
+    Cs_1 = Cs[1][np.where(Cs[1] > 800)]
+    Cs_2 = Cs_1[np.where(Cs_1 < 1200)]
+
+    # Kernel Distribution Estimate (functions)
     pdf_Co = sp.stats.gaussian_kde(Co[1])
-    pdf_Cs = sp.stats.gaussian_kde(Cs[1])
+    pdf_Cs = sp.stats.gaussian_kde(Cs_2)
     pdf_BGO1 = sp.stats.gaussian_kde(BGO[0][1])
     pdf_BGO2 = sp.stats.gaussian_kde(BGO[1][1])
 
-    y_Co = pdf_Co(x_Co)
-    y_Cs = pdf_Cs(x_Cs)
-    y_BGO1 = pdf_BGO1(x_BGO1)
-    y_BGO2 = pdf_BGO2(x_BGO2)
+    # Evaluate functions on interval (Non normalized)
+    y_Co = pdf_Co(x_Co) * dx_Co * np.size(x_Co)
+    y_Cs = pdf_Cs(x_Cs) * dx_Cs * np.size(x_Cs)/4
+    y_BGO1 = pdf_BGO1(x_BGO1) * dx_BGO1 * np.size(x_BGO1)
+    y_BGO2 = pdf_BGO2(x_BGO2) * dx_BGO2 * np.size(x_BGO2)
 
     plt.figure()
     plt.title("Cs137 Calibration")
     plt.grid()
     plt.xlabel("Channel Number")
     plt.ylabel("Counts")
-    plt.plot(x_Cs, y_Cs * dx * np.size(x_Cs), label="PDF Cs")
-    plt.hist(Cs[1], bins=n_bins, normed=False)#, log=True)
+    plt.plot(x_Cs, y_Cs, label="PDF Cs")
+    plt.hist(Cs[1], bins=n_bins_Cs, normed=False)#, log=True)
     plt.legend()
-#    plt.savefig("test0.jpg")
+    plt.savefig("test0.jpg")
 
     plt.figure()
     plt.title("Co Calibration")
     plt.grid()
     plt.xlabel("Channel Number")
     plt.ylabel("Counts")
-    plt.plot(x_Co, y_Co * dx * np.size(x_Co), label="PDF Co")
-    plt.hist(Co[1], bins=n_bins, normed=False)#, log=True)
+    plt.plot(x_Co, y_Co, label="PDF Co")
+    plt.hist(Co[1], bins=n_bins_Co, normed=False)#, log=True)
     plt.legend()
-#    plt.savefig("test1.jpg")
+    plt.savefig("test1.jpg")
 
     fig, axs = plt.subplots(2, 1, sharex=True)
     fig.subplots_adjust(hspace=0)
 
     # Plot each graphc
-    axs[0].plot(x_BGO1, y_BGO1 * dx, label="PDF BGO1")
-    axs[0].hist(BGO[0][1], bins=n_bins, normed=False)
+    axs[0].plot(x_BGO1, y_BGO1, label="PDF BGO1")
+    axs[0].hist(BGO[0][1], bins=n_bins_BGO, normed=False)
 
-    axs[1].plot(x_BGO2, y_BGO2 * dx, label="PDF BGO2")
-    axs[1].hist(BGO[1][1], bins=n_bins, normed=False)
-
-
-
+    axs[1].plot(x_BGO2, y_BGO2, label="PDF BGO2")
+    axs[1].hist(BGO[1][1], bins=n_bins_BGO, normed=False)
 
     # Maximal values and corresponding bins numbers
     print(sp.signal.argrelmax(y_Co, axis=0, order=100))
@@ -313,25 +329,24 @@ def Calibration():
 
 
 
-    return
+    return() 
 
 #cal1()
-#Calibration()
 #x1 =np.array(df_cal[file_names_cal[2]])
 #y1 =np.array(df_cal[file_names_cal[1]])
 #x2 sd=np.array(df_cal[file_names_cal[1]])
 #y2 =np.array(df_cal[file_names_cal[1]])
-
-
-
-
+#
+#
+#
+#
 #df_cal[file_names_cal[1]].plot()
 #plt.plot(df_cal[file_names_cal[0]], df_cal[file_names_cal[1]], '--')
-
+#
 #x = np.array(df_cal[file_names_cal[2]])
 #y = np.array(df_cal[file_names_cal[3]])
 #plt.plot(x, y)
-#
-#
+
+
 Calibration()
 plt.show()
