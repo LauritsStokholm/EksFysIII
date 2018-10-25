@@ -13,18 +13,25 @@ By comparing measurements of scattering on the target with gold layer facing the
 
 %The energies of the scattered protons is due to the ratio between the mass of the protons and the mass of the target. 
 The energy differences are proportional to the thickness of target layers. To determine the thickness of the carbon layer we consider what happens to the energy in the two following situations. In situation a) gold is facing the beam, and the final energy $E_{f,a}$ is given as the incoming energy $E_i$ minus the energy lost due to scattering on gold:
-\begin{equation*}
+\begin{equation}
 E_{f,a} = E_i (1-f_\mathrm{Au}(\theta)), 
-\end{equation*}
-where $f_{Au}$ is the function giving the relation between the incoming energy and the particle energy after scattering on gold in equation \cref{eq:5}. 
+\end{equation}
+where $f_{Au}$ is the function giving the relation between the incoming energy and the particle energy after scattering on gold in equation (6).
 In situation b) carbon is facing the beam, and the final energy is given as the incoming energy minus the energy lost due to the particles; passing through the carbon layer, scattering on gold, and passing through the carbon layer again on the way out. 
-\begin{align*}
-E_{f,b} &= E_i - t_\mathrm{C} \left(\frac{dE}{dx}\right)_\mathrm{C} 
-\\ &- f_\mathrm{Au}(\theta) \left(E_i - t_\mathrm{C} \left(\frac{dE}{dx}\right)_\mathrm{C} \right) \\ &- \frac{t_\mathrm{C}}{\cos(\pi-\theta)} \left(\frac{dE}{dx}\right)_\mathrm{C}, 
-\end{align*}
-where $t_\mathrm{C}$ is the thickness of the carbon layer and $\left(\frac{dE}{dx}\right)_\mathrm{C}$ is the stopping power of carbon found in the table in the laboratory. The stopping power of carbon and gold are found to be $8.5$ and $34 \; \si{\electronvolt}/(10^{15}$ atoms/$\si{\centi\metre}^2$), respectively.
+\begin{align}
+E_{f,b} &= E_i - t_\mathrm{C} \left(\frac{dE}{dx}\right)_\mathrm{C} \nonumber
+\\ &- f_\mathrm{Au}(\theta) \left(E_i - t_\mathrm{C} \left(\frac{dE}{dx}\right)_\mathrm{C} \right)\nonumber 
+\\ &- \frac{t_\mathrm{C}}{\cos(\pi-\theta)} \left(\frac{dE}{dx}\right)_\mathrm{C},
+\end{align}
+where $t_\mathrm{C}$ is the thickness of the carbon layer and
+$\left(\frac{dE}{dx}\right)_\mathrm{C}$ is the stopping power of carbon. The
+stopping power of carbon and gold are found to be $8.5$ and $34 \;
+\si{\electronvolt}/(10^{15}$ atoms/$\si{\centi\metre}^2$), respectively. The
+values were read off a table next to the laboratory computer.
 
-The energy difference for the peak position for gold is found as the difference between the two situations, $\Delta E_\mathrm{Au} = E_{f,a} - E_{f,b}$. Thus, the thickness of the carbon layer is found as 
+The energy difference for the peak position for gold is found as the difference
+between the two situations, $\Delta E_\mathrm{Au} = E_{f,a} - E_{f,b}$. Thus,
+the thickness of the carbon layer is found as
 \begin{equation}
 t_\mathrm{C} = \frac{\Delta E_{\mathrm{Au}}}{\left(\frac{dE}{dx}\right)_\mathrm{C} \left(1 - f_\mathrm{Au}(\theta) - \frac{1}{\cos(\theta)} \right)}
 \end{equation}

@@ -1,15 +1,18 @@
 \section{Materials and Methods}
 \subsection{Experimental Setup}
-To obtain energies up to $\SI{400}{\kilo\electronvolt}$, a single
-Van-de-Graaff accelerator \cref{fig_setup3} was used. The variety of incomming
+To obtain energies up to $\SI{350}{\kilo\electronvolt}$, a single
+Van de Graaff accelerator \cref{fig_setup3} was used. The variety of incoming
 beam particles was limited by the source (a flask of hydrogen gas connected to
 the accelerator tank), which was stationary and not changed. Therefore, we only
-concider incomming ions $\mathrm{H^+}$ and $\mathrm{{H_2}^{+}}$. 
+concider incoming ions $\mathrm{H^+}$ and $\mathrm{{H_2}^{+}}$. This is only a
+limitation for the calibration as to obtain as many different scatter points for
+fitting a tendency. As for the actual experiment, we will primarily use
+$\mathrm{H^{+}}$.
 %
 \begin{figure}[t]
     \centering
     \includegraphics[angle=-90, trim={35cm, 0cm, 27cm, 0cm}, clip,  width=0.99\columnwidth]{setup3}
-    \caption{The Van-de-Graaff accelerator.}
+    \caption{The Van de Graaff accelerator.}
     \label{fig_setup3}
 \end{figure}
 %
@@ -43,19 +46,6 @@ where it has been assumed that the mass of the two ions are related by
 $m(\mathrm{{H_2}^+}) = 2m(\mathrm{H^+}) $ and the speed of each ion is given as
 $v(\mathrm{X}) = \sqrt{\frac{2E}{m(\mathrm{X})}}$.
 %
-Given one of the magnetic fields, the other is determined from this ratio
-factor. The following magnetic field strengths were used:
-\begin{equation}
-    B(\mathrm{H^+}) = \SI{1070}{\gauss} \quad B(\mathrm{{H_2}^+}) = \SI{1513}{\gauss}
-\end{equation}
-Conclusively, by changing the magnetic field strength, one changes the
-incomming ion. However, the magnetic field strength can change over time scales
-of a meassurement. This is a consequence of heating. The iron core is heated
-mechanically and thus its magnetic permeability changes. Also, the wire is
-heated electrically. As the resistance increases with temperature the
-current at a given potential will decrease; giving a lower effective magnetic
-field.
-
 %
 \begin{figure}[t]
     \centering
@@ -64,29 +54,34 @@ field.
     \label{fig_setup2}
 \end{figure}
 %
+Given one of the magnetic fields, the other is determined from this ratio
+factor. The following magnetic field strengths were used:
+\begin{equation}
+    B(\mathrm{H^+}) = \SI{1070}{\gauss} \quad B(\mathrm{{H_2}^+}) = \SI{1513}{\gauss}
+\end{equation}
+Conclusively, by changing the magnetic field strength, one changes the
+incoming ion. However, the magnetic field strength can drift over time scales
+of a measurement. This is a consequence of heating. The iron core is heated
+mechanically and thus its magnetic permeability changes. In addition, a simple
+expansion of the coil will change the systems geometry in which the magnetic
+field also depends. Also, the wire is heated electrically. As the resistance
+increases with temperature the current at a given potential will decrease;
+giving a lower effective magnetic field.
 \begin{figure}[t]
     \centering
     \includegraphics[width=0.99\columnwidth]{setup1}
     \caption{From left to right; Overview of the Faraday cup, target + Silicon detector, beamline, and electromagnet (red brick).}
     \label{fig_setup1}
 \end{figure}
-%
-\begin{figure}[t]
-    \centering
-    \includegraphics[trim={0cm, 10cm, 0cm, 40cm}, clip, width=0.99\columnwidth]{setup4}
-    \caption{The equipment had a failure, so the targets were changed. We were
-    lucky to get this picture of both detector and targets.}
-    \label{fig_setup4}
-\end{figure}
-%
-Subsequently, the incomming ions were directed towards the thin target foil
+
+Subsequently, the incoming ions were directed towards the thin target foil
 \cref{fig_setup4}, and the scattered particles were detected by a Silicon
 detector at a variable angle up to $160$ degree relative to the
-direct beam. 
+incoming particle beam.
 
 The detector was at a constant seperation from the target, $r =
 \SI{49\pm1}{\milli\meter}$, and it had a circular area of given diameter
-$D=\SI{1.88 \pm 0.01}{\milli\meter}$. Of importance is the solid angle of 
+$D=\SI{1.88 \pm 0.01}{\milli\meter}$. Of importance is the solid angle:
 \begin{equation}
 d\Omega = \frac{dA}{r^2}
 \end{equation}
@@ -100,9 +95,17 @@ Mc2Analyzer was used to handle the data. The digital number is also called a
 channel number. It is translatable to the actual energy by a linear factor plus
 an offset. In order to convert these channel numbers to correct energies of the
 scattered particles a calibration was done.
-
+%
+\begin{figure}[t]
+    \centering
+    \includegraphics[trim={0cm, 25cm, 0cm, 40cm}, clip, width=0.99\columnwidth]{setup4}
+    \caption{The equipment had a failure, so the targets were changed. We were
+    lucky to get this picture of both detector and targets.}
+    \label{fig_setup4}
+\end{figure}
+%
 \subsection{Calibration}
-An energy meassurement of the scattered ion gives a digitial output, which we call
+An energy measurement of the scattered ion gives a digitial output, which we call
 a channel number (or bin number). These hold no physical interpretation, but
 can be translated to an equivalent energy of the scattered particle. To
 convert these channel numbers, a calibration is necesarry. 
@@ -140,6 +143,15 @@ We did this for equidistant pulsed energies, and although unimportant for the
 time being, we included the threshold pulser amplitude -- the minimal amplitude
 for a detected signal.
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.99\columnwidth]{gaussian_fit}
+\caption{Gaussian fits for all data meassured pulser-amplitude-signals. This was used to estimate the mean
+bin number (centroid), and the uncertainty of the parameters used in the
+energy-calibration.}
+\label{fig_gaussian_fit}
+\end{figure}
+% 
 Data obtained can be plotted as count numbers versus bin numbers. Due to the
 central limit theorem \parencite[p. 49]{statistics}, data can be fitted to a
 gaussian distribution. This is done for each value of pulsed energy, for which
@@ -151,22 +163,6 @@ function of the pulser amplitude. As expected from \cref{eq_calibration}, this
 follows a linear relation \cref{fig_linear_fit}.
 The intersection is interpretated as the bin number at zero amplitude ($k_|0|$).
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=0.99\columnwidth]{gaussian_fit}
-\caption{Gaussian fits for all data meassured pulser-amplitude-signals. This was used to estimate the mean
-bin number (centroid), and the uncertainty of the parameters used in the
-energy-calibration.}
-\label{fig_gaussian_fit}
-\end{figure}
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=0.99\columnwidth]{k0_plotting}
-\caption{Linear fit of the mean values as a function of amplitude. This was
-used to determine the zero-amplitude constant $k_|0|$.}
-\label{fig_linear_fit}
-\end{figure}
 
  
 \subsubsection{Determining alpha}
@@ -196,10 +192,20 @@ layer, another two for $\mathrm{H^+}$
 scattering off both gold and carbon \cref{fig_gaussian_fit2}. Thus the linear fit
 \cref{fig_linear_fit2} has a third point.
 
-One should be aware of the difference between the two linear fits. First we
-fitted for two parameters, both incline and intersection, and obtained the
-value of the zero-amplitude bin value \cref{fig_linear_fit}. Afterwards, we fitted for a single
-parameter, the incline, and used the value of $k_|0|$ \cref{fig_linear_fit2}.
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.99\columnwidth]{k0_plotting}
+\caption{Linear fit of the mean values as a function of amplitude. This was
+used to determine the zero-amplitude constant $k_|0|$.}
+\label{fig_linear_fit}
+\end{figure}
+During the acceleration, the $\mathrm{{H_2}^{+}}$ molecule is bound, but
+throughout the continuous Rutherford scattering process\footnote{Which of course
+is continuous due to the Coulomb interaction.}, the interaction potential
+supersedes the molecular binding energy of $\mathrm{{H_2}^{+}}$, and it
+symmetrically breaks up in two equienegetic particles of half the initial
+energy. Correcting the expected energy of $\mathrm{{H_2}^{+}}$ by one half is
+thus necesarry.
 
 \begin{figure}[t]
 \centering
@@ -208,24 +214,34 @@ parameter, the incline, and used the value of $k_|0|$ \cref{fig_linear_fit2}.
 and $\mathrm{H^+}$ scattering off the carbon and gold layer respectively.}
 \label{fig_gaussian_fit2}
 \end{figure}
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=0.99\columnwidth]{alpha_plotting}
-\caption{A linear fit of three points.}
-\label{fig_linear_fit2}
-\end{figure}
+One should be aware of the difference between the two linear fits. First we
+fitted for two parameters, both incline and intersection, and obtained the
+value of the zero-amplitude bin value \cref{fig_linear_fit}. Afterwards, we fitted for a single
+parameter, the incline, and used the value of $k_|0|$ \cref{fig_linear_fit2}.
 
 \subsection{Targets}
 %\fxnote{FIX}
 The targets of interest in this experiment was a thin gold coated carbon plate.
 The gold layer was about one tenth of the carbon thickness. The thickness of
 the carbon layer have previously been determined as $\mathrm{d}x_|C|
-\approx\SI{250}{\angstrom}$, and the thickness of the gold layer as $\mathrm{d}x_|Au|\approx\SI{25}{\angstrom}$.\footnotemark \\
-\footnotetext{The estimated thickness of each target available have been determined by the previous users of the experimental setup and written down on the whiteboard next to the setup.} 
-The target was placed in holder, which contains several other targets. The height of the holder was fixed, though it was not investigated whether the marked height was optimal with respect to the beam position.\\
+\approx\SI{250}{\angstrom}$, and the thickness of the gold layer as
+$\mathrm{d}x_|Au|\approx\SI{25}{\angstrom}$.\footnotemark \\
+\footnotetext{The estimated thickness of each target available have been
+determined by the previous users of the experimental setup and written down on
+the whiteboard next to the setup.} 
+The target was placed in holder, which
+contains several other targets. The height of the holder was fixed, though it
+was not investigated whether the marked height was optimal with respect to the
+beam position.\\
 %
 When measuring proton scattering at different angles, the blind angles of the target holder may cause a problem. In order to avoid the targets "blind-spots", the target was turned with the detector to avoid the incoming proton beam hitting a blind angle. The blind angles of the holder are around $\pm \SI{30}{\degree}$ in each side of the target holder.
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.99\columnwidth]{alpha_plotting}
+\caption{A linear fit of three points.}
+\label{fig_linear_fit2}
+\end{figure}
+\vspace*{20cm}
 
 %\subsection{Scattering on atomic nuclei}
 %The aim of this experiment was to use a particle accelerator to test certain dependencies of Rutherford scattering. Numerically, the Rutherford scattering differential cross section per target atom for any target atom is
@@ -240,14 +256,15 @@ When measuring proton scattering at different angles, the blind angles of the ta
 %\end{equation}
 %where $N$ is the number of incoming particles per time, $n_\text{tar}$ is the particle density of the target, $dx$ is the thickness of the target, and $d\Omega$ is the solid angle of the detector.
 %
+\clearpage
 \subsection{Procedure}\label{sec_procedure}
 For a complete description of the experimental setup, we have provided this
 short review of the startup procedure. This can be omitted, but found valueable
 for the course examination.
 
-First thing, the Van-de-Graaff. To accelerate the beam of incomming particles,
+First thing, the Van de Graaff. To accelerate the beam of incoming particles,
 one has to generate a high potential. Turning on the belt, one hears the
-mechanical rhumming. The Van-de-Graaff will generate a potential difference as described
+mechanical rhumming. The Van de Graaff will generate a potential difference as described
 further in \cite[p. 565]{krane}.
 \begin{figure}[h!]
 \centering
@@ -276,8 +293,8 @@ has to change the current throught the electromagnet.
 \label{fig_process3}
 \end{figure}
 
-Now open the vacuum valve, so the incomming ions can be detected.
-If the Faraday cup (detector for $0$ degree scattering) is connected to an Ampere
+Now open the vacuum valve, so the incoming ions can be detected.
+If the Faraday cup (detector for unscattered particles) is connected to an Ampere
 meter, one can look for received current of charged particles. This should be
 maximized, by a variational principle about the calculated magnetic field,
 using the fine grid for adjustments.
@@ -299,10 +316,4 @@ give a precise count for the detected ions picked up in the faraday cup.
 interval.}
 \label{fig_process5}
 \end{figure}
-
-
-
-
-
-
 

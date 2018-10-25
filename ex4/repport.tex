@@ -10,19 +10,13 @@
 \author[1]{Henriette Ravn  \thanks{20116112@post.au.dk}}
 \author[1]{Laurits N. Stokholm \thanks{201605496@post.au.dk}}
 \affil[1]{Department of Physics and Astronomy, Aarhus University}
-\renewcommand{\Affilfont}{\itshape}
+%\renewcommand{\Affilfont}{\itshape}
 \date{\today}
 
 % BibLateX
 
-\usepackage[backend=biber, style=authortitle, defernumbers=true,
-            sorting=nty]{biblatex}
-            
-
+\usepackage{biblatex}
 \addbibresource{bibliography.bib}
-\defbibheading{secbib}[\bibname]{%
-    \section{#1}%
-    \markboth{#1}{#1}}
 
 \begin{document}
 
@@ -33,19 +27,22 @@
         \maketitle
         \begin{onecolabstract}
         \noindent
-            \input{abstract}
+        \input{abstract}
         \end{onecolabstract}]
 \end{minipage}
+% Ignorerer twocolumn til "division of labour"
 \saythanks{}
+\clearpage
 \input{introduction}
 \input{setup}
 \input{angledep_crosssec}
 \input{data}
 \input{conclusion}
 
-\input{appendix}
-\clearpage
-\printbibliography[heading=subbibliography]{}
+\onecolumn{%
+\printbibliography
 \nocite{*}
+}
+\input{appendix}
 \end{document}
 

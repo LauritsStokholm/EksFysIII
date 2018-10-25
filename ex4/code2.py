@@ -12,7 +12,7 @@ from scipy import optimize as opt
 from scipy import stats 
 from scipy import signal
 import matplotlib.pyplot as plt
-plt.style.use('seaborn-deep')
+plt.style.use('seaborn-colorblind')
 
 # Matplotlib compatible TeX
 params = {'legend.fontsize'     : '20',
@@ -202,8 +202,8 @@ def gaussian_fit(df, file_names, k0_switch, fig_ax_axins):
 
             # Choosing 1 of the many to zoom in on
             if name == "cal2_0.csv":
-                axins.plot(gauss_x, gauss_y, color="blue")
-                axins.plot(bins, counts, 'o', color="red")
+                axins.plot(gauss_x, gauss_y, color="red")
+                axins.plot(bins, counts, 'o', color="orchid")
 
 
     #alpha
@@ -395,7 +395,7 @@ def k0():
     handles, labels = ax.get_legend_handles_labels()
     fig.legend(handles[:2], labels[:2], loc=1, ncol=2, borderaxespad=0,
             frameon=False)
-    #plt.savefig("gaussian_fit")
+    plt.savefig("gaussian_fit")
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 # Linear
@@ -719,7 +719,7 @@ def doublegaussian_fit(plot_switch):
             plt.plot(bins, counts, 'o',      label="Data\
                     {}".format(detector_angles[i]))
             plt.legend()
-            plt.savefig("Data_{}".format(detector_angles[i]))
+            #plt.savefig("Data_{}".format(detector_angles[i]))
 
 
         # bin count (dN)
