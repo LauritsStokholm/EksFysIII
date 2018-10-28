@@ -10,34 +10,38 @@ By comparing measurements of scattering on the target with gold layer facing the
 \label{fig_sketch_thickness}
 \end{figure}
 
-
 %The energies of the scattered protons is due to the ratio between the mass of the protons and the mass of the target. 
-The energy differences are proportional to the thickness of target layers. To determine the thickness of the carbon layer we consider what happens to the energy in the two following situations. In situation a) gold is facing the beam, and the final energy $E_{f,a}$ is given as the incoming energy $E_i$ minus the energy lost due to scattering on gold:
-\begin{equation}
-E_{f,a} = E_i (1-f_\mathrm{Au}(\theta)), 
-\end{equation}
-where $f_{Au}$ is the function giving the relation between the incoming energy and the particle energy after scattering on gold in equation (6).
-In situation b) carbon is facing the beam, and the final energy is given as the incoming energy minus the energy lost due to the particles; passing through the carbon layer, scattering on gold, and passing through the carbon layer again on the way out. 
+The energy differences are proportional to the thickness of target layers. To determine the thickness of the gold layer we consider what happens to the energy in the two following situations. In situation a) gold is facing the beam, and the final energy $E_{f,a}$ is given as the initial energy minus the energy lost due to the particles; passing through the gold layer, passing through part of the carbon layer, scattering on carbon, and passing through carbon and gold again on the way out, i.e.
 \begin{align}
-E_{f,b} &= E_i - t_\mathrm{C} \left(\frac{dE}{dx}\right)_\mathrm{C} \nonumber
-\\ &- f_\mathrm{Au}(\theta) \left(E_i - t_\mathrm{C} \left(\frac{dE}{dx}\right)_\mathrm{C} \right)\nonumber 
-\\ &- \frac{t_\mathrm{C}}{\cos(\pi-\theta)} \left(\frac{dE}{dx}\right)_\mathrm{C},
+E_{f,a} &= f_\mathrm{C} \left[ E_i - \int_0^{t_{\mathrm{Au}}}{\left(\frac{dE}{dx}\right)_{\mathrm{Au}}dx} \right. \nonumber 
+\\ &- \left. \int_0^{\tau}{\left(\frac{dE}{dx}\right)_{\mathrm{C}}dx} \right] \nonumber
+\\ &- \int_0^{\frac{\tau}{\cos(\pi-\theta)}}{\left(\frac{dE}{dx}\right)_{\mathrm{C}}dx} \nonumber
+\\ &- \int_0^{\frac{t_\mathrm{Au}}{\cos(\pi-\theta)}}{\left(\frac{dE}{dx}\right)_{\mathrm{Au}}dx}, 
 \end{align}
-where $t_\mathrm{C}$ is the thickness of the carbon layer and
-$\left(\frac{dE}{dx}\right)_\mathrm{C}$ is the stopping power of carbon. The
-stopping power of carbon and gold are found to be $8.5$ and $34 \;
+where $f_\mathrm{C}$ is the function giving the relation between the incoming energy and the particle energy after scattering on gold in equation (6), $t_\mathrm{Au}$ is the thickness of the carbon layer and
+$\left(\frac{dE}{dx}\right)_\mathrm{C}$ and $\left(\frac{dE}{dx}\right)_\mathrm{Au}$ is the stopping power of carbon and gold, respectively. With an initial hydrogen energy of $\SI{350}{\kilo\electronvolt}$ the
+stopping power of carbon and gold are found to be $8.5$ and $34 \,
 \si{\electronvolt}/(10^{15}$ atoms/$\si{\centi\metre}^2$), respectively. The
-values were read off a table next to the laboratory computer.
+values were read off a table next to the laboratory equipment.
 
-The energy difference for the peak position for gold is found as the difference
-between the two situations, $\Delta E_\mathrm{Au} = E_{f,a} - E_{f,b}$. Thus,
-the thickness of the carbon layer is found as
-\begin{equation}
-t_\mathrm{C} = \frac{\Delta E_{\mathrm{Au}}}{\left(\frac{dE}{dx}\right)_\mathrm{C} \left(1 - f_\mathrm{Au}(\theta) - \frac{1}{\cos(\theta)} \right)}
-\end{equation}
+In situation b) carbon is facing the beam, and the final energy is given as the initial energy minus the energy lost due to the particles; passing through part the carbon layer, scattering on carbon, and passing through the carbon layer again on the way out. 
+\begin{align}
+E_{f,b} &= f_\mathrm{C} \left[ E_i - \int_0^{\tau}{\left(\frac{dE}{dx}\right)_{\mathrm{C}}dx} \right] \nonumber 
+\\ &- \int_0^{\frac{\tau}{\cos(\pi-\theta)}}{\left(\frac{dE}{dx}\right)_{\mathrm{C}}dx}, 
+\end{align}
 
-
-The thickness of the gold layer is found using the same approach. 
+The energy difference between the peak positions of carbon is found as the difference between the two situations;
+\begin{align}
+\Delta E_\mathrm{C} &= f_\mathrm{C} \int_0^{t_{\mathrm{Au}}}{\left(\frac{dE}{dx}\right)_{\mathrm{Au}}dx} \nonumber
+\\ &+ \int_0^{\frac{t_\mathrm{Au}}{\cos(\pi-\theta)}}{\left(\frac{dE}{dx}\right)_{\mathrm{Au}}dx} \nonumber
+\\ &= f_\mathrm{C} \cdot t_{\mathrm{Au}} \left( \frac{dE}{dx}\right)_{\mathrm{Au}} \nonumber
+\\ &+ \frac{t_{\mathrm{Au}}}{\cos(\pi-\theta)} \left(\frac{dE}{dx}\right)_{\mathrm{Au}}
+\end{align}
+Thus, the thickness of the gold layer is
+\begin{align}
+t_{\mathrm{Au}} = \frac{\Delta E_\mathrm{C}}{ \left( f_\mathrm{C} + \frac{1}{\cos(\pi-\theta)} \right) \left( \frac{dE}{dx} \right)_{\mathrm{Au}} }
+\end{align}
+The thickness of the carbon layer is found using the same approach. 
 
 \begin{table}[h]
 \centering
@@ -46,8 +50,8 @@ The thickness of the gold layer is found using the same approach.
 \toprule
 \multicolumn{2}{c}{Target layer thickness}\\
 \midrule
-\mathrm{C} & 2325 \pm 51 \; \AA \\
-\mathrm{Au} & 262 \pm 26 \; \AA \\
+\mathrm{C} & 1510 \pm 30 \; \AA \\
+\mathrm{Au} & 250 \pm 25 \; \AA \\
 \bottomrule
 \end{tabular}
 
