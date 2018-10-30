@@ -1,0 +1,6 @@
+1) tænder bælte: tryk på on-knap under markat bælte (nederste box til højre)
+2) få spændingen op - skru på midtste knap ved terminal voltage (anden box til højre)
+3) start magnet - grøn knap 3- box til højre
+4) spænding på farraday cup: sæt ledning over til strøm-måler og tænd for faraday cup (power on) og Si det - sættes på 40 V.
+5) sæt vakkum til: acc-valve - open. tjek at occiloskop giver fornuftigt signal
+6) justere og finjustere magneten så faraday cup strøm-måler viser mest muligt. her ca. 0.4-0.7 nA
