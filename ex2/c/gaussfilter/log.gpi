@@ -1,0 +1,12 @@
+set terminal eps
+set output "myPlot.eps"
+set key out
+set title "This is a title"
+set grid
+set xlabel "x"
+set ylabel "y"
+set datafile sep ','
+plot \
+"input.txt" using 1:2 every ::863::926 with points title "gauss0"\
+#, "input.txt" using 1:2 every ::# <<START0>>:: with points title "gauss1"\
+#, "input.txt" using 1:2 every ::# <<START0>>:: with points title "gauss2"

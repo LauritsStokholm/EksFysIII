@@ -1,0 +1,57 @@
+4096
+# <<GAUSS0>>
+The greatest countnumber is 754 at channelnumber 894, and the halfmax is 377
+25 	 902 	 814229 
+64 	 1132 	 1.28552e+06 
+169 	 888 	 817105 
+256 	 1143 	 1.37198e+06 
+400 	 1144 	 1.46874e+06 
+441 	 1133 	 1.47817e+06 
+841 	 1145 	 2.01831e+06 
+3136 	 901 	 1.06463e+07 
+5329 	 887 	 2.9185e+07 
+6889 	 889 	 4.82486e+07 
+The point of FWHM is given as 
+(0, 25) equivalent to (902, 382)
+Everything as usual with the FWHM
+The full width half maxima is 16
+The FWHM point is Left to center
+The endpoint index is (15, 0), corresponding to the original channel number (917)
+Size of gaussian is 46
+# <<GAUSS1>>
+The greatest countnumber is 606 at channelnumber 1139, and the halfmax is 303
+361 	 1131 	 1.40948e+06 
+1600 	 1146 	 3.87332e+06 
+2025 	 1145 	 5.41165e+06 
+2401 	 1130 	 7.0417e+06 
+2916 	 1144 	 9.81179e+06 
+3249 	 1147 	 1.18716e+07 
+6561 	 1148 	 4.43646e+07 
+6724 	 1132 	 4.64936e+07 
+8100 	 1143 	 6.69164e+07 
+9025 	 1133 	 8.27343e+07 
+The point of FWHM is given as 
+(0, 361) equivalent to (1131, 284)
+Everything as usual with the FWHM
+The full width half maxima is 16
+The FWHM point is Right to center
+The endpoint index is (15, 0), corresponding to the original channel number (1146)
+# <<GAUSS2>>
+The greatest countnumber is 174 at channelnumber 1082, and the halfmax is 87
+0 	 1336 	 1.7849e+06 
+0 	 1328 	 1.76358e+06 
+1 	 1335 	 1.78223e+06 
+4 	 1337 	 1.78758e+06 
+4 	 1332 	 1.77424e+06 
+4 	 1330 	 1.76892e+06 
+16 	 1329 	 1.7665e+06 
+25 	 1096 	 1.20184e+06 
+36 	 1095 	 1.20032e+06 
+64 	 1334 	 1.78365e+06 
+The point of FWHM is given as 
+(8, 36) equivalent to (1095, 93)
+Take a look at FWHM
+The full width half maxima is 26
+The FWHM point is Left to center
+The endpoint index is (25, 0), corresponding to the original channel number (1120)
+Size of gaussian is 76

@@ -1,0 +1,26 @@
+
+# This is for the double column txt file (intstart: intend)
+#GAUSSIANSTART = $(shell for i in `cat gaussianintervals.txt | awk '{print $$c}' c=$${1:-1}`; do echo $$i; done;)
+#GAUSSIANEND = $(shell for i in `cat gaussianintervals.txt | awk '{print $$c}' c=$${2:-2}`; do echo $$i; done;)
+
+
+
+
+	#echo '"input.txt" every ::$(word 1, $(GAUSSIANSTART))::$(word 1, $(GAUSSIANEND))  using 1:2 with points title "Data"\$(void)' >> $(SCRIPT)
+#	echo ', "input.txt" every ::$(word 2, $(GAUSSIANSTART))::$(word 2, $(GAUSSIANEND))  using 1:2 with points title "Data"\$(void)' >> $(SCRIPT)
+#	echo ', "input.txt" every ::$(word 3, $(GAUSSIANSTART))::$(word 3, $(GAUSSIANEND))  using 1:2 with points title "Data"\$(void)' >> $(SCRIPT)
+#	echo ', "input.txt" every ::$(word 4, $(GAUSSIANSTART))::$(word 4, $(GAUSSIANEND))  using 1:2 with points title "Data"' >> $(SCRIPT)
+
+
+#	grep -A1 "Hello Gaussian!" output.txt > Starters.txt
+#	grep -B1 "Goodbye Gaussian!" output.txt > Enders.txt
+#	cat Starters.txt | grep -o "^[0-9]\{3\}" > finale1.txt
+#	cat Enders.txt | grep -o "^[0-9]\{3\}" > finale2.txt
+#	paste finale1.txt finale2.txt | pr -t > gaussianintervals.txt
+#	rm finale1.txt finale2.txt Starters.txt Enders.txt
+
+#	#| sed -r 's/\(.*[0-9]*\t\)+/' > Starters.txt
+#	# .*/\1/' > Starters.txt
+#	#grep -n -B1 -"Goodbye Gaussian!" output.txt | sed 's/\[0-9]*\.*/\1/' > Farewell.txt
+#	#paste Starters.txt Farewell.txt | pr -t > final.txt
+#	#rm Starters.txt Farewell.txt
